@@ -2970,3 +2970,73 @@ MISSION
     .cta-plate{ padding:40px 22px; }
     .cta-plate h2{ font-size:1.6rem; }
 }
+
+/* ==========================================================
+   RESPONSIVE — manufacturing page
+========================================================== */
+
+@media (max-width:1024px){
+
+    /* intro two-col → stack */
+    .mfg-intro-grid{ grid-template-columns:1fr; gap:28px; }
+    .mfg-intro-grid .intro-copy h1{ font-size:2rem; max-width:100%; }
+
+    /* roadmap plate padding eases */
+    .roadmap{ padding:40px 16px 60px; }
+    .roadmap-plate{ padding:60px 6% 60px; }
+    .roadmap-head h2{ font-size:1.9rem; }
+
+    /* road cards a touch smaller */
+    .road-card{ width:clamp(300px, 60vw, 460px); min-height:340px; }
+}
+
+@media (max-width:768px){
+
+    .units{ padding:0 6% 80px; }
+    .units-head h2{ font-size:1.8rem; }
+    .units-head h2 br{ display:none; }
+
+    /* timeline: spine + nodes move to far left, everything stacks right.
+       (your CSS already has a 760px block doing this — this reinforces it) */
+    .unit-timeline::before{ left:7px; }
+
+    .unit-row{
+        grid-template-columns:24px 1fr;
+        padding:22px 0 30px;
+    }
+    .unit-title{
+        grid-column:2;
+        text-align:left;
+        padding-right:0;
+        margin-bottom:10px;
+        font-size:1.35rem;
+    }
+    .unit-node{
+        position:absolute;
+        left:7px;
+        grid-column:1;
+        grid-row:1;
+        margin-top:6px;
+    }
+    .unit-meta{
+        grid-column:2;
+        padding-left:0;
+    }
+    .unit-meta p{ font-size:.98rem; }
+    /* the <br>s inside unit text crowd on mobile — let it wrap */
+    .unit-meta p br{ display:none; }
+
+    /* roadmap tagline / hint */
+    .roadmap-head .label p{ font-size:12px; }
+}
+
+@media (max-width:480px){
+
+    .mfg-intro-grid .intro-copy h1{ font-size:1.7rem; }
+    .mfg-intro-grid .intro-copy h1 br{ display:none; }
+
+    .roadmap-plate{ padding:44px 20px 44px; }
+    .road-card{ width:82vw; min-height:300px; padding:28px 22px; }
+    .road-card h4{ font-size:1.5rem; }
+    .road-card p{ font-size:1rem; }
+}
