@@ -3205,6 +3205,27 @@ MISSION
     .hero-plate{ height:34vh; min-height:240px; }
 }
 
+@media (max-width:768px){
+
+    /* plate fills the screen, leaving only the cream margin border */
+    .hero--contact{
+        padding:16px;              /* the cream border thickness */
+        height:100vh;
+        height:100svh;             /* svh accounts for the mobile browser bar */
+    }
+
+    .hero-plate{
+        height:100%;               /* fill the padded area */
+        min-height:0;              /* override the earlier min-height */
+        padding:0 8% 40px;
+    }
+
+    /* content starts right after, no big gap */
+    .contact-main{
+        padding:40px 6% 70px;
+    }
+}
+
 /* hide reveal targets by default; JS animates them in */
 .values-plate,
 .mission-point,
