@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products — Shivalik</title>
+    <link rel="icon" type="image/x-icon" href="iconmark_PNG.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="https://use.typekit.net/ylw0ugu.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+</head>
+<body class="page-dark">
+
+<!-- ===========================
+Navigation
+=========================== -->
+<header class="navbar">
+    <div class="logo">
+        <a href="index.html"><img src="primary.png" alt=""></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="company.html">Company</a></li>
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="careers.html">Careers</a></li>
+        </ul>
+    </nav>
+    <a class="button" href="contact.html">Get in Touch</a>
+</header>
+
+<!-- ===========================
+Hero
+=========================== -->
+<section class="hero hero--inner" id="home">
+  <img class="hero-img" src="product.jpg" alt="">
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <h1>Diverse expertise <br>Unwavering precision <br>Trusted across sectors.</h1>
+    <span class="hero-rule"></span>
+  </div>
+</section>
+
+<!-- ===========================
+Products — tabbed by industry
+=========================== -->
+<section class="prod" id="products">
+
+  <div class="prod-head">
+    <div class="label"><p>Industries Served</p></div>
+  </div>
+
+  <!-- horizontal sub-navigation -->
+  <div class="prod-tabs" role="tablist" aria-label="Industries">
+
+  <!-- image row — scrolls away normally -->
+  <div class="prod-tab-images">
+    <button class="prod-tab-img active" data-panel="automotive">
+      <img src="products/automotive.png" alt="">
+    </button>
+    <button class="prod-tab-img" data-panel="agriculture">
+      <img src="products/agriculture.jpg" alt="">
+    </button>
+    <button class="prod-tab-img" data-panel="railways">
+      <img src="products/railways.png" alt="">
+    </button>
+    <button class="prod-tab-img" data-panel="offhighway">
+      <img src="products/off-highway.jpg" alt="">
+    </button>
+    <button class="prod-tab-img" data-panel="waterworks">
+      <img src="products/waterworks.jpeg" alt="">
+    </button>
+  </div>
+
+</div>
+  <!-- label row — this is what sticks -->
+  <div class="prod-tab-labels">
+    <button class="prod-tab-label active" data-panel="automotive">Automotive</button>
+    <button class="prod-tab-label" data-panel="agriculture">Tractor &amp; Agriculture</button>
+    <button class="prod-tab-label" data-panel="railways">Railways</button>
+    <button class="prod-tab-label" data-panel="offhighway">Off-Highway</button>
+    <button class="prod-tab-label" data-panel="waterworks">Waterworks &amp; Pipe</button>
+  </div>
+
+  <!-- ============ PANELS ============ -->
+
+  <!-- AUTOMOTIVE -->
+  <div class="prod-panel active" id="panel-automotive" role="tabpanel">
+    <div class="prod-panel-head">
+      <h3>Automotive Segment</h3>
+      <p>High-quality castings &amp; machined parts for commercial vehicles &amp; trucks.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/brake-drum.jpg" alt="Brake Drum"></div>
+        <h4>Brake Drums</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/wheel-hub.jpg" alt="Wheel Hub"></div>
+        <h4>Wheel Hubs</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/carrier.jpg" alt="Carrier"></div>
+        <h4>Carriers</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/bracket.jpg" alt="Bracket"></div>
+        <h4>Brackets</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/transmission-housing.jpg" alt="Transmission Housing"></div>
+        <h4>Transmission Housings</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/clutch-housing.jpg" alt="Clutch Housing"></div>
+        <h4>Clutch Housings</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/axle-support.jpg" alt="Axle Support"></div>
+        <h4>Axle Supports</h4>
+      </article>
+
+    </div>
+
+    <div class="oem-panel">
+      <span class="oem-title">Trusted by leading OEMs</span>
+      <div class="oem-logos">
+          <div class="oem-logo"><img src="logos/tata.jpg" alt="Tata Motors"></div>
+          <div class="oem-logo"><img src="logos/ashok-leyland.png" alt="Ashok Leyland"></div>
+          <div class="oem-logo"><img src="logos/daimler.jpeg" alt="Daimler Truck"></div>
+          <div class="oem-logo"><img src="logos/volvo.png" alt="Volvo Eicher"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AGRICULTURE -->
+  <div class="prod-panel" id="panel-agriculture" role="tabpanel" hidden>
+    <div class="prod-panel-head">
+      <h3>Agriculture Segment</h3>
+      <p>Components designed for tractors, harvesters &amp; farm implements, focusing on durability &amp; performance.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/gearbox.jpg" alt="Gearbox"></div>
+        <h4>Gearboxes</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/crankcase.jpg" alt="Crankcase"></div>
+        <h4>Crankcases</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/transmission-housing.jpg" alt="Transmission Housing"></div>
+        <h4>Transmission Housings</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/clutch.jpg" alt="Clutch"></div>
+        <h4>Clutches</h4>
+      </article>
+
+    </div>
+
+    <div class="oem-panel">
+      <span class="oem-title">Trusted by leading OEMs</span>
+      <div class="oem-logos">
+          <div class="oem-logo"><img src="logos/mahindra.png" alt="Mahindra"></div>
+          <div class="oem-logo"><img src="logos/kubota.png" alt="Escorts Kubota"></div>
+          <div class="oem-logo"><img src="logos/tafe.png" alt="TAFE"></div>
+          <div class="oem-logo"><img src="logos/sonalika.png" alt="Sonalika"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RAILWAYS -->
+  <div class="prod-panel" id="panel-railways" role="tabpanel" hidden>
+    <div class="prod-panel-head">
+      <h3>Railways Segment</h3>
+      <p>Core castings and assemblies for rail infrastructure and rolling stock.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/rib-base-plate.jpg" alt="Rib Base Plate"></div>
+        <h4>Rib Base Plate</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/adaptor.jpg" alt="Adaptor"></div>
+        <h4>Adaptors</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/fitted-back-ring.jpg" alt="Fitted Back Ring"></div>
+        <h4>Fitted Back Rings</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/end-cap-cover.jpg" alt="End Cap Cover"></div>
+        <h4>End Cap Cover</h4>
+      </article>
+
+    </div>
+
+    <div class="oem-panel">
+      <span class="oem-title">Trusted by leading OEMs</span>
+      <div class="oem-logos">
+          <div class="oem-logo"><img src="logos/indian-railways.png" alt="Indian Railways"></div>
+          <div class="oem-logo"><img src="logos/dmrc.png" alt="DMRC"></div>
+          <div class="oem-logo"><img src="logos/timken.png" alt="Timken"></div>
+          <div class="oem-logo"><img src="logos/nbc.png" alt="NBC"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OFF-HIGHWAY -->
+  <div class="prod-panel" id="panel-offhighway" role="tabpanel" hidden>
+    <div class="prod-panel-head">
+      <h3>Off-Highway Segment</h3>
+      <p>Robust castings built for construction, mining and heavy engineering machinery.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/differential-case.jpg" alt="Differential Case"></div>
+        <h4>Differential Cases</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/carrier.jpg" alt="Carrier"></div>
+        <h4>Carriers</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/chassis-component.jpg" alt="Chassis Component"></div>
+        <h4>Chassis Components</h4>
+      </article>
+
+    </div>
+
+    <div class="oem-panel">
+      <span class="oem-title">Trusted by leading OEMs</span>
+      <div class="oem-logos">
+          <div class="oem-logo"><img src="logos/caterpillar.png" alt="Caterpillar"></div>
+          <div class="oem-logo"><img src="logos/meritor.png" alt="Meritor"></div>
+          <div class="oem-logo"><img src="logos/pmp.png" alt="PMP"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WATERWORKS -->
+  <div class="prod-panel" id="panel-waterworks" role="tabpanel" hidden>
+    <div class="prod-panel-head">
+      <h3>Waterworks &amp; Pipe Fitting Segment</h3>
+      <p>Durable SG Iron and ductile iron castings for valves, pipe fittings and municipal water systems.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/valve.jpg" alt="Valve"></div>
+        <h4>Valves</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/pipe-fitting.jpg" alt="Pipe Fitting"></div>
+        <h4>Pipe Fittings</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/bend.jpg" alt="Ductile Bend"></div>
+        <h4>Ductile Bends</h4>
+      </article>
+
+      <article class="prod-item">
+        <div class="prod-item-media"><img src="products/items/tee.jpg" alt="Tee Joint"></div>
+        <h4>Tee Joints</h4>
+      </article>
+
+    </div>
+
+    <div class="oem-panel">
+      <span class="oem-title">Trusted by leading OEMs</span>
+      <div class="oem-logos">
+          <div class="oem-logo"><img src="logos/star.png" alt="Star Pipes India"></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===========================
+Footer
+=========================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <div class="f-logo"><img src="primary.png" alt="Shivalik"></div>
+        <p class="f-desc">
+          Shivalik Engineering Industries Ltd — <br>precision
+          castings and machined components,
+          engineered in India since 2007.
+        </p>
+        <div class="f-social">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.65c0-1.35-.03-3.08-1.9-3.08-1.9 0-2.2 1.46-2.2 2.98V21h-4V9z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.25-1.46 1.5-1.46H16.7V3.96A21 21 0 0014.3 3.8c-2.4 0-4.05 1.47-4.05 4.17V10H7.6v3h2.65v8h3.25z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="company.html">About Us</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Automotive Casting</a></li>
+          <li><a href="#">Tractor &amp; Agriculture</a></li>
+          <li><a href="#">Railway Casting</a></li>
+          <li><a href="#">Off-Highway Casting</a></li>
+          <li><a href="#">Water Works &amp; Pipe Fitting</a></li>
+        </ul>
+      </div>
+      <div class="f-col f-contact">
+        <h4>Get In Touch</h4>
+        <address>
+          Engineering Park, Heavy<br> Industrial Area,
+          Hathkhoj, Bhilai,<br> Dist: Durg,<br>
+          Chhattisgarh, 490026, India
+        </address>
+        <a href="mailto:info@shivalikengineering.com">info@shivalikengineering.com</a>
+        <a href="tel:+918370002018">+91 83700 02018</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Shivalik Engineering Industries Ltd. All rights reserved.</p>
+      <a href="#home" class="to-top">Back to top <span>&uarr;</span></a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="products.js"></script>
+</body>
+</html>
