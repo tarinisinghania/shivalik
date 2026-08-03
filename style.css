@@ -3040,3 +3040,237 @@ MISSION
     .road-card h4{ font-size:1.5rem; }
     .road-card p{ font-size:1rem; }
 }
+
+/* ==========================================================
+   RESPONSIVE — products page
+========================================================== */
+
+@media (max-width:1024px){
+
+    .prod{ padding:90px 40px 90px; }
+    .prod-panel{ padding:60px 0; }
+    .prod-grid{ grid-template-columns:repeat(3, 1fr); gap:24px; }
+    .prod-tab-labels::before{ left:-40px; right:-40px; }
+    .prod-tab-images{ gap:16px; }
+    .hero--inner h1{ font-size:2.4rem; }
+}
+
+@media (max-width:768px){
+
+    .prod{ padding:70px 20px 70px; }
+    .prod-panel{ padding:44px 0; }
+
+    /* image row: let it scroll sideways instead of cramming 5 across */
+    .prod-tab-images{
+        overflow-x:auto;
+        gap:12px;
+        scrollbar-width:none;
+    }
+    .prod-tab-images::-webkit-scrollbar{ display:none; }
+    .prod-tab-img{
+        flex:0 0 42%;            /* ~2 visible, rest swipe */
+    }
+
+    /* sticky label row → horizontally scrollable pills */
+    .prod-tab-labels{
+        top:80px;                /* burger navbar is shorter */
+        gap:6px;
+        padding:12px 0;
+        overflow-x:auto;
+        scrollbar-width:none;
+    }
+    .prod-tab-labels::-webkit-scrollbar{ display:none; }
+    .prod-tab-labels::before{ left:-20px; right:-20px; }
+    .prod-tab-label{
+        flex:0 0 auto;
+        white-space:nowrap;
+        font-size:13px;
+        padding:0 10px 14px;
+    }
+
+    /* products → 2 columns */
+    .prod-grid{ grid-template-columns:repeat(2, 1fr); gap:20px; }
+    .prod-panel-head h3{ font-size:1.5rem; }
+    .prod-panel-head p{ font-size:1rem; }
+
+    /* OEM logos tighter */
+    .oem-panel{ padding:28px 24px; }
+    .oem-logos{ gap:24px; }
+    .oem-logo{ height:38px; }
+}
+
+@media (max-width:480px){
+
+    .prod{ padding:60px 16px 60px; }
+    .hero--inner h1{ font-size:1.8rem; }
+    .hero--inner h1 br{ display:none; }   /* the 3 hard breaks crowd on phone */
+
+    .prod-tab-img{ flex:0 0 60%; }
+
+    /* single-column product grid */
+    .prod-grid{ grid-template-columns:1fr; gap:24px; }
+
+    .prod-tab-labels{ top:76px; }
+}
+
+/* ==========================================================
+   RESPONSIVE — contact page
+========================================================== */
+
+@media (max-width:1024px){
+
+    .contact-main{ padding:120px 6% 90px; }
+    .cm-grid{ gap:56px; }
+    .cm-headline{ font-size:2.4rem; }
+
+    /* contact hero plate a touch shorter */
+    .hero-plate{ height:44vh; min-height:320px; }
+}
+
+@media (max-width:768px){
+
+    /* two-col → single (your 900px rule already stacks .cm-grid;
+       this reinforces + tightens) */
+    .cm-grid{ grid-template-columns:1fr; gap:44px; }
+
+    .contact-main{ padding:110px 6% 70px; }
+
+    .cm-headline{ font-size:2rem; max-width:100%; }
+    .cm-blurb{ max-width:100%; }
+
+    /* info two-col → single so long address/email don't squeeze */
+    .cm-info{ grid-template-columns:1fr; gap:28px; }
+
+    /* social box: stack label above icons instead of space-between */
+    .cm-social-box{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+        padding:24px 22px;
+    }
+
+    /* form card padding eases */
+    .cm-card{ padding:36px 26px; }
+    .cm-card h2{ font-size:1.6rem; }
+
+    /* contact hero */
+    .hero--contact{ padding:16px; }
+    .hero-plate{ height:38vh; min-height:280px; padding:0 8% 34px; }
+    .hero--contact h1{ font-size:clamp(2.2rem, 9vw, 3rem); }
+}
+
+@media (max-width:480px){
+
+    .contact-main{ padding:100px 20px 60px; }
+    .cm-headline{ font-size:1.7rem; }
+    .cm-card{ padding:30px 20px; }
+
+    /* address hard breaks look fine, but tighten the plate */
+    .hero-plate{ height:34vh; min-height:240px; }
+}
+
+/* ==========================================================
+   MOBILE NAV — burger + orange overlay
+========================================================== */
+
+.nav-burger{
+    display:none;
+    position:fixed;              /* escapes the navbar's stacking context */
+    top:44px;
+    right:34px;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:44px;
+    height:44px;
+    padding:0;
+    border:none;
+    background:none;
+    cursor:pointer;
+    z-index:1003;                /* above the overlay (1001) */
+}
+
+.nav-burger span{
+    display:block;
+    width:26px;
+    height:2px;
+    background:#fff;
+    border-radius:2px;
+    transition:transform .35s var(--ease), opacity .35s var(--ease);
+}
+
+.nav-burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2){ opacity:0; }
+.nav-burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+@media (max-width:768px){
+    .navbar nav,
+    .navbar .button{ display:none; }
+    .nav-burger{ display:flex; }
+}
+
+/* the overlay */
+.nav-overlay{
+    position:fixed;
+    inset:0;
+    z-index:1001;
+    background:linear-gradient(160deg, var(--orange) 0%, var(--red) 100%);
+    display:flex;
+    align-items:center;              /* vertically centred */
+    justify-content:flex-start;      /* left instead of centre */
+    padding-left:12%;                /* indent from the edge */
+
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .4s var(--ease), visibility .4s var(--ease);
+}
+
+.nav-overlay ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    text-align:left;
+}
+
+.nav-overlay a{
+    font-family:"balto", sans-serif;
+    font-weight:400;                 /* was 600 */
+    font-size:2rem;
+    color:#fff;
+    letter-spacing:.02em;
+    padding:8px 0;
+    display:inline-block;
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+}
+
+.nav-overlay.open{
+    opacity:1;
+    visibility:visible;
+}
+
+/* stagger the links in when the overlay opens */
+.nav-overlay.open a{
+    opacity:1;
+    transform:translateY(0);
+}
+.nav-overlay.open li:nth-child(1) a{ transition-delay:.10s; }
+.nav-overlay.open li:nth-child(2) a{ transition-delay:.16s; }
+.nav-overlay.open li:nth-child(3) a{ transition-delay:.22s; }
+.nav-overlay.open li:nth-child(4) a{ transition-delay:.28s; }
+.nav-overlay.open li:nth-child(5) a{ transition-delay:.34s; }
+.nav-overlay.open li:nth-child(6) a{ transition-delay:.40s; }
+
+.nav-overlay a:hover{ opacity:.75; }
+
+/* prevent body scroll when menu open */
+body.nav-locked{ overflow:hidden; }
+
+/* ---- show burger, hide desktop nav + button, on mobile ---- */
+@media (max-width:768px){
+    .navbar nav,
+    .navbar .button{ display:none; }
+    .nav-burger{ display:flex; }
+}
