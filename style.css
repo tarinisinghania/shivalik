@@ -2914,3 +2914,59 @@ MISSION
     .cta{ padding:30px 16px 70px; }
     .cta-plate{ padding:40px 22px; }
 }
+
+/* ==========================================================
+   RESPONSIVE — company page specifics
+========================================================== */
+
+@media (max-width:1024px){
+
+    /* intro headline is large with hard <br>s — soften */
+    .intro-copy h1{ font-size:1.7rem; padding:0 0 10px; }
+
+    /* intro two-col → single, image below text */
+    .intro-grid{ grid-template-columns:1fr; gap:36px; }
+    .intro-visual{ margin-top:0; }
+
+    /* values plate padding eases (also in shared block) */
+    .values{ padding:40px 40px 20px; }
+
+    /* mission 3-col → 2-col */
+    .mission-grid{ grid-template-columns:1fr 1fr; gap:36px; }
+}
+
+@media (max-width:768px){
+
+    .intro{ padding:60px 6%; }
+    .intro-copy h1{ font-size:1.5rem; }
+    .intro-copy p{ font-size:1.05rem; }
+
+    /* values 4→2 across */
+    .values-grid{ grid-template-columns:1fr 1fr; gap:20px; }
+    .value-card h3{ font-size:1.3rem; }
+
+    /* mission 2→1 */
+    .mission-grid{ grid-template-columns:1fr; gap:28px; }
+    .mission-point p{ font-size:1.3rem; }
+
+    /* CTA */
+    .cta-plate h2{ font-size:1.9rem; }
+    .cta-plate h2 br,
+    .cta-plate p br{ display:none; }   /* let text wrap naturally on narrow screens */
+}
+
+@media (max-width:480px){
+
+    .intro-copy h1{ font-size:1.3rem; }
+    .intro-copy h1 br{ display:none; }   /* hard breaks look wrong on phones */
+
+    .values-grid{ grid-template-columns:1fr; }
+    .value-card{ justify-content:flex-start; }
+
+    .mission{ padding:20px 6% 50px; }
+    .mission-point p{ font-size:1.2rem; }
+
+    .cta{ padding:30px 16px 60px; }
+    .cta-plate{ padding:40px 22px; }
+    .cta-plate h2{ font-size:1.6rem; }
+}
