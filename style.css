@@ -2914,7 +2914,43 @@ MISSION
     .cta{ padding:30px 16px 70px; }
     .cta-plate{ padding:40px 22px; }
 }
+@media (max-width:768px){
 
+    .stats{ grid-template-columns:1fr; gap:36px; }
+
+    .stat{ align-items:flex-start; padding:0; }
+
+    /* kill the vertical divider lines when stacked */
+    .stat:not(:last-child)::after{ display:none; }
+}
+@media (max-width:768px){
+
+    .why{ padding:70px 6% 40px; }        /* add horizontal padding — was 0 */
+
+    .why-grid{ grid-template-columns:1fr; gap:36px; }
+    .why-sticky{ position:static; }
+
+    /* headline was sized for desktop — shrink + let it wrap */
+    .why h2{ font-size:1.6rem; padding:0; }
+    .headline-reveal .line{ overflow:visible; }   /* the masked lines clip text; unclip on mobile */
+
+    .why-lead{ font-size:1rem; max-width:100%; }
+
+    /* the why-item content (icons + text) can overflow — constrain */
+    .why-item{ padding:26px 0; }
+    .why-item h3{ font-size:18px; }
+    .why-item p{ font-size:15px; }
+
+    /* the feature/cert/client grids inside can push wide */
+    .client-logos{ grid-template-columns:repeat(3, 1fr); max-width:100%; }
+    .cert-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:768px){
+    .hero--inner{
+        height:100vh;            /* fill the screen — was 90vh/70vh */
+        min-height:100svh;       /* svh handles mobile browser chrome better */
+    }
+}
 /* ==========================================================
    RESPONSIVE — company page specifics
 ========================================================== */
@@ -3167,6 +3203,20 @@ MISSION
 
     /* address hard breaks look fine, but tighten the plate */
     .hero-plate{ height:34vh; min-height:240px; }
+}
+
+/* hide reveal targets by default; JS animates them in */
+.values-plate,
+.mission-point,
+.cta-plate{
+    opacity:0;
+}
+
+/* if JS is off or reduced-motion, don't leave them invisible */
+@media (prefers-reduced-motion:reduce){
+    .values-plate,
+    .mission-point,
+    .cta-plate{ opacity:1; }
 }
 
 /* ==========================================================

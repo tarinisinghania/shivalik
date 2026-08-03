@@ -708,3 +708,11 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         if (e.key === "Escape") setOpen(false);
     });
 })();
+
+if (window.gsap){
+    gsap.fromTo(".values-plate",
+        { opacity:0, y:40 },
+        { opacity:1, y:0, duration:.8, ease:"power3.out",
+          scrollTrigger:{ trigger:".values", start:"top 75%" } }
+    );
+}
