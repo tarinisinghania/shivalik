@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shivalik</title>
+    <link rel="icon" type="image/x-icon" href="iconmark_PNG.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://use.typekit.net/ylw0ugu.css">      
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- ===========================
+Navigation
+=========================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <a href="index.html"><img src="primary.png" alt=""></a>
+    </div>
+
+    <nav>
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="company.html">Company</a></li>
+
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+
+            <li><a href="products.html">Products</a></li>
+
+            <li><a href="careers.html">Careers</a></li>
+
+        </ul>
+
+    </nav>
+
+    <a class="button" href="contact.html">
+        Get in Touch
+    </a>
+
+</header>
+
+<!-- ===========================
+
+Hero
+=========================== -->
+
+<section class="hero" id="home">
+  <div class="fallback-bg"></div>
+  <!-- Replace the src below with your own brand video file -->
+  <video id="heroVideo" autoplay muted loop playsinline
+    src="Shivalik_Corporate_Film.mp4">
+  </video>
+  <div class="scrim"></div>
+    <div class="hero-content">
+
+        <h1>
+
+            Driving Automotive Excellence 
+        </h1>
+
+        <p>
+
+            We are proud to partner with the nation’s growth, delivering consistent quality, precision and timely solutions to our customers. 
+
+        </p>
+
+    <div class="hero-buttons">
+      <a href="#main" class="primary" id="exploreBtn" aria-label="Scroll to content">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 4v15M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+Statistics
+=========================== -->
+<div class="main" id="main">
+<section class="about">
+
+    <div class="about-inner">
+
+        <div class="label">
+            <p>ABOUT SHIVALIK</p>
+        </div>
+
+        <div class="about-copy">
+
+            <h1>
+                With the largest manufacturing footprint,
+                quality, scalability & precision in the industry,
+                Shivalik sets the benchmark for every product
+                we create.
+            </h1>
+
+            <p>
+                <span>Shivalik Engineering Industries Limited</span> is a
+                trusted manufacturing partner for precision-
+                engineered cast and machined components,
+                serving leading OEMs and industrial customers
+                across global markets.
+                Backed by vertically integrated operations,
+                advanced manufacturing technologies, and deep
+                engineering expertise, the company delivers
+                high-quality solutions for commercial vehicles,
+                agricultural equipment, off-highway machinery,
+                railways, and infrastructure applications.
+                With a diversified product portfolio, large-scale 
+                manufacturing capabilities, and a commitment to 
+                operational excellence, Shivalik continues to drive 
+                performance, reliability, and value for customers worldwide.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<div class="stats">
+
+  <div class="stat">
+    <p>MT Foundry Capacity / Annual</p>
+    <h2 class="counter" data-target="111600" data-format="comma">0</h2>
+  </div>
+
+  <div class="stat">
+    <p>Customers</p>
+    <h2 class="counter" data-target="45" data-suffix="+">0</h2>
+  </div>
+
+  <div class="stat">
+    <p>Employees</p>
+    <h2 class="counter" data-target="1500" data-suffix="+">0</h2>
+  </div>
+
+  <div class="stat">
+    <p>Products</p>
+    <h2 class="counter" data-target="600" data-suffix="+">0</h2>
+  </div>
+
+</div>
+    <!-- ============ WHY ============ -->
+<section class="why" id="why">
+  <div class="container why-grid">
+    <div class="why-sticky">
+      <div class="label"><p>Why Shivalik</p></div>
+      <h2 class="headline-reveal reveal">
+        <span class="line"><span>The difference is in what</span></span>
+        <span class="line"><span>you don't have to think about.</span></span>
+      </h2>
+      <p class="why-lead reveal">A good casting is invisible. It just runs. Here's what keeps ours that way.</p>
+      <div class="why-progress">
+        <span class="count" id="whyCount">01</span>
+        <span class="of">/ 05</span>
+      </div>
+      <div class="why-progress-bar"><span id="whyBar"></span></div>
+    </div>
+    <div class="why-list" id="whyList">
+    <div class="why-item active" data-idx="1">
+      <span class="num">01</span>
+      <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.2 4.6L17 7.3l-3.5 3.4.8 4.8L10 13.3l-4.3 2.2.8-4.8L3 7.3l4.8-.7L10 2z" fill="currentColor"/></svg></div>
+      <div class="why-body">
+        <h3>Integrated Manufacturing</h3>
+        <p>Foundry, machine shop and finishing under one roof — with automation built in.</p>
+
+        <div class="feature-list">
+
+          <div class="feature-item">
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 21V10l5-2v3l5-2v3l5-2v11H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 21v-3M10 21v-3M14 21v-3M18 21v-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6 8V5l1.5-1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </span>
+            <div class="feature-text">
+              <ul class="feature-stats">
+                <li><strong>4</strong> Foundries</li>
+                <li><strong>1</strong> Machining Unit</li>
+                <li><strong>1</strong> Fettling Unit</li>
+                <li><strong>1</strong> Solar Plant</li>
+              </ul>
+              <span class="feature-sub">Dedicated facilities with sustainable energy.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+          <div class="why-item" data-idx="4">
+        <span class="num">02</span>
+        <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M3 8h14" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div><h3>Engineering-Led Development</h3>
+          <div class="feature-list">
+            <div class="feature-item">
+            <span class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8l4 5M11 13l6-3M17 10l1 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="5" y="18" width="10" height="3" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M9 15v3" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <div class="feature-text">
+              <span class="feature-name">Robotics</span>
+              <span class="feature-sub">Precision robotics and automation for repeatable, high-quality machining processes.</span>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="why-item" data-idx="5">
+      <span class="num">03</span>
+      <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.5 4.5l2.8 2.8M12.7 12.7l2.8 2.8M15.5 4.5l-2.8 2.8M7.3 12.7l-2.8 2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div class="why-body">
+        <h3>Green Foundry of India</h3>
+        <p>Sustainability built into how we manufacture, not bolted on after.</p>
+
+        <div class="sustain-list">
+
+          <div class="sustain-item">
+            <span class="sustain-icon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="10" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M4 11h16M9 7v10M15 7v10M12 17v3" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <p><strong>70 MW</strong> captive solar power plant — operational since April 2026.</p>
+          </div>
+
+          <div class="sustain-item">
+            <span class="sustain-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 20V9l8-5 8 5v11" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 20v-5M12 20v-7M16 20v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <p><strong>87%</strong> reduction in grid electricity consumption.</p>
+          </div>
+
+          <div class="sustain-item">
+            <span class="sustain-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c5-2 8-6 8-12V5s-4 0-7 2-5 5-5 9c0 2 1 4 4 5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 18c1-3 3-5 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <p>Lower product carbon footprint, supporting sustainable manufacturing.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="why-item" data-idx="3">
+        <span class="num">04</span>
+        <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2"/><path d="M3 10h14M10 3a11 11 0 010 14" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div class="why-body">
+            <h3>Trusted By Global OEMs</h3>
+            <p>Partnering with leading manufacturers across India and international markets.</p>
+
+            <div class="client-logos">
+            <div class="client-logo"><img src="logos/volvo.png" alt="VE Commercial Vehicles"></div>
+            <div class="client-logo"><img src="logos/ashok-leyland.png" alt="Ashok Leyland"></div>
+            <div class="client-logo"><img src="logos/tata.jpg" alt="Tata Motors"></div>
+            <div class="client-logo"><img src="logos/mahindra.png" alt="Mahindra"></div>
+            <div class="client-logo"><img src="logos/kubota.png" alt="Kubota"></div>
+            <div class="client-logo"><img src="logos/webb.jpeg" alt="Webb Wheel"></div>
+            <div class="client-logo"><img src="logos/accuride.jpg" alt="Accuride"></div>
+            <div class="client-logo"><img src="logos/daimler.jpeg" alt="Daimler Truck"></div>
+            <div class="client-logo"><img src="logos/dana.png" alt="Dana"></div>
+            <div class="client-logo"><img src="logos/caterpillar.png" alt="Caterpillar"></div>
+            </div>
+        </div>
+        </div>
+    <div class="why-item" data-idx="2">
+      <span class="num">05</span>
+      <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5l3.5 3.5L16 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="why-body">
+        <h3>Certified Quality</h3>
+        <p>Independently audited and certified across every operation, from foundry to final inspection.</p>
+
+        <div class="cert-grid">
+
+          <div class="cert-item">
+            <img src="certs/iatf.jpg" alt="IATF 16949:2016">
+            <div class="cert-text">
+              <span class="cert-name">IATF 16949:2016</span>
+              <span class="cert-sub">Automotive Quality Management System</span>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <img src="certs/iso-9001.jpeg" alt="ISO 9001:2015">
+            <div class="cert-text">
+              <span class="cert-name">ISO 9001:2015</span>
+              <span class="cert-sub">Quality Management System</span>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <img src="certs/iso-14001.png" alt="ISO 14001:2015">
+            <div class="cert-text">
+              <span class="cert-name">ISO 14001:2015</span>
+              <span class="cert-sub">Environment Management</span>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <img src="certs/iso-45001.jpg" alt="ISO 45001:2018">
+            <div class="cert-text">
+              <span class="cert-name">ISO 45001:2018</span>
+              <span class="cert-sub">Occupational Health &amp; Safety Management</span>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <img src="certs/vda.png" alt="VDA 6.3">
+            <div class="cert-text">
+              <span class="cert-name">VDA 6.3</span>
+              <span class="cert-sub">Automotive Process Audit</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</section>
+<!-- ============ PRODUCTS ============ -->
+<section class="products" id="products">
+
+  <div class="products-head">
+    <div class="label"><p>Industries Served</p></div>
+    <h2>Diverse expertise. Unwavering precision.<br>Trusted across sectors.</h2>
+  </div>
+
+  <div class="product-grid">
+
+    <a class="product-card" href="products/automotive.html">
+      <div class="pc-media">
+        <img src="products/automotive.png" alt="Automotive">
+        <img class="pc-alt" src="products/automotive-hover.jpg" alt="" aria-hidden="true">
+      </div>
+      <div class="pc-body">
+        <h3>Automotive</h3>
+        <p>Precision castings and machined parts for leading CV and HCV manufacturers.</p>
+      </div>
+      <span class="pc-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <a class="product-card" href="products/agriculture.html">
+      <div class="pc-media">
+        <img src="products/agriculture.jpg" alt="Agriculture">
+        <img class="pc-alt" src="products/agriculture-hover.jpg" alt="" aria-hidden="true">
+      </div>
+      <div class="pc-body">
+        <h3>Agriculture</h3>
+        <p>Durable, high-quality components supporting leading farm equipment makers.</p>
+      </div>
+      <span class="pc-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <a class="product-card" href="products/railways.html">
+      <div class="pc-media">
+        <img src="products/railways.png" alt="Railways">
+        <img class="pc-alt" src="products/railways-hover.jpg" alt="" aria-hidden="true">
+      </div>
+      <div class="pc-body">
+        <h3>Railways</h3>
+        <p>Trusted supplier of core castings and assemblies for rail infrastructure.</p>
+      </div>
+      <span class="pc-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <a class="product-card" href="products/waterworks.html">
+      <div class="pc-media">
+        <img src="products/waterworks.jpeg" alt="Waterworks and Pipe Fittings">
+        <img class="pc-alt" src="products/waterworks-hover.jpg" alt="" aria-hidden="true">
+      </div>
+      <div class="pc-body">
+        <h3>Waterworks &amp; Pipe Fittings</h3>
+        <p>Robust SG Iron valves and fittings for municipal and industrial water systems.</p>
+      </div>
+      <span class="pc-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <a class="product-card" href="products/off-highway.html">
+      <div class="pc-media">
+        <img src="products/off-highway.jpg" alt="Off-Highway Equipment">
+        <img class="pc-alt" src="products/off-highway-hover.png" alt="" aria-hidden="true">
+      </div>
+      <div class="pc-body">
+        <h3>Off-Highway Equipment</h3>
+        <p>High-strength castings for mining, construction and heavy engineering.</p>
+      </div>
+      <span class="pc-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+  </div>
+
+  <div class="products-cta">
+    <a href="products.html" class="view-products">
+      View All Products
+      <span class="vp-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
+</section>
+</div>
+<!-- ===========================
+Footer
+=========================== -->
+<footer class="site-footer">
+
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <div class="f-brand">
+        <div class="f-logo">
+          <img src="primary.png" alt="Shivalik">
+        </div>
+        <p class="f-desc">
+          Shivalik Engineering Industries Ltd — <br>precision
+          castings and machined components,
+          engineered in India since 2007.
+        </p>
+        <div class="f-social">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.65c0-1.35-.03-3.08-1.9-3.08-1.9 0-2.2 1.46-2.2 2.98V21h-4V9z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.25-1.46 1.5-1.46H16.7V3.96A21 21 0 0014.3 3.8c-2.4 0-4.05 1.47-4.05 4.17V10H7.6v3h2.65v8h3.25z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why Shivalik</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="f-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Automotive Casting</a></li>
+          <li><a href="#">Tractor &amp; Agriculture</a></li>
+          <li><a href="#">Railway Casting</a></li>
+          <li><a href="#">Off-Highway Casting</a></li>
+          <li><a href="#">Water Works &amp; Pipe Fitting</a></li>
+        </ul>
+      </div>
+
+      <div class="f-col f-contact">
+        <h4>Get In Touch</h4>
+        <address>
+          Engineering Park, Heavy<br> Industrial Area,
+          Hathkhoj, Bhilai,<br> Dist: Durg,<br>
+          Chhattisgarh, 490026, India
+        </address>
+        <a href="mailto:info@shivalikengineering.com">info@shivalikengineering.com</a>
+        <a href="tel:+918370002018">+91 83700 02018</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Shivalik Engineering Industries Ltd. All rights reserved.</p>
+      <a href="#home" class="to-top">Back to top <span>&uarr;</span></a>
+    </div>
+
+  </div>
+
+</footer>
+<script src="script.js"></script>
+</body>
