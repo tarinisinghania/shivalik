@@ -2781,3 +2781,136 @@ MISSION
     .oem-logos{ gap:26px; }
     .oem-logo{ height:42px; }
 }
+
+/* ==========================================================
+   RESPONSIVE — iPad & phones
+   consolidated overrides, keep at end of file
+========================================================== */
+
+/* ---------- iPad / tablet (≤1024px) ---------- */
+@media (max-width:1024px){
+
+    /* navbar tightens in */
+    .navbar{ left:20px; right:20px; padding:14px 26px; }
+    .logo{ width:150px; }
+    nav ul{ gap:30px; }
+    nav a{ font-size:13px; letter-spacing:.1em; }
+
+    /* hero text scales down */
+    .hero h1{ font-size:44px; }
+    .hero--inner h1{ font-size:2.6rem; }
+    .hero-content{ max-width:100%; }
+
+    /* about block is fixed-width 850px — must fluid */
+    .about{ width:100%; }
+
+    /* stats → 2 columns */
+    .stats{ grid-template-columns:repeat(2, 1fr); gap:40px 0; }
+    .stat h2, .stat .counter{ font-size:54px; }
+
+    /* why grid stacks */
+    .why-grid{ grid-template-columns:1fr; gap:40px; }
+    .why-sticky{ position:static; }
+
+    /* homepage products grid */
+    .product-grid{ grid-template-columns:repeat(3, 1fr); }
+
+    /* footer */
+    .footer-top{ grid-template-columns:1fr 1fr; gap:50px 40px; }
+    .f-brand{ grid-column:1 / -1; }
+
+    /* PRODUCTS page — ease the huge paddings */
+    .prod{ padding:90px 40px 90px; }
+    .prod-panel{ padding:60px 0; }              /* was 80px 80px */
+    .prod-grid{ grid-template-columns:repeat(3, 1fr); }
+    .prod-tab-labels::before{ left:-40px; right:-40px; }
+
+    /* manufacturing / company plates */
+    .values{ padding:40px 40px 20px; }
+    .roadmap{ padding:40px 16px 60px; }
+    .mission-grid{ grid-template-columns:1fr 1fr; gap:36px; }
+
+    /* contact two-col → stack sooner if needed stays 1fr at 900 already */
+    .contact-main{ padding:120px 6% 90px; }
+}
+
+/* ---------- Large phone (≤768px) ---------- */
+@media (max-width:768px){
+
+    /* navbar: hide the text nav, keep logo + button
+       (you'd normally add a burger menu; this prevents overflow) */
+    nav ul{ display:none; }
+    .navbar{ padding:12px 20px; }
+
+    .hero{ padding:100px 6%; }
+    .hero h1{ font-size:34px; }
+    .hero p{ font-size:16px; }
+    .hero--inner{ height:70vh; min-height:420px; padding:0 6% 70px; }
+    .hero--inner h1{ font-size:2rem; }
+
+    /* main / section paddings shrink */
+    .main{ padding:120px 6% 80px; }
+
+    /* stats stay 2-up but tighter */
+    .stats{ padding:50px 0 30px; }
+    .stat{ padding:0 16px; }
+    .stat h2, .stat .counter{ font-size:44px; }
+
+    /* homepage products → 2 col */
+    .product-grid{ grid-template-columns:repeat(2, 1fr); }
+
+    /* PRODUCTS page */
+    .prod{ padding:80px 20px 70px; }
+    .prod-tab-images{ gap:12px; }
+    .prod-tab-labels{ gap:8px; top:90px; padding:12px 0; overflow-x:auto; }
+    .prod-tab-label{ font-size:13px; flex:0 0 auto; padding:0 6px 14px; white-space:nowrap; }
+    .prod-grid{ grid-template-columns:repeat(2, 1fr); gap:20px; }
+    .prod-panel-head h3{ font-size:1.5rem; }
+
+    /* OEM logos wrap tighter */
+    .oem-logos{ gap:24px; }
+    .oem-logo{ height:40px; }
+
+    /* company/manufacturing */
+    .values-grid{ grid-template-columns:1fr 1fr; }
+    .mission-grid{ grid-template-columns:1fr; }
+    .mission-head h2{ font-size:2.2rem; }
+    .cta-plate h2{ font-size:1.8rem; }
+
+    /* contact */
+    .cm-grid{ grid-template-columns:1fr; gap:44px; }
+    .cm-info{ grid-template-columns:1fr 1fr; }
+
+    /* footer single col */
+    .footer-top{ grid-template-columns:1fr; gap:40px; padding:60px 0 40px; }
+    .footer-bottom{ flex-direction:column; align-items:flex-start; gap:12px; }
+}
+
+/* ---------- Small phone (≤480px) ---------- */
+@media (max-width:480px){
+
+    .hero h1{ font-size:28px; }
+    .hero--inner h1{ font-size:1.7rem; }
+
+    /* stats → single column */
+    .stats{ grid-template-columns:1fr; gap:32px; }
+    .stat{ align-items:flex-start; }
+    .stat h2, .stat .counter{ font-size:52px; }
+
+    /* all product-ish grids single col */
+    .product-grid{ grid-template-columns:1fr; }
+    .prod-grid{ grid-template-columns:1fr; }
+    .values-grid{ grid-template-columns:1fr; }
+    .cm-info{ grid-template-columns:1fr; }
+
+    .prod{ padding:70px 16px 60px; }
+    .roadmap-plate{ padding:50px 22px 50px; }
+    .road-card{ width:86vw; }
+
+    .values{ padding:30px 16px 20px; }
+    .values-plate{ padding:36px 24px; }
+
+    .mission{ padding:20px 6% 60px; }
+    .cta{ padding:30px 16px 70px; }
+    .cta-plate{ padding:40px 22px; }
+}
