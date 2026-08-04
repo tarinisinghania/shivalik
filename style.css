@@ -123,7 +123,7 @@ nav ul{
 
     display:flex;
 
-    gap:60px;
+    gap:40px;
 
     list-style:none;
 
@@ -3386,6 +3386,7 @@ MISSION
 .nav-overlay.open li:nth-child(4) a{ transition-delay:.28s; }
 .nav-overlay.open li:nth-child(5) a{ transition-delay:.34s; }
 .nav-overlay.open li:nth-child(6) a{ transition-delay:.40s; }
+.nav-overlay.open li:nth-child(7) a{ transition-delay:.46s; }
 
 .nav-overlay a:hover{ opacity:.75; }
 
