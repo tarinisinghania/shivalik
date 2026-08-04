@@ -1,3 +1,42 @@
+/* ==========================================================
+   MOBILE NAV — burger toggle
+========================================================== */
+
+(() => {
+    const burger  = document.getElementById("navBurger");
+    const overlay = document.getElementById("navOverlay");
+    if (!burger || !overlay) return;
+
+    const setOpen = (open) => {
+        burger.classList.toggle("open", open);
+        overlay.classList.toggle("open", open);
+        document.body.classList.toggle("nav-locked", open);
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+        burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+
+    burger.addEventListener("click", () =>
+        setOpen(!overlay.classList.contains("open"))
+    );
+
+    /* close when a link is tapped */
+    overlay.querySelectorAll("a").forEach(a =>
+        a.addEventListener("click", () => setOpen(false))
+    );
+
+    /* close on Escape */
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") setOpen(false);
+    });
+})();
+
+if (window.gsap){
+    gsap.fromTo(".values-plate",
+        { opacity:0, y:40 },
+        { opacity:1, y:0, duration:.8, ease:"power3.out",
+          scrollTrigger:{ trigger:".values", start:"top 75%" } }
+    );
+}
 /* ==========================================
    NAVBAR ACTIVE LINK (per page)
 ========================================== */
@@ -689,45 +728,6 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     all.forEach(el => el.addEventListener("click", () => activate(el.dataset.panel)));
 })();
 
-/* ==========================================================
-   MOBILE NAV — burger toggle
-========================================================== */
-
-(() => {
-    const burger  = document.getElementById("navBurger");
-    const overlay = document.getElementById("navOverlay");
-    if (!burger || !overlay) return;
-
-    const setOpen = (open) => {
-        burger.classList.toggle("open", open);
-        overlay.classList.toggle("open", open);
-        document.body.classList.toggle("nav-locked", open);
-        burger.setAttribute("aria-expanded", open ? "true" : "false");
-        burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    };
-
-    burger.addEventListener("click", () =>
-        setOpen(!overlay.classList.contains("open"))
-    );
-
-    /* close when a link is tapped */
-    overlay.querySelectorAll("a").forEach(a =>
-        a.addEventListener("click", () => setOpen(false))
-    );
-
-    /* close on Escape */
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape") setOpen(false);
-    });
-})();
-
-if (window.gsap){
-    gsap.fromTo(".values-plate",
-        { opacity:0, y:40 },
-        { opacity:1, y:0, duration:.8, ease:"power3.out",
-          scrollTrigger:{ trigger:".values", start:"top 75%" } }
-    );
-}
 
 /* ==========================================================
    TRANSFORMATION PAGE — pillar tab switching
