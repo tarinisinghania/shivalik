@@ -749,9 +749,28 @@ if (window.gsap){
             p.classList.toggle("active", on);
             p.hidden = !on;
         });
+
+        /* reveal the new panel's content immediately (triggers won't re-fire) */
+        const active = document.getElementById("panel-" + name);
+        if (active && window.gsap){
+            const items = active.querySelectorAll(
+                ".human-card .hc-media, .human-card .hc-copy, .tech-erp, .tech-item, .tech-safety, .sus-feature, .sus-point, .reveal-card"
+            );
+            gsap.set(items, { opacity:1, x:0, y:0 });
+        }
+
         if (window.ScrollTrigger) ScrollTrigger.refresh();
+
+        /* scroll after layout has updated to the new panel height */
+        requestAnimationFrame(() => {
+            const anchor = document.querySelector(".trans-head") || document.querySelector(".trans");
+            if (!anchor) return;
+            const y = anchor.getBoundingClientRect().top + window.pageYOffset - 120;
+            window.scrollTo({ top:y, behavior:"smooth" });
+        });
     };
 
+    
     tabs.forEach(tab => {
         tab.addEventListener("click", () => activate(tab.dataset.panel));
 
