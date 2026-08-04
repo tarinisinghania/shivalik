@@ -2540,49 +2540,56 @@ MISSION
     opacity:1;
 }
 
-/* the label row sticks under the navbar */
+/* label row — sticky, now styled as a pill/segmented group */
 .prod-tab-labels{
     position:sticky;
-    top:110px;                    /* clears the fixed navbar */
+    top:110px;
     z-index:100;
 
-    display:flex;
-    gap:24px;
-    padding:18px 0;
-    margin-top:12px;
-    background:var(--light);
-    border-bottom:1px solid rgba(0,0,0,.1);
-}
-
-/* full-width backing so cards don't show through */
-.prod-tab-labels::before{
-    content:"";
-    position:absolute;
-    top:0; bottom:0;
-    left:-200px; right:-200px;    /* match your section padding */
-    background:var(--light);
-    z-index:-1;
+    display:flex;                 /* was inline-flex — now fills width */
+    gap:0;
+    margin:20px 0 0;
+    padding:6px;
+    border-radius:60px;
+    background:#EDEAE4;
+    border-bottom:none;
 }
 
 .prod-tab-label{
-    flex:1 1 0;
+    flex:1 1 0;                   /* was flex:0 0 auto — now equal columns */
     text-align:center;
     border:none;
     background:none;
     cursor:pointer;
     font-family:"balto", sans-serif;
-    font-weight:500;
-    font-size:15px;
+    font-weight:400;
+    font-size:1.1em;
     color:#8a8580;
-    position:relative;
-    padding-bottom:16px;
-    transition:color .35s var(--ease);
+    padding:15px 16px;
+    border-radius:60px;
+    white-space:nowrap;
+    transition:.35s var(--ease);
 }
 
-.prod-tab-label.active{
-    color:var(--middle);
-    font-weight:600;
+/* full-width backing so cards don't show through when pinned */
+.prod-tab-labels::before{
+    content:"";
+    position:absolute;
+    top:-12px; bottom:-12px;
+    left:0; right:0;              /* the track already spans full width now */
+    background:var(--light);
+    z-index:-1;
 }
+
+.prod-tab-label:hover{ color:var(--ink); }
+
+.prod-tab-label.active{
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    color:#fff;
+}
+
+/* remove the old underline indicator */
+.prod-tab-label::after{ display:none; }
 
 /* active underline */
 .prod-tab-label::after{
@@ -3346,6 +3353,7 @@ MISSION
 
     opacity:0;
     visibility:hidden;
+    pointer-events: none;
     transition:opacity .4s var(--ease), visibility .4s var(--ease);
 }
 
@@ -3373,6 +3381,7 @@ MISSION
 .nav-overlay.open{
     opacity:1;
     visibility:visible;
+    pointer-events: auto;
 }
 
 /* stagger the links in when the overlay opens */
@@ -3398,4 +3407,196 @@ body.nav-locked{ overflow:hidden; }
     .navbar nav,
     .navbar .button{ display:none; }
     .nav-burger{ display:flex; }
+}
+
+/* ==========================================================
+   TRANSFORMATION PAGE
+   uses site tokens from style.css. Load AFTER style.css.
+========================================================== */
+
+.trans{
+    background:var(--light);
+    padding:110px 8% 130px;
+}
+
+.trans-head{
+    max-width:760px;
+    margin-bottom:50px;
+}
+
+.trans-head h2{
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:2.2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-top:16px;
+}
+
+/* ==========================================================
+   SUB-NAV
+========================================================== */
+
+.trans-tabs{
+    position:sticky;
+    top:110px;                    /* clears the fixed navbar */
+    z-index:100;
+
+    display:flex;
+    gap:20px;
+    max-width:520px;              /* contained, not full width */
+    background:#EDEAE4;
+    border-radius:60px;
+    padding:10px;
+    border-bottom:none;  
+}
+
+/* full-width backing so nothing shows through at the section's side padding */
+.trans-tabs::before{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    left:-8%; right:-8%;          /* matches .trans section's 8% side padding */
+    background:var(--light);
+    z-index:-1;
+}
+.trans-tab{
+    flex:1;
+    text-align:center;
+    padding:12px 20px;
+    border:none;                 /* kill the default button border */
+    border-radius:60px;
+    background:none;             /* inactive = transparent, not outlined */
+    cursor:pointer;
+    font-family:"balto", sans-serif;
+    font-weight:400;
+    font-size:1.10rem;
+    color:#8a8580;
+    transition:.35s var(--ease);
+}
+
+/* .trans-tab::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:2px;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s var(--ease);
+} */
+.trans-tab::after{ display:none; }   /* no underline in pill style */
+.trans-tab:hover{ color:var(--ink); }
+
+.trans-tab.active{
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    color:#fff;
+}
+
+.trans-tab.active::after{ transform:scaleX(1); }
+
+/* ==========================================================
+   PANELS
+========================================================== */
+
+.trans-panel{
+    animation:transIn .5s var(--ease);
+}
+
+.trans-panel[hidden]{ display:none; }
+
+@keyframes transIn{
+    from{ opacity:0; transform:translateY(16px); }
+    to  { opacity:1; transform:translateY(0); }
+}
+
+.trans-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+/* ---------- Copy ---------- */
+
+.trans-eyebrow{
+    display:block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--middle);
+    margin-bottom:20px;
+}
+
+.trans-copy h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:22px;
+    max-width:18ch;
+}
+
+.trans-copy p{
+    font-size:1.15rem;
+    line-height:1.65;
+    color:#5a534e;
+    max-width:48ch;
+}
+
+/* ---------- Image ---------- */
+
+.trans-visual{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:4 / 3;
+    background:#EDEAE4;
+}
+
+.trans-visual img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
+}
+
+.trans-visual:hover img{
+    transform:scale(1.05);
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media (max-width:900px){
+    .trans-grid{ grid-template-columns:1fr; gap:36px; }
+    /* image above text on mobile */
+    .trans-visual{ order:-1; }
+    .trans-copy h3{ max-width:100%; font-size:1.6rem; }
+    .trans-copy p{ max-width:100%; }
+}
+
+@media (max-width:768px){
+    .trans{ padding:80px 6% 90px; overflow-x:hidden; }
+    .trans-head h2{ font-size:1.7rem; }
+    .trans-tab{ font-size:1rem; }
+}
+@media (max-width:768px){
+    .trans-tabs{
+        top:80px;                 /* shorter mobile navbar */
+        gap:20px;
+        overflow-x:auto;          /* let the 3 tabs scroll if tight */
+        scrollbar-width:none;
+    }
+    .trans-tabs::before{ left:-6%; right:-6%; }
+}
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion:reduce){
+    .trans-panel{ animation:none; }
+    .trans-visual img,
+    .trans-tab::after{ transition:none; }
 }

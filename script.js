@@ -728,3 +728,47 @@ if (window.gsap){
           scrollTrigger:{ trigger:".values", start:"top 75%" } }
     );
 }
+
+/* ==========================================================
+   TRANSFORMATION PAGE — pillar tab switching
+========================================================== */
+
+(() => {
+    const tabs = Array.from(document.querySelectorAll(".trans-tab"));
+    const panels = Array.from(document.querySelectorAll(".trans-panel"));
+    if (!tabs.length) return;
+
+    const activate = (name) => {
+        tabs.forEach(t => {
+            const on = t.dataset.panel === name;
+            t.classList.toggle("active", on);
+            t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        panels.forEach(p => {
+            const on = p.id === "panel-" + name;
+            p.classList.toggle("active", on);
+            p.hidden = !on;
+        });
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+    };
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => activate(tab.dataset.panel));
+
+        /* keyboard arrows move between tabs */
+        tab.addEventListener("keydown", e => {
+            const i = tabs.indexOf(tab);
+            if (e.key === "ArrowRight" && i < tabs.length - 1){
+                tabs[i + 1].focus(); activate(tabs[i + 1].dataset.panel);
+            } else if (e.key === "ArrowLeft" && i > 0){
+                tabs[i - 1].focus(); activate(tabs[i - 1].dataset.panel);
+            }
+        });
+    });
+
+    /* open a pillar from the URL hash, e.g. transformation.html#human */
+    const hash = location.hash.replace("#", "");
+    if (hash && document.getElementById("panel-" + hash)){
+        activate(hash);
+    }
+})();

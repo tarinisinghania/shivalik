@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformation — Shivalik</title>
+    <link rel="icon" type="image/x-icon" href="iconmark_PNG.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="transformation.css">
+    <link rel="stylesheet" href="https://use.typekit.net/ylw0ugu.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+</head>
+<body class="page-dark">
+
+<!-- ===========================
+Navigation
+=========================== -->
+<header class="navbar">
+    <div class="logo">
+        <a href="index.html"><img src="primary.png" alt=""></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="company.html">Company</a></li>
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="transformation.html">Transformation</a></li>
+            <li><a href="careers.html">Careers</a></li>
+        </ul>
+    </nav>
+    <a class="button" href="contact.html">Get in Touch</a>
+</header>
+
+<!-- burger — only shows on mobile -->
+<button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+</button>
+
+<!-- full-screen orange menu overlay -->
+<div class="nav-overlay" id="navOverlay">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="company.html">Company</a></li>
+        <li><a href="manufacturing.html">Manufacturing</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="transformation.html">Transformation</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Get in Touch</a></li>
+    </ul>
+</div>
+
+<!-- ===========================
+Hero
+=========================== -->
+<section class="hero hero--inner" id="home">
+  <img class="hero-img" src="companybg.jpg" alt="">
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <h1>Transforming how<br>we build, for what's next.</h1>
+    <span class="hero-rule"></span>
+  </div>
+</section>
+
+<!-- ===========================
+Transformation — tabbed
+=========================== -->
+<section class="trans" id="transformation">
+
+  <div class="trans-head">
+    <div class="label"><p>Our Transformation</p></div>
+    <h2>Three pillars carrying Shivalik into its <br>next decade.</h2>
+  </div>
+
+  <!-- sub-navigation -->
+  <div class="trans-tabs" role="tablist" aria-label="Transformation pillars">
+    <button class="trans-tab active" role="tab" aria-selected="true" data-panel="technology">Technology</button>
+    <button class="trans-tab" role="tab" aria-selected="false" data-panel="human">Human</button>
+    <button class="trans-tab" role="tab" aria-selected="false" data-panel="sustainability">Sustainability</button>
+  </div>
+
+  <!-- ============ PANELS ============ -->
+
+  <!-- TECHNOLOGY -->
+  <div class="trans-panel active" id="panel-technology" role="tabpanel">
+    <div class="trans-grid">
+      <div class="trans-copy">
+        <span class="trans-eyebrow">01 — Technology</span>
+        <h3>Automation, simulation and data on the foundry floor.</h3>
+        <p>
+          We're rebuilding how a casting comes to life. Every mould is simulated
+          before a grain of sand is packed; robotic cells handle fettling and
+          machining with repeatable precision; and live process data lets us
+          catch a deviation before it becomes a defect. Technology here isn't a
+          showpiece — it's how we hold quality steady at scale, shorten lead
+          times, and take on parts that older methods simply couldn't deliver.
+        </p>
+      </div>
+      <div class="trans-visual">
+        <img src="transformation/technology.jpg" alt="Automated foundry technology">
+      </div>
+    </div>
+  </div>
+
+  <!-- HUMAN -->
+  <div class="trans-panel" id="panel-human" role="tabpanel" hidden>
+    <div class="trans-grid">
+      <div class="trans-copy">
+        <span class="trans-eyebrow">02 — Human</span>
+        <h3>The people who know, by sound, when something isn't right.</h3>
+        <p>
+          Machines don't run a foundry — people do. Our transformation invests
+          as much in the fifteen hundred hands behind every casting as in the
+          equipment they operate: continuous training, safer workspaces, and
+          career paths that grow with the company. From design engineers to
+          floor operators, we're building a workforce that treats precision as a
+          habit and takes ownership of what leaves the gate.
+        </p>
+      </div>
+      <div class="trans-visual">
+        <img src="transformation/human.jpg" alt="Shivalik people and workforce">
+      </div>
+    </div>
+  </div>
+
+  <!-- SUSTAINABILITY -->
+  <div class="trans-panel" id="panel-sustainability" role="tabpanel" hidden>
+    <div class="trans-grid">
+      <div class="trans-copy">
+        <span class="trans-eyebrow">03 — Sustainability</span>
+        <h3>A greener foundry, built into how we manufacture.</h3>
+        <p>
+          Sustainability isn't bolted on after the fact — it's designed into the
+          process. Our captive solar plant powers a growing share of operations,
+          cutting grid dependence and lowering the carbon footprint of every
+          part we cast. Cleaner melting, sand reclamation and tighter energy
+          control mean we can grow output without growing our impact, delivering
+          castings our customers can stand behind on every front.
+        </p>
+      </div>
+      <div class="trans-visual">
+        <img src="transformation/sustainability.jpg" alt="Solar-powered sustainable manufacturing">
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===========================
+Footer
+=========================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <div class="f-logo"><img src="primary.png" alt="Shivalik"></div>
+        <p class="f-desc">
+          Shivalik Engineering Industries Ltd — <br>precision
+          castings and machined components,
+          engineered in India since 2007.
+        </p>
+        <div class="f-social">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.65c0-1.35-.03-3.08-1.9-3.08-1.9 0-2.2 1.46-2.2 2.98V21h-4V9z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.25-1.46 1.5-1.46H16.7V3.96A21 21 0 0014.3 3.8c-2.4 0-4.05 1.47-4.05 4.17V10H7.6v3h2.65v8h3.25z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="company.html">Company</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="transformation.html">Transformation</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Automotive Casting</a></li>
+          <li><a href="#">Tractor &amp; Agriculture</a></li>
+          <li><a href="#">Railway Casting</a></li>
+          <li><a href="#">Off-Highway Casting</a></li>
+          <li><a href="#">Water Works &amp; Pipe Fitting</a></li>
+        </ul>
+      </div>
+      <div class="f-col f-contact">
+        <h4>Get In Touch</h4>
+        <address>
+          Engineering Park, Heavy<br> Industrial Area,
+          Hathkhoj, Bhilai,<br> Dist: Durg,<br>
+          Chhattisgarh, 490026, India
+        </address>
+        <a href="mailto:info@shivalikengineering.com">info@shivalikengineering.com</a>
+        <a href="tel:+918370002018">+91 83700 02018</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Shivalik Engineering Industries Ltd. All rights reserved.</p>
+      <a href="#home" class="to-top">Back to top <span>&uarr;</span></a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="transformation.js"></script>
+</body>
+</html>
