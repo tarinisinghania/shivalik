@@ -772,3 +772,69 @@ if (window.gsap){
         activate(hash);
     }
 })();
+
+/* ==========================================================
+   HUMAN CARDS — scroll reveal (image + text slide in)
+========================================================== */
+
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray(".human-card").forEach(card => {
+        const media = card.querySelector(".hc-media");
+        const copy  = card.querySelector(".hc-copy");
+
+        gsap.to([media, copy], {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            stagger: 0.12,
+            scrollTrigger: {
+                trigger: card,
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+}
+/* ==========================================================
+   TECHNOLOGY panel — scroll reveals
+========================================================== */
+
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* SAP block */
+    gsap.to(".tech-erp", {
+        opacity:1, y:0, duration:.9, ease:"power3.out",
+        scrollTrigger:{ trigger:".tech-erp", start:"top 80%", toggleActions:"play none none reverse" }
+    });
+
+    /* each trio, staggered */
+    gsap.utils.toArray(".tech-trio").forEach(trio => {
+        gsap.to(trio.querySelectorAll(".tech-item"), {
+            opacity:1, y:0, duration:.7, ease:"power3.out", stagger:.12,
+            scrollTrigger:{ trigger:trio, start:"top 82%", toggleActions:"play none none reverse" }
+        });
+    });
+
+    /* Health & Safety block */
+    gsap.to(".tech-safety", {
+        opacity:1, y:0, duration:.9, ease:"power3.out",
+        scrollTrigger:{ trigger:".tech-safety", start:"top 80%", toggleActions:"play none none reverse" }
+    });
+}
+/* SUSTAINABILITY reveals */
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    gsap.utils.toArray(".sus-feature").forEach(f => {
+        gsap.to(f, { opacity:1, y:0, duration:.9, ease:"power3.out",
+            scrollTrigger:{ trigger:f, start:"top 82%", toggleActions:"play none none reverse" } });
+    });
+    gsap.utils.toArray(".sus-grid-4").forEach(grid => {
+        gsap.to(grid.querySelectorAll(".sus-point"), {
+            opacity:1, y:0, duration:.6, ease:"power3.out", stagger:.1,
+            scrollTrigger:{ trigger:grid, start:"top 82%", toggleActions:"play none none reverse" } });
+    });
+}

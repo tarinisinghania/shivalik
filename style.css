@@ -3537,7 +3537,7 @@ body.nav-locked{ overflow:hidden; }
     line-height:1.2;
     color:var(--ink);
     margin-bottom:22px;
-    max-width:18ch;
+    max-width:20ch;
 }
 
 .trans-copy p{
@@ -3565,6 +3565,116 @@ body.nav-locked{ overflow:hidden; }
 
 .trans-visual:hover img{
     transform:scale(1.05);
+}
+/* ==========================================================
+   HUMAN — heading + alternating image/text cards
+========================================================== */
+
+.human-head{
+    max-width:620px;
+    margin-top:60px;          /* no extra top gap — tabs already space it */
+    margin-bottom:64px;
+}
+.human-head h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:18px;
+}
+
+.human-head p{
+    font-size:1.15rem;
+    line-height:1.65;
+    color:#5a534e;
+}
+
+.human-cards{
+    display:flex;
+    flex-direction:column;
+    gap:70px;
+}
+
+.human-card{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.human-card--flip .hc-media{ order:2; }
+
+.hc-media{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:16 / 10;
+    background:#EDEAE4;
+}
+
+.hc-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
+}
+
+.human-card:hover .hc-media img{ transform:scale(1.05); }
+
+.hc-copy{ max-width:44ch; }
+
+.hc-num{
+    display:block;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.2rem;
+    color:var(--middle);
+    margin-bottom:16px;
+}
+
+.hc-copy h4{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.5rem;
+    line-height:1.25;
+    color:var(--ink);
+    margin-bottom:14px;
+}
+
+.hc-copy p{
+    font-size:1.05rem;
+    line-height:1.65;
+    color:#5a534e;
+}
+
+/* ---- scroll-reveal starting states (JS animates to visible) ---- */
+.reveal-card .hc-media{ opacity:0; transform:translateX(-40px); }
+.reveal-card .hc-copy{  opacity:0; transform:translateX(40px); }
+.human-card--flip.reveal-card .hc-media{ transform:translateX(40px); }
+.human-card--flip.reveal-card .hc-copy{  transform:translateX(-40px); }
+
+@media (prefers-reduced-motion:reduce){
+    .reveal-card .hc-media,
+    .reveal-card .hc-copy{ opacity:1; transform:none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+    .human-card,
+    .human-card--flip{
+        grid-template-columns:1fr;
+        gap:24px;
+    }
+    .human-card--flip .hc-media{ order:0; }
+    .hc-copy{ max-width:100%; }
+    .human-cards{ gap:50px; }
+
+    .reveal-card .hc-media,
+    .reveal-card .hc-copy,
+    .human-card--flip.reveal-card .hc-media,
+    .human-card--flip.reveal-card .hc-copy{
+        transform:translateY(30px);
+    }
 }
 
 /* ==========================================================
@@ -3599,4 +3709,382 @@ body.nav-locked{ overflow:hidden; }
     .trans-panel{ animation:none; }
     .trans-visual img,
     .trans-tab::after{ transition:none; }
+}
+/* ==========================================================
+   TECHNOLOGY panel
+========================================================== */
+
+/* 1. SAP / ERP feature */
+.tech-erp{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+    margin-bottom:100px;
+}
+
+.tech-copy h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:22px;
+    max-width:16ch;
+}
+
+.tech-copy p{
+    font-size:1.15rem;
+    line-height:1.65;
+    color:#5a534e;
+    max-width:46ch;
+}
+
+.tech-visual{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:16 / 10;
+    background:#EDEAE4;
+}
+
+.tech-visual img{ width:100%; height:100%; object-fit:cover; }
+
+/* 2 & 3. blocks with a title + three columns */
+.tech-block{ margin-bottom:90px; }
+
+.tech-block-title{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.9rem;
+    color:var(--ink);
+    margin-bottom:40px;
+}
+
+.tech-trio{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+}
+
+.tech-item{
+    display:flex;
+    flex-direction:column;
+}
+
+/* the AI / IoT / Robotics gradient header bar */
+.tech-item-head{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.3rem;
+    color:#fff;
+    text-align:center;
+    padding:14px;
+    border-radius:12px;
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    margin-bottom:22px;
+}
+
+.tech-item-media{
+    border-radius:16px;
+    overflow:hidden;
+    aspect-ratio:4 / 3;
+    background:#EDEAE4;
+    margin-bottom:20px;
+}
+
+.tech-item-media img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .7s var(--ease);
+}
+
+.tech-item:hover .tech-item-media img{ transform:scale(1.05); }
+
+.tech-item-key{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--middle);
+    text-align:center;
+    padding-top:14px;
+    border-top:2px solid rgba(0,0,0,.1);
+    position:relative;
+    margin-bottom:10px;
+}
+
+/* little gradient tick on the top border, like your other sections */
+.tech-item-key::before{
+    content:"";
+    position:absolute;
+    top:-2px; left:50%;
+    transform:translateX(-50%);
+    width:46px; height:2px;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+}
+
+.tech-item p{
+    font-size:.98rem;
+    line-height:1.6;
+    color:#5a534e;
+    text-align:center;
+}
+
+/* ---- scroll reveal starting states ---- */
+.tech-erp,
+.tech-item{ opacity:0; transform:translateY(30px); }
+
+@media (prefers-reduced-motion:reduce){
+    .tech-erp,
+    .tech-item{ opacity:1; transform:none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+    .tech-erp{ grid-template-columns:1fr; gap:32px; margin-bottom:70px; }
+    .tech-visual{ order:-1; }
+    .tech-copy h3{ max-width:100%; font-size:1.6rem; }
+    .tech-copy p{ max-width:100%; }
+
+    .tech-trio{ grid-template-columns:1fr; gap:40px; }
+    .tech-block-title{ font-size:1.5rem; }
+}
+/* ==========================================================
+   TECHNOLOGY — Health & Safety block
+========================================================== */
+
+.tech-safety{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+    margin-top:20px;
+}
+
+.safety-copy h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:34px;
+}
+
+.safety-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px 40px;
+}
+
+.safety-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+    margin:0;
+}
+
+.safety-list li{
+    position:relative;
+    padding-left:22px;
+    font-size:1rem;
+    line-height:1.45;
+    color:#5a534e;
+}
+
+/* orange bullet dot */
+.safety-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:8px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:linear-gradient(120deg, var(--orange), var(--red));
+}
+
+.safety-list strong{
+    color:var(--ink);
+    font-weight:600;
+}
+
+/* ---- image with overlaid caption ---- */
+.safety-visual{
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:4 / 3;
+    background:var(--ink);
+}
+
+.safety-visual img{
+    width:100%; height:100%; object-fit:cover;
+}
+
+/* darkening at the lower-right so the caption reads */
+.safety-visual::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top right, rgba(16,12,9,.75) 0%, rgba(16,12,9,0) 55%);
+}
+
+.safety-caption{
+    position:absolute;
+    right:28px;
+    bottom:26px;
+    z-index:1;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.6rem;
+    line-height:1.15;
+    color:#fff;
+    text-align:right;
+}
+
+/* ---- reveal starting state ---- */
+.tech-safety{ opacity:0; transform:translateY(30px); }
+
+@media (prefers-reduced-motion:reduce){
+    .tech-safety{ opacity:1; transform:none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+    .tech-safety{ grid-template-columns:1fr; gap:32px; }
+    .safety-visual{ order:-1; }
+    .safety-copy h3{ font-size:1.6rem; }
+}
+
+@media (max-width:560px){
+    .safety-cols{ grid-template-columns:1fr; gap:22px; }
+}
+/* ==========================================================
+   SUSTAINABILITY panel
+========================================================== */
+
+.sus-head{ max-width:620px; margin-bottom:70px; margin-top: 60px; }
+
+.sus-head h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin:18px 0;
+}
+
+.sus-head p{ font-size:1.15rem; line-height:1.65; color:#5a534e; }
+
+/* Road to Carbon Neutrality — 4-up point grid */
+.sus-block{ margin-bottom:90px; }
+
+.sus-block-title{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.9rem;
+    color:var(--ink);
+    margin-bottom:40px;
+}
+
+.sus-grid-4{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:30px;
+}
+
+.sus-point{
+    padding-top:22px;
+    border-top:2px solid rgba(0,0,0,.1);
+    position:relative;
+}
+
+.sus-point::before{
+    content:"";
+    position:absolute;
+    top:-2px; left:0;
+    width:46px; height:2px;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+}
+
+.sus-point p{ font-size:1rem; line-height:1.55; color:#5a534e; }
+.sus-point strong{ color:var(--ink); font-weight:600; }
+
+/* alternating feature rows (copy + image) */
+.sus-feature{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:60px;
+    align-items:center;
+    margin-bottom:90px;
+}
+
+.sus-feature--flip .sus-visual{ order:-1; }
+
+.sus-copy h4{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.8rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:24px;
+}
+
+.sus-lead{ font-size:1.15rem; line-height:1.6; color:#5a534e; max-width:44ch; }
+
+.sus-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    margin:0;
+}
+
+.sus-list li{
+    position:relative;
+    padding-left:22px;
+    font-size:1.02rem;
+    line-height:1.55;
+    color:#5a534e;
+}
+
+.sus-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:9px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:linear-gradient(120deg, var(--orange), var(--red));
+}
+
+.sus-list strong{ color:var(--ink); font-weight:600; }
+
+.sus-visual{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:4 / 3;
+    background:#EDEAE4;
+}
+
+.sus-visual img{ width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+.sus-feature:hover .sus-visual img{ transform:scale(1.04); }
+
+/* ---- reveal starts ---- */
+.sus-feature,
+.sus-point{ opacity:0; transform:translateY(30px); }
+
+@media (prefers-reduced-motion:reduce){
+    .sus-feature, .sus-point{ opacity:1; transform:none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+    .sus-grid-4{ grid-template-columns:1fr 1fr; gap:28px; }
+    .sus-feature,
+    .sus-feature--flip{ grid-template-columns:1fr; gap:28px; }
+    .sus-feature--flip .sus-visual{ order:-1; }
+    .sus-visual{ order:-1; }
+    .sus-block-title{ font-size:1.5rem; }
+    .sus-copy h4{ font-size:1.5rem; }
+}
+
+@media (max-width:560px){
+    .sus-grid-4{ grid-template-columns:1fr; }
 }
