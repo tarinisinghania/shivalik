@@ -3105,6 +3105,30 @@ MISSION
     .road-card h4{ font-size:1.5rem; }
     .road-card p{ font-size:1rem; }
 }
+@media (max-width:768px){
+
+    /* roadmap: vertical stack instead of horizontal track */
+    .road-viewport{ overflow:visible; }
+
+    .road-track{
+        flex-direction:column;      /* was row */
+        width:auto;                 /* was max-content */
+        gap:20px;
+    }
+
+    .road-card{
+        width:100%;                 /* full width, was clamp(...) */
+        min-height:0;               /* let content set the height */
+        padding:28px 24px;
+    }
+
+    .road-card h4{ font-size:1.4rem; }
+    .road-card p{ font-size:1rem; }
+
+    /* the progress bar + hint were for the horizontal scroll — hide them */
+    .road-progress,
+    .road-hint{ display:none; }
+}
 
 /* ==========================================================
    RESPONSIVE — products page
