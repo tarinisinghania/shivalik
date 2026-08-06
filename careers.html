@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers — Shivalik</title>
+    <link rel="icon" type="image/x-icon" href="iconmark_PNG.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="careers.css">
+    <link rel="stylesheet" href="https://use.typekit.net/ylw0ugu.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+</head>
+<body class="page-dark">
+
+<!-- ===========================
+Navigation
+=========================== -->
+<header class="navbar">
+    <div class="logo">
+        <a href="index.html"><img src="primary.png" alt=""></a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="company.html">Company</a></li>
+            <li><a href="manufacturing.html">Manufacturing</a></li>
+            <li><a href="transformation.html">Transformation</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="careers.html">Careers</a></li>
+        </ul>
+    </nav>
+    <a class="button" href="contact.html">Get in Touch</a>
+</header>
+
+<!-- burger — only shows on mobile -->
+<button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+</button>
+
+<!-- full-screen orange menu overlay -->
+<div class="nav-overlay" id="navOverlay">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="company.html">Company</a></li>
+        <li><a href="manufacturing.html">Manufacturing</a></li>
+        <li><a href="transformation.html">Transformation</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Get in Touch</a></li>
+    </ul>
+</div>
+
+<!-- ===========================
+Hero
+=========================== -->
+<section class="hero hero--inner" id="home">
+  <img class="hero-img" src="companybg.jpg" alt="">
+  <div class="hero-fade"></div>
+  <div class="hero-content">
+    <h1>Build a career<br>that holds and lasts.</h1>
+    <span class="hero-rule"></span>
+  </div>
+</section>
+
+<!-- ===========================
+Careers — intro + form
+=========================== -->
+<section class="careers-main">
+  <div class="cr-grid">
+
+    <!-- LEFT: framing copy + why-join points -->
+    <div class="cr-left">
+      <div class="label"><p>Join Shivalik</p></div>
+
+      <h1 class="cr-headline">Precision is built by people.</h1>
+
+      <p class="cr-blurb">
+        From the foundry floor to the design office, our fifteen hundred people
+        share one habit: getting it right the first time. If that sounds like
+        you, we'd like to hear from you — send us your details and CV, and our
+        HR team will be in touch.
+      </p>
+
+      <ul class="cr-points">
+        <li>
+          <span class="cr-point-key">Grow with us</span>
+          <span class="cr-point-val">Training, mentorship and clear paths that grow with the company.</span>
+        </li>
+        <li>
+          <span class="cr-point-key">Safety first</span>
+          <span class="cr-point-val">ISO 45001-certified operations with a genuine safety-first culture.</span>
+        </li>
+        <li>
+          <span class="cr-point-key">Real impact</span>
+          <span class="cr-point-val">Your work ships in vehicles and machinery relied on across the world.</span>
+        </li>
+      </ul>
+
+      <div class="cr-hr-contact">
+        <span class="cr-point-key">HR Enquiries</span>
+        <a href="mailto:careers@shivalikengineering.com" class="cr-hr-mail">careers@shivalikengineering.com</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: application form card -->
+    <div class="cr-card">
+      <h2>Apply now</h2>
+      <p class="cr-card-lead">
+        Tell us about yourself and attach your CV. Fields marked * are required.
+      </p>
+
+      <form class="cr-form" id="careersForm" novalidate>
+
+        <div class="cf-field">
+          <label for="cr-name">Full name *</label>
+          <input type="text" id="cr-name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label for="cr-email">Email *</label>
+            <input type="email" id="cr-email" name="email" autocomplete="email" required>
+          </div>
+          <div class="cf-field">
+            <label for="cr-phone">Phone</label>
+            <input type="tel" id="cr-phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="cf-field">
+          <label for="cr-role">Area of interest</label>
+          <select id="cr-role" name="role">
+            <option value="">Select a department</option>
+            <option>Foundry &amp; Production</option>
+            <option>Machining</option>
+            <option>Quality &amp; Metallurgy</option>
+            <option>Design &amp; Engineering</option>
+            <option>Maintenance</option>
+            <option>Supply Chain &amp; Logistics</option>
+            <option>Sales &amp; Marketing</option>
+            <option>Human Resources &amp; Admin</option>
+            <option>Finance &amp; Accounts</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="cf-field">
+          <label for="cr-exp">Years of experience</label>
+          <select id="cr-exp" name="experience">
+            <option value="">Select</option>
+            <option>Fresher / 0–1 years</option>
+            <option>1–3 years</option>
+            <option>3–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+
+        <div class="cf-field">
+          <label for="cr-message">Message</label>
+          <textarea id="cr-message" name="message" rows="4" placeholder="A short note about what you're looking for (optional)"></textarea>
+        </div>
+
+        <!-- CV upload -->
+        <div class="cf-field">
+          <label>Attach CV *</label>
+          <label class="cr-upload" for="cr-cv" id="crUploadLabel">
+            <span class="cr-upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M12 16V4M7 9l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="cr-upload-text" id="crUploadText">
+              <strong>Click to upload</strong> or drag &amp; drop<br>
+              <small>PDF, DOC or DOCX — max 5&nbsp;MB</small>
+            </span>
+          </label>
+          <input type="file" id="cr-cv" name="cv" accept=".pdf,.doc,.docx" required hidden>
+        </div>
+
+        <button type="submit" class="cf-submit">
+          <span class="cf-arrow" aria-hidden="true">&rarr;</span>
+          Submit application
+        </button>
+
+        <p class="cf-status" id="crStatus" role="status" aria-live="polite"></p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===========================
+Footer
+=========================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <div class="f-logo"><img src="primary.png" alt="Shivalik"></div>
+        <p class="f-desc">
+          Shivalik Engineering Industries Ltd — <br>precision
+          castings and machined components,
+          engineered in India since 2007.
+        </p>
+        <div class="f-social">
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.65c0-1.35-.03-3.08-1.9-3.08-1.9 0-2.2 1.46-2.2 2.98V21h-4V9z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.87.25-1.46 1.5-1.46H16.7V3.96A21 21 0 0014.3 3.8c-2.4 0-4.05 1.47-4.05 4.17V10H7.6v3h2.65v8h3.25z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="company.html">About Us</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="transformation.html">Transformation</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Automotive Casting</a></li>
+          <li><a href="#">Tractor &amp; Agriculture</a></li>
+          <li><a href="#">Railway Casting</a></li>
+          <li><a href="#">Off-Highway Casting</a></li>
+          <li><a href="#">Water Works &amp; Pipe Fitting</a></li>
+        </ul>
+      </div>
+      <div class="f-col f-contact">
+        <h4>Get In Touch</h4>
+        <address>
+          Engineering Park, Heavy<br> Industrial Area,
+          Hathkhoj, Bhilai,<br> Dist: Durg,<br>
+          Chhattisgarh, 490026, India
+        </address>
+        <a href="mailto:info@shivalikengineering.com">info@shivalikengineering.com</a>
+        <a href="tel:+918370002018">+91 83700 02018</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Shivalik Engineering Industries Ltd. All rights reserved.</p>
+      <a href="#home" class="to-top">Back to top <span>&uarr;</span></a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="careers.js"></script>
+</body>
+</html>

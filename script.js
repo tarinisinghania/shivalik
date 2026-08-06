@@ -857,3 +857,111 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
             scrollTrigger:{ trigger:grid, start:"top 82%", toggleActions:"play none none reverse" } });
     });
 }
+
+/* ==========================================================
+   CAREERS PAGE — CV upload + form handling
+========================================================== */
+
+(() => {
+    const form   = document.getElementById("careersForm");
+    if (!form) return;
+
+    const fileInput = document.getElementById("cr-cv");
+    const dropZone  = document.getElementById("crUploadLabel");
+    const uploadTxt = document.getElementById("crUploadText");
+    const status    = document.getElementById("crStatus");
+
+    const MAX_BYTES = 5 * 1024 * 1024;               // 5 MB
+    const ALLOWED = [".pdf", ".doc", ".docx"];
+
+    /* ---- reflect the chosen file in the drop zone ---- */
+    const showFile = (file) => {
+        if (!file) return;
+
+        const ext = "." + file.name.split(".").pop().toLowerCase();
+        if (!ALLOWED.includes(ext)){
+            status.textContent = "Please upload a PDF, DOC or DOCX file.";
+            status.classList.add("error");
+            fileInput.value = "";
+            return;
+        }
+        if (file.size > MAX_BYTES){
+            status.textContent = "That file is over 5 MB. Please upload a smaller version.";
+            status.classList.add("error");
+            fileInput.value = "";
+            return;
+        }
+
+        status.textContent = "";
+        status.classList.remove("error");
+        dropZone.classList.add("has-file");
+        const kb = (file.size / 1024).toFixed(0);
+        uploadTxt.innerHTML =
+            `<strong>${file.name}</strong><br><small>${kb} KB — click to replace</small>`;
+    };
+
+    fileInput.addEventListener("change", () => showFile(fileInput.files[0]));
+
+    /* ---- drag & drop ---- */
+    ["dragenter", "dragover"].forEach(ev =>
+        dropZone.addEventListener(ev, e => {
+            e.preventDefault();
+            dropZone.classList.add("dragover");
+        })
+    );
+    ["dragleave", "drop"].forEach(ev =>
+        dropZone.addEventListener(ev, e => {
+            e.preventDefault();
+            dropZone.classList.remove("dragover");
+        })
+    );
+    dropZone.addEventListener("drop", e => {
+        const file = e.dataTransfer.files[0];
+        if (file){
+            fileInput.files = e.dataTransfer.files;   // assign to the input
+            showFile(file);
+        }
+    });
+
+    /* ---- submit ---- */
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        if (!form.checkValidity()){
+            status.textContent = "Please complete the required fields and attach your CV.";
+            status.classList.add("error");
+            form.reportValidity();
+            return;
+        }
+        if (!fileInput.files.length){
+            status.textContent = "Please attach your CV before submitting.";
+            status.classList.add("error");
+            return;
+        }
+
+        status.classList.remove("error");
+        const btn = form.querySelector(".cf-submit");
+        btn.disabled = true;
+        status.textContent = "Submitting…";
+
+        /* ---- NO BACKEND WIRED YET ----
+           A file upload needs a server endpoint or a form service that
+           accepts attachments (e.g. Formspree, Web3Forms, or your own API).
+           Replace this block with a real fetch() using FormData:
+
+               const data = new FormData(form);
+               const res = await fetch("YOUR_ENDPOINT", { method:"POST", body:data });
+
+           For now it simulates success so the flow is complete.        */
+        console.log("Application:", Object.fromEntries(new FormData(form).entries()));
+
+        setTimeout(() => {
+            status.textContent = "Thank you — your application has been received. Our HR team will be in touch.";
+            form.reset();
+            dropZone.classList.remove("has-file");
+            uploadTxt.innerHTML =
+                `<strong>Click to upload</strong> or drag &amp; drop<br><small>PDF, DOC or DOCX — max 5&nbsp;MB</small>`;
+            btn.disabled = false;
+        }, 800);
+    });
+})();
