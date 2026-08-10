@@ -3732,7 +3732,7 @@ body.nav-locked{ overflow:hidden; }
     /* because the tab bar is now fixed (removed from flow), push the
        panels down so the first one isn't hidden behind it */
     .trans-panel{
-        padding-top:70px;         /* ≈ tab bar height; tune to fit */
+        padding-top:0px;         /* ≈ tab bar height; tune to fit */
     }
 
     /* the section heading also needs clearance from navbar + tabs */

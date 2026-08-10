@@ -517,17 +517,6 @@ if (window.gsap){
             );
         });
     }
-    if (reduce){
-    roadmap.classList.add("no-pin");
-    // fade cards in on scroll when not pinned
-    gsap.utils.toArray(".road-card").forEach(card => {
-        gsap.fromTo(card,
-            { opacity:0, y:30 },
-            { opacity:1, y:0, duration:.6, ease:"power3.out",
-              scrollTrigger:{ trigger:card, start:"top 85%" } }
-        );
-    });
-}
 
     /* ---- roadmap: pinned horizontal scroll ---- */
     const track = document.querySelector(".road-track");
