@@ -3156,16 +3156,29 @@ MISSION
     .prod{ padding:70px 20px 70px; }
     .prod-panel{ padding:44px 0; }
 
-    /* image row: let it scroll sideways instead of cramming 5 across */
+    /* show only the active sector's image */
     .prod-tab-images{
-        overflow-x:auto;
-        gap:12px;
-        scrollbar-width:none;
+        display:block;             /* was flex — no more row */
+        overflow:visible;
+    }
+
+    .prod-tab-img{
+        display:none;              /* hide all by default */
+        width:100%;
+    }
+
+    .prod-tab-img.active{
+        display:block;             /* show only the selected one */
+    }
+
+    .prod-tab-img.active img{
+        width:100%;
+        aspect-ratio:16 / 10;      /* wider crop for a single hero-ish image */
+        border-radius:16px;
+        filter:none;               /* full colour, it's the feature image now */
+        opacity:1;
     }
     .prod-tab-images::-webkit-scrollbar{ display:none; }
-    .prod-tab-img{
-        flex:0 0 42%;            /* ~2 visible, rest swipe */
-    }
 
     .prod-tab-labels{
         position:fixed;

@@ -655,7 +655,16 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
             p.classList.toggle("active", on);
             p.hidden = !on;
         });
+
         if (window.ScrollTrigger) ScrollTrigger.refresh();
+
+        /* scroll to the top of the products section so the new panel starts fresh */
+        requestAnimationFrame(() => {
+            const anchor = document.querySelector(".prod-head") || document.querySelector(".prod");
+            if (!anchor) return;
+            const y = anchor.getBoundingClientRect().top + window.pageYOffset - 120;
+            window.scrollTo({ top: y, behavior: "smooth" });
+        });
     };
 
     all.forEach(el => el.addEventListener("click", () => activate(el.dataset.panel)));
