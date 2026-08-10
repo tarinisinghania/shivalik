@@ -3167,22 +3167,48 @@ MISSION
         flex:0 0 42%;            /* ~2 visible, rest swipe */
     }
 
-    /* sticky label row → horizontally scrollable pills */
     .prod-tab-labels{
-        top:80px;                /* burger navbar is shorter */
-        gap:6px;
-        padding:12px 0;
-        overflow-x:auto;
-        scrollbar-width:none;
+        position:fixed;
+        top:96px;                /* pushed down to clear the navbar */
+        left:16px;
+        right:16px;
+        z-index:900;
+
+        display:flex;
+        flex-wrap:wrap;           /* allow 3-on-top, 2-below */
+        justify-content:flex-start;
+        gap:8px;
+        margin:0;
+        padding:12px 14px;
+        border-radius:28px;       /* less round now it's taller (two rows) */
+
+        background:rgba(60,59,58,0.55);
+        backdrop-filter:blur(18px) saturate(1.3);
+        -webkit-backdrop-filter:blur(18px) saturate(1.3);
+        border:1px solid rgba(255,255,255,.10);
+
+        overflow:visible;         /* no scroll — they wrap instead */
     }
-    .prod-tab-labels::-webkit-scrollbar{ display:none; }
-    .prod-tab-labels::before{ left:-20px; right:-20px; }
+    .prod-tab-labels::before{ display:none; }
+
     .prod-tab-label{
         flex:0 0 auto;
         white-space:nowrap;
-        font-size:13px;
-        padding:0 10px 14px;
+        font-size:.9rem;
+        padding:8px 14px;
+        border-radius:40px;
+        color:#fff;
+        background:none;
     }
+
+    .prod-tab-label.active{
+        background:linear-gradient(100deg, var(--orange), var(--red));
+        color:#fff;
+    }
+
+    /* the fixed 2-row pill is taller — clear the panel + images below it */
+    .prod-panel{ padding-top:0; }
+    .prod-tab-images{ margin-top:12px; }
 
     /* products → 2 columns */
     .prod-grid{ grid-template-columns:repeat(2, 1fr); gap:20px; }
@@ -3206,7 +3232,7 @@ MISSION
     /* single-column product grid */
     .prod-grid{ grid-template-columns:1fr; gap:24px; }
 
-    .prod-tab-labels{ top:76px; }
+    .prod-tab-labels{ top:96px; }
 }
 
 /* ==========================================================

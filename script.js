@@ -616,48 +616,6 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches){
    PRODUCTS PAGE — industry tab switching
 ========================================================== */
 
-(() => {
-    const tabs = Array.from(document.querySelectorAll(".prod-tab"));
-    const panels = Array.from(document.querySelectorAll(".prod-panel"));
-    if (!tabs.length) return;
-
-    const activate = (name) => {
-        tabs.forEach(t => {
-            const on = t.dataset.panel === name;
-            t.classList.toggle("active", on);
-            t.setAttribute("aria-selected", on ? "true" : "false");
-        });
-
-        panels.forEach(p => {
-            const on = p.id === "panel-" + name;
-            p.classList.toggle("active", on);
-            p.hidden = !on;
-        });
-
-        /* recalc any scroll-triggers now the panel height changed */
-        if (window.ScrollTrigger) ScrollTrigger.refresh();
-    };
-
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => activate(tab.dataset.panel));
-
-        /* keyboard: left/right arrows move between tabs */
-        tab.addEventListener("keydown", e => {
-            const i = tabs.indexOf(tab);
-            if (e.key === "ArrowRight" && i < tabs.length - 1){
-                tabs[i + 1].focus(); activate(tabs[i + 1].dataset.panel);
-            } else if (e.key === "ArrowLeft" && i > 0){
-                tabs[i - 1].focus(); activate(tabs[i - 1].dataset.panel);
-            }
-        });
-    });
-
-    /* optional: open a tab from the URL hash, e.g. products.html#railways */
-    const hash = location.hash.replace("#", "");
-    if (hash && document.getElementById("panel-" + hash)){
-        activate(hash);
-    }
-})();
 
 /* ---- product cards fade in on load / tab switch ---- */
 if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
@@ -673,28 +631,14 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     };
 
     revealGrid();
-    document.querySelectorAll(".prod-tab").forEach(t =>
-        t.addEventListener("click", () => setTimeout(revealGrid, 20))
+    document.querySelectorAll(".prod-tab-label").forEach(t =>
+    t.addEventListener("click", () => setTimeout(revealGrid, 20))
     );
 }
 /* ==========================================================
    SUB-NAV CONDENSE ON SCROLL
 ========================================================== */
 
-(() => {
-    const tabs = document.querySelector(".prod-tabs");
-    const section = document.querySelector(".prod");
-    if (!tabs || !section) return;
-
-    const onScroll = () => {
-        /* condense once we've scrolled a bit past where the bar pins */
-        const trigger = section.offsetTop + 160;   // tune this number
-        tabs.classList.toggle("condensed", window.scrollY > trigger);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-})();
 
 (() => {
     const imgs = Array.from(document.querySelectorAll(".prod-tab-img"));
