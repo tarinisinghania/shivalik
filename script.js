@@ -400,6 +400,24 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
    back-to-top, GSAP registration). This only adds page-specifics.
 ========================================================== */
 
+(() => {
+    const track = document.querySelector(".cm-lined-track span");
+    const lined = document.querySelector(".cm-lined");
+    if (!track || !lined || !window.gsap) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to(track, {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+            trigger: lined,
+            start: "top 75%",
+            end: "bottom 80%",
+            scrub: true
+        }
+    });
+})();
 /* ---------- Form submit ---------- */
 
 const form = document.getElementById("contactForm");
@@ -907,3 +925,4 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         }, 800);
     });
 })();
+
