@@ -289,14 +289,69 @@ HERO
 
 }
 
-.hero-buttons{
-
+.hero-lower{
     display:flex;
-
-    gap:20px;
-
+    justify-content:space-between;
+    align-items:center;          /* was flex-start — centers buttons against the paragraph */
+    gap:60px;
+    margin-top:40px;
+    width:calc(100vw - 42%);
+}
+.hero-lower p{
+    margin:0;
+    max-width:460px;              /* paragraph stays its normal width on the left */
+    flex:0 0 auto;
 }
 
+.hero-buttons{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-left:auto;
+    margin-top:8px;              /* small drop to align with the text nicely */
+}
+
+.hero-buttons{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-shrink:0;               /* don't let buttons squish */
+}
+
+/* the two text buttons — light bg, middle-colour text */
+.hero-btn{
+    display:inline-flex;
+    align-items:center;
+    padding:15px 30px;
+    border-radius:60px;
+    background:rgba(60, 59, 58, 0.45);
+    backdrop-filter:blur(18px) saturate(1.3);
+    -webkit-backdrop-filter:blur(18px) saturate(1.3);
+    border:1px solid rgba(255,255,255,.10);
+    color: var(--light);
+    font-family:"balto", sans-serif;
+    font-weight:400;
+    font-size:15px;
+    letter-spacing:.02em;
+    text-transform: uppercase;
+    gap: 10px;
+    white-space:nowrap;
+    transition:background .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+}
+.hero-btn-icon{
+    width:18px;
+    height:18px;
+    flex:0 0 auto;
+    color: var(--middle);
+}
+.hero-btn:hover{
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+/* the arrow stays exactly as-is — orange gradient circle + bob.
+   just make sure it's the rightmost (it is, last in the row) */
 .primary{
 
     background:linear-gradient(100deg,var(--orange),var(--red));
@@ -357,16 +412,18 @@ ABOUT
 }
 
 .about-visual{
-    flex:1;                      /* image fills remaining space beside the text */
-    border-radius:16px;
-    overflow:hidden;     
+    flex:1;
+    display:flex;
+    flex-direction:column;   /* stack the two images */
+    gap:24px;
     background:transparent;
 }
 
 .about-visual img{
     width:100%;
-    height:100%;
+    height:auto;             /* let each image keep its aspect ratio */
     object-fit:contain;
+    display:block;
 }
 
 /* stack when there isn't room for 850px text + image */
@@ -436,10 +493,11 @@ STATISTICS
 }
 /* label sits above the number */
 .stat p{
-    order:-1;                    /* pulls label above regardless of DOM order */
-    color:#666;
+    order:1;                    /* pulls label above regardless of DOM order */
+    color:var(--middle);
     text-transform:uppercase;
-    font-size:14px;
+    font-size:18px;
+    font-weight: 500;
     letter-spacing:.08em;
     margin:0;
 }
@@ -557,12 +615,50 @@ SECTION TITLE
     background:var(--paper);
     padding:130px 0 60px;
   }
-  .why-grid{
+  /* left column back to its original proportion */
+.why-grid{
     display:grid;
-    grid-template-columns:0.85fr 1.15fr;
+    grid-template-columns:0.60fr 1.40fr;   /* restore — not 0.55/1.45 */
     gap:70px;
     align-items:start;
-  }
+}
+
+/* the list is a SINGLE column stack, NOT a grid — this restores sticky-scroll */
+.why-list{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+/* each item is a box, but keep the sticky-scroll dim/active behaviour */
+.why-item{
+    display:flex;
+    gap:22px;
+    padding:34px 30px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.06);
+    border-left:5px solid var(--middle);
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    /* KEEP the dim + scale so it still highlights one at a time */
+    opacity:0.4;
+    transform:scale(0.98);
+    transition:opacity .5s var(--ease), transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.why-item.active{
+    opacity:1;
+    transform:scale(1);
+    box-shadow:0 16px 40px rgba(0,0,0,.10);   /* active card lifts a bit */
+}
+
+/* per-card accent colour */
+.why-item:nth-child(1){ border-left-color:var(--red); }
+.why-item:nth-child(2){ border-left-color:var(--orange); }
+.why-item:nth-child(3){ border-left-color:var(--red); }
+.why-item:nth-child(4){ border-left-color:#1F6FD6; }
+.why-item:nth-child(5){ border-left-color:var(--orange); }
+
   .why-sticky{
     position:sticky;
     top:120px;
@@ -576,11 +672,7 @@ SECTION TITLE
     color: #111;
     padding: 20px;
   }
-  .why-lead{
-    font-size: 1.2rem;
-    line-height: 1.5;
-    max-width:420px;
-  }
+
   .why-progress{
     margin-top:44px;
     display:flex;
@@ -610,46 +702,7 @@ SECTION TITLE
     width:20%;
     transition:width 0.5s var(--ease);
   }
-
-  .why-list{
-    display:flex;
-    flex-direction:column;
-  }
-  .why-item{
-    display:flex;
-    gap:22px;
-    padding:34px 4px;
-    border-top:1px solid var(--line-dark);
-    opacity:0.4;
-    transform:scale(0.98);
-    transition:opacity 0.5s var(--ease), transform 0.5s var(--ease);
-  }
-  .why-item:last-child{ border-bottom:1px solid var(--line-dark); }
-  .why-item.active{ opacity:1; transform:scale(1); }
-  .why-item .num{
-    font-family:'balto', sans-serif;
-    font-size:22px;
-    color:var(--steel-light);
-    flex:0 0 auto;
-    width:34px;
-    transition:color 0.4s var(--ease);
-  }
-  .why-item.active .num{ color:var(--middle); }
-  .why-item .icon{
-    flex:0 0 auto;
-    width:44px; height:44px;
-    border-radius:10px;
-    background:var(--line-dark);
-    color:var(--steel);
-    display:flex; align-items:center; justify-content:center;
-    transition:background 0.4s var(--ease), box-shadow 0.4s var(--ease), color 0.4s var(--ease);
-  }
-  .why-item .icon svg path, .why-item .icon svg circle, .why-item .icon svg rect{ transition:stroke 0.4s var(--ease); }
-  .why-item.active .icon{
-    background:linear-gradient(135deg,var(--orange),var(--red));
-    color:#fff;
-    box-shadow:0 8px 20px rgba(232,41,27,0.25);
-  }
+  
   .why-item h3{
     font-family:'balto', sans-serif;
     font-weight:500;
@@ -666,6 +719,30 @@ SECTION TITLE
   @media (max-width:980px){
     .why-sticky{ position:static; }
   }
+
+.why-more{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:24px;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--middle);
+    transition:gap .3s var(--ease), color .3s var(--ease);
+}
+
+.why-more span{
+    transition:transform .3s var(--ease);
+}
+
+.why-more:hover{
+    color:var(--red);
+    gap:12px;
+}
+.why-more:hover span{
+    transform:translateX(3px);
+}
 
 /* ---------- Certification grid inside Why item ---------- */
 
@@ -732,55 +809,54 @@ SECTION TITLE
 }
 
 /* ---------- Sustainability stat list inside Why item ---------- */
-
 .sustain-list{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    margin-top:24px;
-    max-width:460px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);   /* 3 across instead of stacked */
+    gap:30px;
+    margin-top:30px;
+    max-width:100%;                          /* was 460px — let it fill the card */
 }
 
 .sustain-item{
-    display:flex;
+    flex-direction:column;                   /* icon above text */
     align-items:flex-start;
     gap:16px;
 }
 
+/* bigger icon circle */
 .sustain-icon{
     flex:0 0 auto;
-    width:56px;
-    height:56px;
+    width:64px;
+    height:64px;
+    margin-bottom: 20px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(0,0,0,.04);
+    background:rgba(0,0,0,.06);       /* slightly darker so the circle reads */
+    border:1px solid rgba(0,0,0,.06); /* optional: a subtle ring to define it */
     color:var(--steel);
     transition:background .4s var(--ease), color .4s var(--ease);
 }
-
 .sustain-icon svg{
-    width:22px;
-    height:22px;
+    width:28px;
+    height:28px;
 }
 
-/* light up with the active item, like the other Why visuals */
-.why-item.active .sustain-icon{
-    color:var(--middle);
-}
-
+/* bigger, bolder text */
 .sustain-item p{
-    margin:0;
-    font-size:15px;
-    line-height:1.55;
-    color:var(--steel);
+    font-size:1.05rem;
+    line-height:1.5;
 }
 
 .sustain-item strong{
-    color:var(--middle);       /* the 70 MW / 87% figures in orange */
-    font-weight:600;
-    font-size:16px;
+    font-size:1.5rem;      /* the 70 MW / 87% figures — larger and punchier */
+    display:block;
+    margin-bottom:4px;
+    color: var(--middle);
+}
+.sustain-item span{
+    font-weight: 500;
 }
 
 /* ---------- Feature blocks inside Why item ---------- */
@@ -836,7 +912,7 @@ SECTION TITLE
 .feature-stats li{
     font-family:'balto', sans-serif;
     font-weight:500;
-    font-size:16px;
+    font-size:20px;
     color:var(--ink);
 }
 
@@ -862,7 +938,51 @@ SECTION TITLE
     color:var(--steel);
     margin-top:6px;
 }
+.feature-img{
+    width:100%;
+    max-width:420px;
+    height:auto;
+    border-radius:14px;
+    margin-top:18px;
+    display:block;
+    /* dim until the card is active, matching your other why visuals */
+    filter:grayscale(1);
+    opacity:.6;
+    transition:filter .4s var(--ease), opacity .4s var(--ease);
+}
 
+/* comes to colour when this why-item is active */
+.why-item.active .feature-img{
+    filter:grayscale(0);
+    opacity:1;
+}
+.oem-group{
+    margin-top:26px;
+}
+.oem-group + .oem-group{
+    margin-top:36px;      /* gap between International and Domestic */
+}
+
+.oem-cat{
+    display:inline-block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--middle);
+    margin-bottom:16px;
+    padding:6px 16px;
+    border-radius:0 12px 12px 0;
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    color:#fff;                       /* orange banner label like your reference */
+}
+
+/* the logo grid you already have works — maybe widen to fit more per row */
+.client-logos{
+    grid-template-columns:repeat(6, 1fr);   /* was 5 — fit more logos per row */
+    max-width:100%;
+}
   /* ==========================================================
 FOOTER
 ========================================================== */
@@ -1056,25 +1176,27 @@ FOOTER
 
 .client-logos{
     display:grid;
-    grid-template-columns:repeat(5, 1fr);
-    gap:18px 22px;
-    margin-top:22px;
-    max-width:520px;
+    grid-template-columns:repeat(5, 1fr);   /* 5 across — comfortable for the logo size */
+    gap:16px;
+    margin-top:16px;
+    max-width:100%;
 }
 
 .client-logo{
-    width: 100px;
+    /* was width:100px — remove the fixed width so it fills the grid cell */
+    width:auto;
+    min-height:90px;                /* taller cells so logos have room */
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:6px 8px;
-    border-radius:8px;
+    padding:16px 18px;              /* more breathing room */
+    border-radius:10px;
     background:rgba(0,0,0,.025);
     transition:background .35s var(--ease), transform .35s var(--ease);
 }
 
 .client-logo img{
-    max-height:100%;
+    max-height:90px;                /* was 100% of a tiny box — now a real size */
     max-width:100%;
     width:auto;
     object-fit:contain;
@@ -1083,7 +1205,6 @@ FOOTER
     transition:filter .4s var(--ease), opacity .4s var(--ease);
 }
 
-/* logos come to life only when this item is the active one */
 .why-item.active .client-logo img{
     filter:grayscale(0);
     opacity:1;
@@ -4442,4 +4563,78 @@ body.nav-locked{ overflow:hidden; }
     .careers-main{ padding:100px 20px 60px; }
     .cr-card{ padding:30px 20px; }
     .cr-upload{ flex-direction:column; text-align:center; gap:12px; padding:24px; }
+}
+/* ==========================================================
+   CONTACT MODAL
+========================================================== */
+
+.contact-modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:0px;
+}
+.contact-modal.open{ display:flex; }
+
+.contact-modal-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(16,12,9,.6);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    animation:cmFade .3s var(--ease);
+}
+
+.contact-modal-card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:560px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#EDEAE4;
+    border-radius:22px;
+    padding:25px 40px;
+    animation:cmPop .4s var(--ease);
+}
+
+@keyframes cmFade{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes cmPop{
+    from{ opacity:0; transform:translateY(20px) scale(.98); }
+    to  { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.contact-modal-card h2{
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:1.9rem;
+    color:var(--ink);
+    margin-bottom:10px;
+}
+
+.contact-modal-close{
+    position:absolute;
+    top:18px; right:20px;
+    width:38px; height:38px;
+    border:none;
+    background:rgba(0,0,0,.05);
+    border-radius:50%;
+    font-size:24px;
+    line-height:1;
+    color:var(--ink);
+    cursor:pointer;
+    transition:background .3s var(--ease), color .3s var(--ease);
+}
+.contact-modal-close:hover{
+    background:linear-gradient(120deg, var(--orange), var(--red));
+    color:#fff;
+}
+
+body.modal-open{ overflow:hidden; }
+
+@media (max-width:560px){
+    .contact-modal-card{ padding:36px 24px; }
 }

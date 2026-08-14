@@ -926,3 +926,96 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     });
 })();
 
+/* ==========================================================
+   CONTACT MODAL
+========================================================== */
+
+(() => {
+    const modal   = document.getElementById("contactModal");
+    const openBtn = document.getElementById("openContactModal");
+    if (!modal || !openBtn) return;
+
+    const open = () => {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+    };
+    const close = () => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+    };
+
+    openBtn.addEventListener("click", e => { e.preventDefault(); open(); });
+
+    /* close on X, overlay click, or Escape */
+    modal.querySelectorAll("[data-close]").forEach(el =>
+        el.addEventListener("click", close)
+    );
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && modal.classList.contains("open")) close();
+    });
+
+    /* form submit (same fake-success flow as the contact page) */
+    const form   = document.getElementById("contactFormModal");
+    const status = document.getElementById("modalStatus");
+    form?.addEventListener("submit", e => {
+        e.preventDefault();
+        if (!form.checkValidity()){
+            status.textContent = "Please fill in the required fields.";
+            status.classList.add("error");
+            form.reportValidity();
+            return;
+        }
+        status.classList.remove("error");
+        const btn = form.querySelector(".cf-submit");
+        btn.disabled = true;
+        status.textContent = "Sending…";
+
+        /* NO BACKEND — replace with a real fetch() to your form service */
+        console.log("Enquiry:", Object.fromEntries(new FormData(form).entries()));
+
+        setTimeout(() => {
+            status.textContent = "Thanks — we'll reply within two working days.";
+            form.reset();
+            btn.disabled = false;
+            setTimeout(close, 1500);   /* auto-close after the thank-you */
+        }, 700);
+    });
+})();
+/* ==========================================================
+   SCROLL TO HASH TARGET ON LOAD (for Learn more deep-links)
+========================================================== */
+
+(() => {
+    const hash = location.hash;
+    if (!hash || hash.length < 2) return;
+
+    /* on the transformation page the hash is a pillar name (#technology,
+       #human, #sustainability) → scroll to that panel. Elsewhere the hash
+       is a section id (#units, #products, #intro). */
+    const isTransformation = /transformation/i.test(location.pathname);
+
+    const target = isTransformation
+        ? document.getElementById("panel-" + hash.replace("#", ""))
+        : document.querySelector(hash);
+
+    if (!target) return;
+
+    const scrollToTarget = () => {
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 120; // clear navbar
+        window.scrollTo({ top:y, behavior:"smooth" });
+    };
+
+    /* wait for full layout, then scroll (delay lets the browser's native
+       hash jump + any tab activation finish first) */
+    const run = () => requestAnimationFrame(() =>
+        requestAnimationFrame(() => setTimeout(scrollToTarget, 80))
+    );
+
+    if (document.readyState === "complete"){
+        run();
+    } else {
+        window.addEventListener("load", run);
+    }
+})();
