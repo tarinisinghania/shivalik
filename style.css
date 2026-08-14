@@ -61,7 +61,7 @@ section{
 
     --black:#111;
     --white:#fff;
-    --grey:#624b42;
+    --grey:#625550;
     --light: rgb(249, 246, 241);
     --ease: cubic-bezier(.19,1,.22,1);
     --ink:#111;
@@ -983,6 +983,158 @@ SECTION TITLE
     grid-template-columns:repeat(6, 1fr);   /* was 5 — fit more logos per row */
     max-width:100%;
 }
+.contact-cta{
+    background:var(--light);
+    padding:60px 15px;
+}
+
+.contact-cta-inner{
+    max-width:1500px;
+    margin:0 auto;
+    padding:56px 6%;
+    border-radius:24px;
+    background:linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+    background-image: url(companybg.jpg);
+    background-size: cover;
+    color:#fff;
+    text-align:center;
+}
+
+.contact-cta-inner h2{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2.2rem;
+    margin-bottom:14px;
+}
+
+.contact-cta-inner p{
+    font-size:1.1rem;
+    line-height:1.6;
+    color:rgba(255,255,255,.92);
+    max-width:52ch;
+    margin:0 auto 32px;
+}
+.contact-cta-buttons{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+/* second button: outline style so it's distinct from the solid Contact button */
+.contact-cta-btn--outline{
+    background:transparent;
+    color:#fff;
+    border:1.5px solid rgba(255,255,255,.6);
+}
+
+.contact-cta-btn--outline .hero-btn-icon{
+    color:#fff;
+}
+
+.contact-cta-btn--outline:hover{
+    background:#fff;
+    color:var(--middle);
+}
+.contact-cta-btn--outline:hover .hero-btn-icon{
+    color:var(--middle);
+}
+.contact-cta-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 34px;
+    border-radius:60px;
+    background:var(--light);
+    color:var(--middle);
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:15px;
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.contact-cta-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+.contact-cta-btn .hero-btn-icon{
+    width:18px; height:18px;
+    color:var(--middle);
+}
+.brand-arrow{
+    width:18px;
+    height:auto;
+    display:inline-block;
+    vertical-align:middle;
+    flex:0 0 auto;
+    transition:transform .3s var(--ease);
+}
+.brand-arrow-triple{
+    width:38px;
+    height:auto;
+    display:inline-block;
+    vertical-align:middle;
+    flex:0 0 auto;
+    transition:transform .3s var(--ease);
+}
+
+.why-more:hover .brand-arrow-triple{
+    transform:translateX(4px);
+}
+
+/* default: the three brand colours */
+.brand-arrow-triple .ch-1{ fill:#1e1714; }
+.brand-arrow-triple .ch-2{ fill:#FB8503; }
+.brand-arrow-triple .ch-3{ fill:#F5040B; }
+
+.brand-arrow-triple{
+    width:38px;
+    height:auto;
+    display:inline-block;
+    vertical-align:middle;
+    flex:0 0 auto;
+    transition:transform .3s var(--ease);
+}
+.brand-arrow-triple .ch-1,
+.brand-arrow-triple .ch-2,
+.brand-arrow-triple .ch-3{
+    transition:fill .3s var(--ease);
+}
+
+/* on hover of the link, all three chevrons turn light */
+.view-products:hover .brand-arrow-triple .ch-1,
+.view-products:hover .brand-arrow-triple .ch-2,
+.view-products:hover .brand-arrow-triple .ch-3{
+    fill:var(--light);
+}
+.cta-btn .brand-arrow-triple .ch-1,
+.cta-btn .brand-arrow-triple .ch-2,
+.cta-btn .brand-arrow-triple .ch-3{
+    fill:var(--light);
+}
+.cta-btn:hover .brand-arrow-triple .ch-1{ fill:#1e1714; }
+.cta-btn:hover .brand-arrow-triple .ch-2{ fill:#FB8503; }
+.cta-btn:hover .brand-arrow-triple .ch-3{ fill:#F5040B; }
+
+.cf-submit .brand-arrow-triple .ch-1 {    fill:var(--light);}
+.cf-submit:hover .brand-arrow-triple .ch-1,
+.cf-submit:hover .brand-arrow-triple .ch-2,
+.cf-submit:hover .brand-arrow-triple .ch-3{
+    fill:var(--light);
+}
+
+/* direction variants */
+.brand-arrow--down{ transform:rotate(90deg); }
+.brand-arrow--up{ transform:rotate(-90deg); }
+.brand-arrow--left{ transform:rotate(180deg); }
+
+.why-more:hover .brand-arrow{ transform:translateX(4px); }
+.view-products:hover .brand-arrow-triple{ transform:translateX(5px); }
   /* ==========================================================
 FOOTER
 ========================================================== */
@@ -1256,41 +1408,111 @@ PRODUCTS
     display:grid;
     grid-template-columns:repeat(5, 1fr);
     gap:26px;
+    align-items:stretch;        /* was start — now columns stretch to match the tallest */
 }
 
-.product-card{
+.sector-col{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    height:100%;                /* fill the row height */
+}
+
+/* ---- top card: image with the sector name over it ---- */
+.sector-card{
     position:relative;
+    display:block;
+    aspect-ratio:4 / 3;
+    border-radius:16px;
+    overflow:hidden;
+    transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+
+.sector-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
+}
+
+/* dark scrim so the title reads on any image */
+.sector-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(16,12,9,.75) 0%, rgba(16,12,9,.1) 55%, rgba(16,12,9,0) 100%);
+}
+
+.sector-title{
+    position:absolute;
+    left:20px;
+    bottom:18px;
+    z-index:1;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.25rem;
+    line-height:1.2;
+    color:#fff;
+}
+
+.sector-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.14);
+}
+.sector-card:hover img{ transform:scale(1.06); }
+
+/* ---- bottom card: group product image + names ---- */
+.products-card{
+    flex:1;                     /* grow to fill remaining column height → all equal */
     display:flex;
     flex-direction:column;
     background:#fff;
     border:1px solid rgba(0,0,0,.07);
     border-radius:16px;
     overflow:hidden;
-    transition:transform .45s var(--ease),
-               box-shadow .45s var(--ease),
-               border-color .45s var(--ease);
+    padding-bottom:18px;
 }
 
-.product-card:hover{
-    transform:translateY(-8px);
-    border-color:transparent;
-    box-shadow:0 18px 44px rgba(0,0,0,.12);
-}
-
-/* gradient hairline that draws in on hover */
-.product-card::before{
-    content:"";
-    position:absolute;
-    top:0; left:0;
-    height:3px;
-    width:0;
-    background:linear-gradient(90deg, var(--orange), var(--red));
-    transition:width .5s var(--ease);
-    z-index:3;
-}
-
-.product-card:hover::before{
+.products-card img{
     width:100%;
+    aspect-ratio:16 / 10;
+    padding: 10px;
+    object-fit:contain;
+    display:block;
+    flex:0 0 auto;              /* image keeps its size */
+}
+
+.products-card .pc-products{
+    flex:1;                     /* the names area fills the rest, keeping cards level */
+    align-content:flex-start;   /* pills sit at the top of that space */
+}
+
+.products-card .pc-products li{
+    font-family:"balto", sans-serif;
+    font: size 14.5px;
+    letter-spacing:.02em;
+    color:var(--grey);
+    padding:5px 12px;
+    /* border-radius:40px;
+    background:rgba(248,69,7,.07); */
+    line-height:1.3;
+}
+.products-card .pc-products li::before{
+    content:"–";
+    margin-right:6px;
+    margin-left: 6px;
+    color:var(--middle);
+}
+
+/* responsive */
+@media (max-width:1280px){
+    .product-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:860px){
+    .product-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:560px){
+    .product-grid{ grid-template-columns:1fr; }
 }
 
 /* ---------- Media ---------- */
@@ -1314,16 +1536,16 @@ PRODUCTS
                transform .8s var(--ease);
 }
 
-.pc-media .pc-img{ opacity:1; }
+/* .pc-media .pc-img{ opacity:1; }
 .pc-media .pc-alt{ opacity:0; }
 
 .product-card:hover .pc-img{ opacity:0; }
-.product-card:hover .pc-alt{ opacity:1; }
+.product-card:hover .pc-alt{ opacity:1; } */
 
 /* both scale together so the swap feels like one move */
-.product-card:hover .pc-media img{
+/* .product-card:hover .pc-media img{
     transform:scale(1.07);
-}
+} */
 
 /* ---------- Body ---------- */
 
@@ -1349,27 +1571,30 @@ PRODUCTS
 
 /* ---------- Arrow ---------- */
 
-.pc-arrow{
+/* arrow on the sector image card */
+.sector-card .pc-arrow{
     position:absolute;
-    left:22px;
-    bottom:22px;
-    width:34px;
-    height:34px;
+    right:16px;
+    bottom:16px;
+    z-index:1;
+    width:38px;
+    height:38px;
     border-radius:50%;
-    border:1px solid rgba(0,0,0,.15);
+    border:1px solid rgba(255,255,255,.5);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:15px;
-    color:#111;
+    font-size:16px;
+    color:#fff;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(4px);
     transition:.4s var(--ease);
 }
 
-.product-card:hover .pc-arrow{
+.sector-card:hover .pc-arrow{
     background:linear-gradient(120deg, var(--orange), var(--red));
     border-color:transparent;
-    color:#fff;
-    transform:translateX(4px);
+    transform:translateX(3px);
 }
 
 /* ---------- CTA ---------- */
@@ -1398,12 +1623,13 @@ PRODUCTS
     color:#fff;
 }
 
-.view-products .vp-arrow{
+.view-products .brand-arrow-triple{
     transition:transform .4s var(--ease);
 }
 
-.view-products:hover .vp-arrow{
+.view-products:hover .brand-arrow-triple{
     transform:translateX(5px);
+    color: var(--light);
 }
 
 /* ---------- Responsive ---------- */
@@ -1772,7 +1998,21 @@ p.illuminate{
     align-items:start;
     margin-bottom:10px;
 }
-.cm-banner-truck img{ width:100%; max-width:480px; height:auto; object-fit:contain; }
+.cm-banner-truck{
+    flex:1;
+    display:flex;
+    flex-direction:column;   /* stack the two images */
+    gap:24px;
+    background:transparent;
+}
+
+.cm-banner-truck img{
+    width:100%;
+    height:auto;             /* let each image keep its aspect ratio */
+    object-fit:contain;
+    display:block;
+}
+/* .cm-banner-truck img{ width:100%; max-width:480px; height:auto; object-fit:contain; } */
 .cm-banner-logo img{ width:100%; max-width:340px; height:auto; left: -50px; }
 
 .cm-lined{
@@ -1852,7 +2092,9 @@ p.illuminate{
     flex-direction:column;
     gap:8px;
 }
-
+.cm-info-block + .cm-info-block{
+    margin-top:8px;
+}
 .cm-info-key{
     font-family:"balto", sans-serif;
     font-weight:600;
