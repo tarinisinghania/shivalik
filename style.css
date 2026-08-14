@@ -4880,3 +4880,90 @@ body.modal-open{ overflow:hidden; }
 @media (max-width:560px){
     .contact-modal-card{ padding:36px 24px; }
 }
+/* ===== Trust strip — pinned to bottom of hero ===== */
+
+/* The hero must be a positioning context. If yours already has
+   position: relative, you can skip this rule. */
+.hero {
+  position: relative;
+}
+
+.trust-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50px;                /* distance from bottom of hero */
+  z-index: 3;
+
+  display: flex;
+  justify-content: flex-end;   /* keeps the group on the right */
+  align-items: center;
+  gap: 16px;
+  padding: 0 140px;
+  pointer-events: none;        /* lets hero clicks/scroll pass through */
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 8px 46px;
+  border-left: 1px solid rgba(0, 0, 0, 0.18);
+  background: var(--light);
+  border-radius: 20px;
+}
+
+.trust-item:first-child {
+  border-left: none;
+}
+
+.trust-item svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  stroke: var(--middle);
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trust-item span {
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: #1a1a1a;
+  max-width: 8ch;              /* forces the two-line wrap */
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .trust-strip {
+    bottom: 36px;
+    justify-content: center;
+    padding: 0 32px;
+  }
+  .trust-item { padding: 8px 26px; }
+  .trust-item span { font-size: 20px; }
+  .trust-item svg { width: 40px; height: 40px; }
+}
+
+/* Mobile — drop out of the hero and stack below it */
+@media (max-width: 640px) {
+  .trust-strip {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    pointer-events: auto;
+  }
+  .trust-item {
+    width: 100%;
+    padding: 14px 0;
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .trust-item:first-child { border-top: none; }
+  .trust-item span { max-width: none; font-size: 19px; }
+}
