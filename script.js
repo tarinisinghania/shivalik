@@ -1061,3 +1061,39 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         window.addEventListener("load", run);
     }
 })();
+
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    gsap.utils.toArray(".mgmt-row").forEach(row => {
+        gsap.fromTo(row,
+            { opacity:0, y:30 },
+            { opacity:1, y:0, duration:.8, ease:"power3.out",
+              scrollTrigger:{ trigger:row, start:"top 85%", toggleActions:"play none none reverse" } }
+        );
+    });
+}
+/* ---- our story timeline: spine draws + rows fade in ---- */
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+
+    gsap.registerProperty?.({
+        name: "--spine", syntax: "<number>", initialValue: "1", inherits: false
+    });
+
+    const storyLine = document.querySelector(".story-timeline");
+    if (storyLine){
+        gsap.fromTo(storyLine,
+            { "--spine": 0 },
+            { "--spine": 1, ease:"none",
+              scrollTrigger:{ trigger:storyLine, start:"top 78%", end:"bottom 70%", scrub:true } }
+        );
+
+        gsap.utils.toArray(".story-row").forEach(row => {
+            gsap.fromTo(row,
+                { opacity:0, x:20 },
+                { opacity:1, x:0, ease:"power3.out", duration:.7,
+                  scrollTrigger:{ trigger:row, start:"top 85%", toggleActions:"play none none reverse" } }
+            );
+        });
+    }
+}
+
+/* ---- our story timeline: spine draws + rows fade in ---- */
