@@ -536,18 +536,55 @@ if (window.gsap){
         });
     }
 
-    /* ---- roadmap: pinned horizontal scroll ---- */
+/* ---- roadmap: pinned horizontal scroll + arrows ---- */
     const track = document.querySelector(".road-track");
     const viewport = document.querySelector(".road-viewport");
     const roadmap = document.querySelector(".roadmap");
     const progress = document.querySelector(".road-progress span");
+    const prevBtn = document.getElementById("roadPrev");
+    const nextBtn = document.getElementById("roadNext");
 
     if (track && viewport && roadmap){
 
         if (reduce){
             roadmap.classList.add("no-pin");
+            document.querySelector(".road-nav")?.remove();
         } else {
+            const cards = Array.from(track.children);
             const getDist = () => track.scrollWidth - viewport.clientWidth;
+
+            let st;
+            let index = 0;
+
+            const cardProgress = (i) => {
+                const dist = getDist();
+                if (dist <= 0) return 0;
+                const offset = cards[i].offsetLeft - cards[0].offsetLeft;
+                return Math.min(offset / dist, 1);
+            };
+
+            const nearestIndex = (p) => {
+                let best = 0, bestDelta = Infinity;
+                cards.forEach((_, i) => {
+                    const d = Math.abs(cardProgress(i) - p);
+                    if (d < bestDelta){ bestDelta = d; best = i; }
+                });
+                return best;
+            };
+
+            const syncButtons = () => {
+                if (!prevBtn || !nextBtn) return;
+                prevBtn.disabled = index <= 0;
+                nextBtn.disabled = index >= cards.length - 1;
+            };
+
+            const goTo = (i) => {
+                if (!st) return;
+                index = Math.max(0, Math.min(i, cards.length - 1));
+                const y = st.start + cardProgress(index) * (st.end - st.start);
+                window.scrollTo({ top:y, behavior:"smooth" });
+                syncButtons();
+            };
 
             gsap.to(track, {
                 x: () => -getDist(),
@@ -560,11 +597,18 @@ if (window.gsap){
                     scrub: 1,
                     invalidateOnRefresh: true,
                     anticipatePin: 1,
+                    onRefresh: self => { st = self; syncButtons(); },
                     onUpdate: self => {
+                        st = self;
                         if (progress) progress.style.width = (self.progress * 100) + "%";
+                        const i = nearestIndex(self.progress);
+                        if (i !== index){ index = i; syncButtons(); }
                     }
                 }
             });
+
+            prevBtn?.addEventListener("click", () => goTo(index - 1));
+            nextBtn?.addEventListener("click", () => goTo(index + 1));
         }
     }
 
@@ -1017,4 +1061,3 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         window.addEventListener("load", run);
     }
 })();
-

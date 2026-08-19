@@ -61,7 +61,7 @@ Navigation
 Hero
 =========================== -->
 <section class="hero hero--inner" id="home">
-  <img class="hero-img" src="companybg.jpg" alt="">
+  <img class="hero-img" src="companycover.jpg" alt="">
   <div class="hero-fade"></div>
   <div class="hero-content">
     <h1>    Streamlined end-to-end manufacturing: <em>from design to delivery.</em></h1>
@@ -178,14 +178,31 @@ Technical Roadmap
 =========================== -->
 <section class="roadmap" id="roadmap">
   <div class="roadmap-plate">
-  <div class="roadmap-head">
-    <div class="label"><p>Technical Details</p></div>
-    <h2>From design to delivery, in-house.</h2>
-    <p class="roadmap-lead">
-      A streamlined, end-to-end manufacturing chain — every stage owned,
-      controlled and quality-checked under one operation.
-    </p>
-  </div>
+  <div class="roadmap-top">
+      <div class="roadmap-head">
+        <div class="label"><p>Technical Details</p></div>
+        <h2>From design to delivery, in-house.</h2>
+        <p class="roadmap-lead">
+          A streamlined, end-to-end manufacturing chain — every stage owned,
+          controlled and quality-checked under one operation.
+        </p>
+      </div>
+
+      <div class="road-nav">
+        <button class="road-arrow" id="roadPrev" aria-label="Previous step" disabled>
+          <svg viewBox="0 0 40 48" fill="currentColor" aria-hidden="true">
+            <path d="M4 2 L28 2 L38 22 L14 22 Z"/>
+            <path d="M14 26 L38 26 L28 46 L4 46 Z"/>
+          </svg>
+        </button>
+        <button class="road-arrow" id="roadNext" aria-label="Next step">
+          <svg viewBox="0 0 40 48" fill="currentColor" aria-hidden="true">
+            <path d="M4 2 L28 2 L38 22 L14 22 Z"/>
+            <path d="M14 26 L38 26 L28 46 L4 46 Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
 
   <div class="road-viewport">
     <ol class="road-track">
@@ -255,6 +272,8 @@ Technical Roadmap
 
     </ol>
   </div>
+
+  <div class="road-progress"><span></span></div>
 
   <div class="road-progress"><span></span></div>
   <p class="road-hint">Scroll to explore the process →</p>

@@ -67,6 +67,7 @@ section{
     --ink:#111;
     --orange:#FB8503;
     --red:#F5040B;
+    --lightorange: rgb(248, 141, 64);
     --middle:#F84507; 
     --dark: #1e1714;
 
@@ -476,39 +477,45 @@ STATISTICS
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);   /* four side-by-side columns */
+    grid-template-columns:repeat(5, max-content);   /* was repeat(5, 1fr) */
+    justify-content:space-between;                  /* spreads them across the row */
     gap:0;
-    text-align:center;
+    text-align:left;
     position:relative;
     padding:80px 0 50px;
 }
 
 .stat{
     position:relative;
-    padding:0 40px;
+    padding:0 30px;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     gap:14px;
 }
-/* label sits above the number */
-.stat p{
-    order:1;                    /* pulls label above regardless of DOM order */
-    color:var(--middle);
-    text-transform:uppercase;
-    font-size:18px;
-    font-weight: 500;
-    letter-spacing:.08em;
-    margin:0;
-}
+
+.stat:first-child{ padding-left:0; }
+.stat:last-child{ padding-right:0; }
 
 .stat h2,
 .stat .counter{
-    font-size:70px;
+    font-size:clamp(38px, 3.4vw, 58px);
     font-weight:600;
     line-height:1;
     color:var(--ink);
     margin:0;
+    white-space:nowrap;          /* keeps "1.8 Million" on one line */
+}
+
+.stat p{
+    order:1;
+    color:var(--middle);
+    text-transform:uppercase;
+    font-size:clamp(12px, .95vw, 15px);
+    font-weight:500;
+    letter-spacing:.06em;
+    margin:0;
+    white-space:nowrap;          /* stops "INTEGRATED FOUNDRY CAPACITY" wrapping */
 }
 
 /* ==========================================================
@@ -618,7 +625,7 @@ SECTION TITLE
   /* left column back to its original proportion */
 .why-grid{
     display:grid;
-    grid-template-columns:0.60fr 1.40fr;   /* restore — not 0.55/1.45 */
+    grid-template-columns:0.50fr 1.50fr;   /* restore — not 0.55/1.45 */
     gap:70px;
     align-items:start;
 }
@@ -634,7 +641,7 @@ SECTION TITLE
 .why-item{
     display:flex;
     gap:22px;
-    padding:34px 30px;
+    padding:28px 55px;
     background:#fff;
     border:1px solid rgba(0,0,0,.06);
     border-left:5px solid var(--middle);
@@ -857,6 +864,103 @@ SECTION TITLE
 }
 .sustain-item span{
     font-weight: 500;
+}
+/* ---------- Three-up tech cards inside a Why item ---------- */
+
+.tech-trio-mini{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:18px;
+    margin-top:26px;
+}
+
+.tech-mini{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:20px 18px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.07);
+    border-left:4px solid var(--middle);
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.tech-mini:nth-child(1){ border-left-color:var(--red); }
+.tech-mini:nth-child(2){ border-left-color:var(--middle); }
+.tech-mini:nth-child(3){ border-left-color:var(--orange); }
+
+.tech-mini:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 26px rgba(0,0,0,.09);
+}
+
+.tm-icon{
+    flex:0 0 auto;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1.5px solid rgba(0,0,0,.12);
+    color:#b9b3ad;
+    transition:color .4s var(--ease), border-color .4s var(--ease);
+}
+
+.tm-icon svg{ width:20px; height:20px; }
+.tm-figure{
+    width:100%;
+    height:auto;
+    border-radius:14px;
+    margin-top:22px;
+    display:block;
+    /* dim until this why-item is active, matching the section's other visuals */
+    filter:grayscale(1);
+    opacity:.6;
+    transition:filter .4s var(--ease), opacity .4s var(--ease);
+}
+
+.why-item.active .tm-figure{
+    filter:grayscale(0);
+    opacity:1;
+}
+
+/* icons come to colour only when this why-item is the active one */
+.why-item.active .tech-mini:nth-child(1) .tm-icon{ color:var(--red);    border-color:var(--red); }
+.why-item.active .tech-mini:nth-child(2) .tm-icon{ color:var(--middle); border-color:var(--middle); }
+.why-item.active .tech-mini:nth-child(3) .tm-icon{ color:var(--orange); border-color:var(--orange); }
+
+.tm-body{ min-width:0; }
+
+.tm-name{
+    display:block;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.2rem;
+    text-transform: uppercase;
+    line-height:1.35;
+    color:var(--middle);
+    margin-bottom:12px;
+}
+
+.tech-mini:nth-child(1) .tm-name{ color:var(--red); }
+.tech-mini:nth-child(3) .tm-name{ color:var(--orange); }
+
+.tech-mini p{
+    font-size:14px;
+    line-height:1.5;
+    color:var(--grey);
+    margin:0;
+}
+
+@media (max-width:1100px){
+    .tech-trio-mini{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:768px){
+    .tech-trio-mini{ grid-template-columns:1fr; gap:14px; }
 }
 
 /* ---------- Feature blocks inside Why item ---------- */
@@ -1875,7 +1979,7 @@ p.illuminate{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 60%;
+    object-position:center 100%;
     transform:none;
     opacity:0;
     transition:opacity 1.2s var(--ease);
@@ -2693,6 +2797,72 @@ h2.illuminate{
     .road-card{ width:80vw; min-height:320px; padding:32px 28px; }
     .road-card h4{ font-size:1.6rem; }
     .roadmap-tagline{ font-size:1.5rem; }
+}
+.roadmap-top{
+    display:flex;
+    align-items:flex-end;         /* nav sits level with the bottom of the lead text */
+    justify-content:space-between;
+    gap:40px;
+    margin-bottom:56px;
+}
+
+/* the head no longer owns the bottom margin — the row does */
+.roadmap-head{
+    max-width:720px;
+    margin-bottom:0;
+}
+
+.road-nav{
+    display:flex;
+    gap:12px;
+    flex:0 0 auto;
+    margin-bottom:6px;
+}
+
+.road-arrow{
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    border:none;
+    background:#1e1714;           /* same dark as the first triple-arrow chevron */
+    color:var(--middle);          /* the chevron itself */
+    cursor:pointer;
+    transition:background .35s var(--ease), color .35s var(--ease),
+               opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.road-arrow svg{ width:17px; height:auto; }
+
+#roadPrev svg{ transform:rotate(180deg); }
+
+.road-arrow:hover:not(:disabled){
+    background:var(--orange);
+    color:#1e1714;
+    transform:translateY(-2px);
+}
+
+.road-arrow:disabled{
+    opacity:.35;
+    cursor:default;
+}
+
+.road-arrow:focus-visible{
+    outline:2px solid #fff;
+    outline-offset:3px;
+}
+
+@media (max-width:900px){
+    .roadmap-top{ gap:28px; }
+    .road-arrow{ width:48px; height:48px; }
+    .road-arrow svg{ width:15px; }
+}
+
+@media (max-width:768px){
+    .roadmap-top{ flex-direction:column; align-items:flex-start; margin-bottom:36px; }
+    .road-nav{ display:none; }    /* track stacks vertically here */
 }
 
 /* ==========================================================
