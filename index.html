@@ -98,15 +98,14 @@ Hero
               Contact Us
           </a>
 
-          <a href="Shivalik-Corporate-Deck.pdf" class="hero-btn" download>
-            Download Brochure
-              <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <path d="M7 10l5 5 5-5"/>
-                  <path d="M12 15V3"/>
-              </svg>
-              
-          </a>
+        <a href="#" class="hero-btn js-open-brochure" id="openBrochureModal">
+          Download Brochure
+          <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <path d="M7 10l5 5 5-5"/>
+            <path d="M12 15V3"/>
+          </svg>
+        </a>
 
           <a href="#main" class="primary" id="exploreBtn" aria-label="Scroll to content">
           <svg class="brand-arrow brand-arrow--down" viewBox="0 0 40 48" fill="currentColor" aria-hidden="true">
@@ -174,7 +173,7 @@ Statistics
 <div class="stats">
 
   <div class="stat">
-    <p>Integrated Foundary Capacity</p>
+    <p>Integrated Foundry Capacity</p>
     <h2 class="counter" data-target="111600" data-format="comma">0</h2>
   </div>
 
@@ -637,7 +636,7 @@ Statistics
         Contact Us
       </a>
 
-      <a href="Shivalik-Corporate-Deck.pdf" class="contact-cta-btn contact-cta-btn--outline" download>
+      <a href="#" class="contact-cta-btn contact-cta-btn--outline js-open-brochure">
         <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <path d="M7 10l5 5 5-5"/>
@@ -780,6 +779,60 @@ Footer
           </svg>
       </button>
       <p class="cf-status" id="modalStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+<div class="contact-modal" id="brochureModal" aria-hidden="true">
+  <div class="contact-modal-overlay" data-close></div>
+
+  <div class="contact-modal-card" role="dialog" aria-modal="true" aria-labelledby="bmTitle">
+    <button class="contact-modal-close" data-close aria-label="Close">&times;</button>
+
+    <h2 id="bmTitle">Download Brochure</h2>
+    <p class="cm-card-lead">Share your requirement and we'll route it to the right team — and get you the deck.</p>
+
+    <form class="cf-form" id="brochureForm" novalidate data-file="Shivalik-Corporate-Deck.pdf">
+      <div class="cf-field">
+        <label for="b-name">Full name</label>
+        <input type="text" id="b-name" name="name" autocomplete="name" required>
+      </div>
+      <div class="cf-field">
+        <label for="b-email">Email</label>
+        <input type="email" id="b-email" name="email" autocomplete="email" required>
+      </div>
+      <div class="cf-field">
+        <label for="b-company">Company</label>
+        <input type="text" id="b-company" name="company" autocomplete="organization" required>
+      </div>
+      <div class="cf-field">
+        <label for="b-designation">Designation</label>
+        <input type="text" id="b-designation" name="designation" autocomplete="organization-title" required>
+      </div>
+      <div class="cf-field">
+        <label for="b-subject">Subject</label>
+        <select id="b-subject" name="subject">
+          <option value="">Select a topic</option>
+          <option>Automotive casting</option>
+          <option>Agriculture</option>
+          <option>Railway casting</option>
+          <option>Off-highway casting</option>
+          <option>Waterworks &amp; pipe fitting</option>
+          <option>Careers</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="cf-field">
+        <label for="b-message">Message</label>
+        <textarea id="b-message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="cf-submit">
+        Download Brochure
+        <svg class="brand-arrow-triple" viewBox="0 0 40 48" fill="currentColor" aria-hidden="true">
+          <path d="M4 2 L28 2 L38 22 L14 22 Z"/>
+          <path d="M14 26 L38 26 L28 46 L4 46 Z"/>
+        </svg>
+      </button>
+      <p class="cf-status" id="brochureStatus" role="status" aria-live="polite"></p>
     </form>
   </div>
 </div>

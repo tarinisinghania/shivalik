@@ -536,13 +536,20 @@ if (window.gsap){
         });
     }
 
-/* ---- roadmap: pinned horizontal scroll + arrows ---- */
+//* ---- roadmap: pinned horizontal scroll + arrows ---- */
     const track = document.querySelector(".road-track");
     const viewport = document.querySelector(".road-viewport");
     const roadmap = document.querySelector(".roadmap");
     const progress = document.querySelector(".road-progress span");
     const prevBtn = document.getElementById("roadPrev");
     const nextBtn = document.getElementById("roadNext");
+
+    /* background image crossfade */
+    const bgImgs = Array.from(document.querySelectorAll(".road-bg-img"));
+    function setActiveBg(i){
+        bgImgs.forEach(img => img.classList.toggle("is-active", Number(img.dataset.idx) === i));
+    }
+    setActiveBg(0);
 
     if (track && viewport && roadmap){
 
@@ -584,6 +591,7 @@ if (window.gsap){
                 const y = st.start + cardProgress(index) * (st.end - st.start);
                 window.scrollTo({ top:y, behavior:"smooth" });
                 syncButtons();
+                setActiveBg(index);
             };
 
             gsap.to(track, {
@@ -602,7 +610,11 @@ if (window.gsap){
                         st = self;
                         if (progress) progress.style.width = (self.progress * 100) + "%";
                         const i = nearestIndex(self.progress);
-                        if (i !== index){ index = i; syncButtons(); }
+                        if (i !== index){
+                            index = i;
+                            syncButtons();
+                            setActiveBg(index);
+                        }
                     }
                 }
             });
@@ -645,7 +657,7 @@ if (window.gsap){
                 "--bar": 1,
                 ease: "power3.out",
                 duration: 0.9,
-                delay: i * 0.15,        /* each bar draws slightly after the last */
+                delay: i * 0.15,
                 scrollTrigger: {
                     trigger: ".mission-grid",
                     start: "top 80%",
@@ -655,7 +667,6 @@ if (window.gsap){
         );
     });
 }
-
 /* ---- closing CTA reveal ---- */
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches){
     gsap.fromTo(".cta-plate",
@@ -1097,3 +1108,103 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 }
 
 /* ---- our story timeline: spine draws + rows fade in ---- */
+/* ==========================================================
+   ROADMAP CARDS — "Learn more" expand/collapse
+========================================================== */
+document.querySelectorAll(".road-more").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const card = btn.closest(".road-card");
+        openDetail(card, true);
+    });
+});
+
+document.querySelectorAll(".road-detail-close").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const card = btn.closest(".road-card");
+        openDetail(card, false);
+    });
+});
+
+function openDetail(card, open){
+    const toggleBtn = card.querySelector(".road-more");
+    const detail = card.querySelector(".road-detail");
+
+    card.classList.toggle("is-open", open);
+    toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    toggleBtn.querySelector(".road-more-label").textContent = open ? "Show less" : "Learn more";
+
+    if (!open) detail.scrollTop = 0;
+}
+
+/* ==========================================================
+   BROCHURE MODAL — gate the PDF behind the lead form
+========================================================== */
+
+(() => {
+    const modal = document.getElementById("brochureModal");
+    if (!modal) return;
+
+    const open = () => {
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+    };
+    const close = () => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+    };
+
+    /* any element with .js-open-brochure opens this modal */
+    document.querySelectorAll(".js-open-brochure").forEach(btn =>
+        btn.addEventListener("click", e => { e.preventDefault(); open(); })
+    );
+
+    modal.querySelectorAll("[data-close]").forEach(el =>
+        el.addEventListener("click", close)
+    );
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && modal.classList.contains("open")) close();
+    });
+
+    const form = document.getElementById("brochureForm");
+    const status = document.getElementById("brochureStatus");
+
+    form?.addEventListener("submit", e => {
+        e.preventDefault();
+
+        if (!form.checkValidity()){
+            status.textContent = "Please fill in the required fields.";
+            status.classList.add("error");
+            form.reportValidity();
+            return;
+        }
+
+        status.classList.remove("error");
+        const btn = form.querySelector(".cf-submit");
+        btn.disabled = true;
+        status.textContent = "Preparing your download...";
+
+        /* ---- NO BACKEND WIRED YET ----
+           Replace this with a real fetch() to log/store the lead
+           (Formspree, Web3Forms, your own API, etc.) before triggering
+           the download. For now it simulates the lead capture. */
+        console.log("Brochure request:", Object.fromEntries(new FormData(form).entries()));
+
+        setTimeout(() => {
+            /* trigger the actual file download */
+            const filename = form.dataset.file;
+            const a = document.createElement("a");
+            a.href = filename;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            status.textContent = "Thanks — your download has started.";
+            form.reset();
+            btn.disabled = false;
+            setTimeout(close, 1500);
+        }, 600);
+    });
+})();
