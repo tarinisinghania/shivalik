@@ -5882,3 +5882,16 @@ body.modal-open{ overflow:hidden; }
         max-width:none;
     }
 }
+@media (max-width:900px){
+    .navbar nav,
+    .navbar .button{ display:none; }
+    .nav-burger{ display:flex; }
+}
+@media (max-width:900px){
+    .cr-grid{ grid-template-columns:1fr; gap:44px; }
+    .careers-main{ padding:110px 6% 70px; }
+    .cr-headline{ font-size:2rem; max-width:100%; }
+    .cr-blurb{ max-width:100%; }
+    .cr-card{ padding:36px 26px; }
+    .cf-row{ grid-template-columns:1fr; gap:26px; }
+}
