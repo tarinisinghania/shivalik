@@ -5828,6 +5828,21 @@ body.modal-open{ overflow:hidden; }
         max-width:300px;
     }
 }
+@media (max-width:1024px){
+    .about-visual{
+        width:100%;
+        max-width:100vw;
+        overflow:hidden;          /* clips anything still trying to bleed out */
+        align-items:center;
+    }
+
+    .about-visual img{
+        width:100%;
+        max-width:100%;
+        margin:0 auto;
+        display:block;
+    }
+}
 @media (max-width:640px){
     .trust-strip{
         display:none;   /* was: position:static; flex-direction:column; ... */
@@ -5839,7 +5854,7 @@ body.modal-open{ overflow:hidden; }
     .roadmap-plate{
         background-image:
             linear-gradient(135deg, rgba(16,12,9,.55) 0%, rgba(16,12,9,.35) 100%),
-            url("bg-02.jpg");
+            url("roadmap/bg-02.jpg");
         background-size:cover;
         background-position:center;
     }
