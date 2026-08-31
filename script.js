@@ -1209,3 +1209,68 @@ function openDetail(card, open){
         }, 600);
     });
 })();
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+const downloadBtn = document.getElementById("downloadBrochureBtn");
+
+function submitEnquiry(){
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log("Enquiry submitted:", data);
+    // Replace with a real fetch() to your endpoint / form service.
+}
+
+/* ---- Send a message (unchanged behaviour) ---- */
+form?.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!form.checkValidity()){
+        status.textContent = "Please fill in the required fields.";
+        status.classList.add("error");
+        form.reportValidity();
+        return;
+    }
+
+    status.classList.remove("error");
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.textContent = "Sending…";
+
+    submitEnquiry();
+
+    setTimeout(() => {
+        status.textContent = "Thanks — we'll reply within two working days.";
+        form.reset();
+        btn.disabled = false;
+    }, 700);
+});
+
+/* ---- Download Brochure — gated behind the same validation ---- */
+downloadBtn?.addEventListener("click", () => {
+
+    if (!form.checkValidity()){
+        status.textContent = "Please fill in the required fields to download the brochure.";
+        status.classList.add("error");
+        form.reportValidity();
+        return;
+    }
+
+    status.classList.remove("error");
+    downloadBtn.disabled = true;
+    status.textContent = "Preparing your download…";
+
+    submitEnquiry();
+
+    setTimeout(() => {
+        const filename = form.dataset.file;
+        const a = document.createElement("a");
+        a.href = filename;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        status.textContent = "Thanks — your download has started.";
+        form.reset();
+        downloadBtn.disabled = false;
+    }, 600);
+});

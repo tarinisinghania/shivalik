@@ -169,7 +169,7 @@ Contact — details left, form card right
         Share your requirement and we'll route it to the right team.
       </p>
 
-<form class="cf-form" id="contactForm" novalidate>
+<form class="cf-form" id="contactForm" novalidate data-file="Shivalik-Corporate-Deck.pdf">
 
   <div class="cf-field">
     <label for="name">Full name</label>
@@ -210,6 +210,7 @@ Contact — details left, form card right
     <textarea id="message" name="message" rows="4" required></textarea>
   </div>
 
+  <div class="cf-buttons"></div>
   <button type="submit" class="cf-submit">
     Send a message
     <svg class="brand-arrow-triple" viewBox="0 0 120 48" fill="currentColor" aria-hidden="true">
@@ -218,6 +219,16 @@ Contact — details left, form card right
       <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
     </svg>
   </button>
+
+      <button type="button" class="cf-submit cf-submit--outline" id="downloadBrochureBtn">
+      Download Brochure
+      <svg class="brand-arrow-triple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <path d="M7 10l5 5 5-5"/>
+        <path d="M12 15V3"/>
+      </svg>
+    </button>
+  </div>
 
   <p class="cf-status" id="formStatus" role="status" aria-live="polite"></p>
 

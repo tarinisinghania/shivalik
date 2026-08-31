@@ -2576,6 +2576,31 @@ a.cm-info-val:hover{ color:var(--middle); }
 
 .cf-status.error{ color:var(--red); }
 
+.cf-buttons{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:8px;
+}
+
+.cf-submit--outline{
+    background:transparent;
+    color:var(--ink);
+    border:1.5px solid rgba(0,0,0,.25);
+}
+
+.cf-submit--outline:hover{
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    color:#fff;
+    border-color:transparent;
+}
+
+@media (max-width:480px){
+    .cf-buttons{ flex-direction:column; align-items:stretch; }
+    .cf-buttons .cf-submit{ justify-content:center; }
+}
+
 /* ==========================================================
    Gradient illuminate (scroll reveal on text)
 ========================================================== */
@@ -2809,7 +2834,7 @@ h2.illuminate{
 
 .roadmap-plate{
     position:relative;
-    background:linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);  /* fallback under the images */
+    background:black;  /* fallback under the images */
     color:#fff;
     border-radius:28px;
     padding:90px 6% 80px;
@@ -3472,8 +3497,9 @@ CORE VALUES  (roadmap-style plate)
 @media (max-width:1024px){
     .mgmt-grid{ gap:22px; }
     .mgmt-copy{ padding:24px 22px 28px; }
-    .mgmt-copy h3{ font-size:1.2rem; }
+    .mgmt-copy h3{ font-size:1rem; font-weight: 600; }
     .mgmt-copy p{ font-size:.94rem; }
+    .mgmt-role {font-size: 9.5px;}
 }
 
 @media (max-width:860px){
@@ -5741,12 +5767,12 @@ body.modal-open{ overflow:hidden; }
     .prod-tab-labels{
         left:40px;
         right:40px;
-        top:120px;
+        top:110px;
     }
     .trans-tabs{
         left:40px;
         right:40px;
-        top:120px;
+        top:110px;
         max-width:none;             /* let it fill the available width like prod-tab-labels */
     }
 }
