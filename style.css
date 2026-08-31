@@ -3958,9 +3958,8 @@ MISSION
 
     /* navbar tightens in */
     .navbar{ left:20px; right:20px; padding:14px 26px; }
-    .logo{ width:150px; }
-    nav ul{ gap:30px; }
-    nav a{ font-size:13px; letter-spacing:.1em; }
+    nav ul{ gap:20px; }
+    nav a{ font-size:11px; letter-spacing:.06em; }
 
     /* hero text scales down */
     .hero h1{ font-size:44px; }
@@ -4105,7 +4104,7 @@ MISSION
     .why-item{
         flex-wrap:wrap;
         gap:14px;
-        padding:26px 0;
+        padding:26px 24px;
     }
     .why-item .num{ width:auto; }
     /* num + icon sit together on the first row, body drops below full-width */
@@ -5693,4 +5692,140 @@ body.modal-open{ overflow:hidden; }
   }
   .trust-item:first-child { border-top: none; }
   .trust-item span { max-width: none; font-size: 19px; }
+}
+/* ==========================================================
+   RESPONSIVE PATCH — tablet (iPad) & mobile gap fixes
+   Append at the very end of style.css so it wins the cascade.
+========================================================== */
+
+/* ---------- Hero buttons: stop overflow on tablet/mobile ---------- */
+
+@media (max-width:1024px){
+    .hero-lower{
+        width:100%;                 /* was calc(100vw - 42%) — too wide once side padding shrinks */
+        flex-wrap:wrap;
+        gap:28px;
+    }
+}
+
+@media (max-width:768px){
+    .hero-lower{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:22px;
+    }
+    .hero-buttons{
+        flex-wrap:wrap;
+        margin-left:0;
+        gap:12px;
+        width:100%;
+    }
+    .hero-btn{
+        padding:13px 22px;
+        font-size:14px;
+    }
+    .primary#exploreBtn{
+        width:50px;
+        height:50px;
+    }
+    .primary#exploreBtn svg{
+        width:20px;
+        height:20px;
+    }
+}
+
+/* ---------- Fixed sub-nav bars (Products / Transformation tabs):
+   iPad range currently falls back to the desktop left/right values,
+   which don't match the section's shrunk side padding at 1024px ---------- */
+
+@media (max-width:1070px){
+    .prod-tab-labels{
+        left:40px;
+        right:40px;
+        top:120px;
+    }
+    .trans-tabs{
+        left:40px;
+        right:40px;
+        top:120px;
+        max-width:none;             /* let it fill the available width like prod-tab-labels */
+    }
+}
+
+/* ---------- Manufacturing CTA card: 40vw is far too narrow once
+   the viewport itself shrinks ---------- */
+
+@media (max-width:1024px){
+    .man-contact{
+        max-width:70vw;
+        margin:40px;
+    }
+}
+
+@media (max-width:768px){
+    .man-contact{
+        max-width:100%;
+        margin:20px;
+        padding:26px 26px;
+    }
+}
+
+/* ---------- Roadmap detail overlay: tighten padding so content
+   isn't cramped inside the smaller tablet card width ---------- */
+
+@media (max-width:1024px){
+    .road-detail{
+        padding:28px 24px;
+    }
+    .road-detail-close{
+        top:14px;
+        right:14px;
+        width:32px;
+        height:32px;
+    }
+    .road-detail-close svg{ width:12px; }
+}
+
+/* ---------- Contact-page logo offset: the -50px left nudge only
+   makes sense inside the desktop two-column banner layout ---------- */
+
+@media (max-width:900px){
+    .cm-banner-logo img{
+        left:0;
+    }
+}
+
+/* ---------- Contact / brochure modal: a touch more breathing
+   room on small phones ---------- */
+
+@media (max-width:400px){
+    .contact-modal-card{
+        padding:28px 18px;
+    }
+    .cm-card-lead,
+    .contact-modal-card .cm-card-lead{
+        max-width:100%;
+    }
+}
+
+/* ---------- Global overflow guard: fixed-position bars using
+   left/right offsets can occasionally trigger a horizontal
+   scrollbar on narrow devices if a child overflows ---------- */
+
+@media (max-width:1024px){
+    html, body{
+        overflow-x:hidden;
+    }
+}
+@media (max-width:1024px){
+    .about-visual img{
+        max-width:500px;
+        margin:0 auto;
+    }
+}
+
+@media (max-width:768px){
+    .about-visual img{
+        max-width:300px;
+    }
 }
