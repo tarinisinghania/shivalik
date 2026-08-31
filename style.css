@@ -4891,7 +4891,16 @@ body.nav-locked{ overflow:hidden; }
 @media (max-width:768px){
     .trans{ padding:80px 6% 90px; overflow-x:hidden; }
     .trans-head h2{ font-size:1.7rem; }
-    .trans-tab{ font-size:1rem; }
+}
+@media (max-width:768px){
+    .trans-tab{
+        font-size:.9rem;      /* was 1rem — let 3 tabs fit without scrolling */
+        padding:8px 12px;     /* was 8px 16px */
+    }
+
+    .trans-head{
+        padding-top:70px;     /* was 20px — clears the fixed subnav bar fully */
+    }
 }
 
 @media (max-width:768px){
@@ -4921,13 +4930,6 @@ body.nav-locked{ overflow:hidden; }
     .trans-tabs::-webkit-scrollbar{ display:none; }
     .trans-tabs::before{ display:none; }   /* kill any backing pseudo */
 
-    .trans-tab{
-        flex:0 0 auto;
-        white-space:nowrap;
-        font-size:1rem;
-        padding:8px 16px;
-    }
-
     /* because the tab bar is now fixed (removed from flow), push the
        panels down so the first one isn't hidden behind it */
     .trans-panel{
@@ -4935,9 +4937,6 @@ body.nav-locked{ overflow:hidden; }
     }
 
     /* the section heading also needs clearance from navbar + tabs */
-    .trans-head{
-        padding-top:20px;
-    }
 }
 /* ---------- Reduced motion ---------- */
 
@@ -5827,5 +5826,43 @@ body.modal-open{ overflow:hidden; }
 @media (max-width:768px){
     .about-visual img{
         max-width:300px;
+    }
+}
+@media (max-width:640px){
+    .trust-strip{
+        display:none;   /* was: position:static; flex-direction:column; ... */
+    }
+}
+@media (max-width:1024px){
+    .road-bg-img{ display:none; }   /* stop relying on JS-driven crossfade */
+
+    .roadmap-plate{
+        background-image:
+            linear-gradient(135deg, rgba(16,12,9,.55) 0%, rgba(16,12,9,.35) 100%),
+            url("bg-02.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+}
+@media (max-width:1366px){
+    .navbar{
+        left:20px;
+        right:20px;
+        padding:14px 30px;
+    }
+    nav ul{ gap:24px; }
+    nav a{ font-size:12.5px; letter-spacing:.08em; }
+
+    /* gap between subnav and navbar on big iPad, same fix as before */
+    .prod-tab-labels{
+        left:40px;
+        right:40px;
+        top:120px;
+    }
+    .trans-tabs{
+        left:40px;
+        right:40px;
+        top:120px;
+        max-width:none;
     }
 }

@@ -1114,7 +1114,8 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 document.querySelectorAll(".road-more").forEach(btn => {
     btn.addEventListener("click", () => {
         const card = btn.closest(".road-card");
-        openDetail(card, true);
+        const isOpen = card.classList.contains("is-open");
+        openDetail(card, !isOpen);
     });
 });
 
