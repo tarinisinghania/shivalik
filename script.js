@@ -1239,3 +1239,138 @@ downloadBtn?.addEventListener("click", () => {
         downloadBtn.disabled = false;
     }, 600);
 });
+/* ==========================================================
+   COMPANY PAGE — subnav scroll-to-section + active tracking
+========================================================== */
+
+(() => {
+    const subnav = document.getElementById("companySubnav");
+    if (!subnav) return;
+
+    const buttons = Array.from(subnav.querySelectorAll(".prod-tab-label"));
+    const sections = buttons
+        .map(btn => document.getElementById(btn.dataset.target))
+        .filter(Boolean);
+
+    if (!sections.length) return;
+
+    const setActive = (id) => {
+        buttons.forEach(btn =>
+            btn.classList.toggle("active", btn.dataset.target === id)
+        );
+    };
+
+    /* click → smooth scroll, clearing the fixed navbar + subnav height */
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const target = document.getElementById(btn.dataset.target);
+            if (!target) return;
+            const y = target.getBoundingClientRect().top + window.pageYOffset - 160;
+            window.scrollTo({ top: y, behavior: "smooth" });
+            setActive(btn.dataset.target);
+        });
+    });
+
+    /* scroll-spy: highlight whichever section is currently in view */
+    const spy = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) setActive(entry.target.id);
+        });
+    }, { rootMargin: "-160px 0px -60% 0px", threshold: 0 });
+
+    sections.forEach(sec => spy.observe(sec));
+})();
+/* ==========================================================
+   MD'S MESSAGE ANIMATION
+========================================================== */
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".md-label", {
+
+    y: 40,
+    opacity: 0,
+
+    duration: 1,
+
+    ease: "power3.out",
+
+    scrollTrigger: {
+
+        trigger: ".md-message",
+
+        start: "top 75%",
+
+        toggleActions: "play none none reverse"
+
+    }
+
+});
+
+
+gsap.from(".md-heading h2", {
+
+    y: 100,
+    opacity: 0,
+
+    duration: 1.2,
+
+    ease: "power4.out",
+
+    scrollTrigger: {
+
+        trigger: ".md-heading",
+
+        start: "top 80%",
+
+        toggleActions: "play none none reverse"
+
+    }
+
+});
+
+
+gsap.from(".md-image", {
+
+    y: 80,
+    opacity: 0,
+
+    duration: 1.2,
+
+    ease: "power3.out",
+
+    scrollTrigger: {
+
+        trigger: ".md-content",
+
+        start: "top 75%",
+
+        toggleActions: "play none none reverse"
+
+    }
+
+});
+
+
+gsap.from(".md-copy > p", {
+
+    y: 30,
+    opacity: 0,
+
+    duration: 0.8,
+
+    stagger: 0.12,
+
+    ease: "power3.out",
+
+    scrollTrigger: {
+
+        trigger: ".md-copy",
+
+        start: "top 75%",
+
+        toggleActions: "play none none reverse"
+
+    }
+
+});

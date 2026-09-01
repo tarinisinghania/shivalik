@@ -3384,6 +3384,160 @@ CORE VALUES  (roadmap-style plate)
     .values-plate{ padding:60px 8% 50px; }
 }
 /* ==========================================================
+   MD'S MESSAGE
+========================================================== */
+
+.md-message {
+    position: relative;
+    width: 100%;
+    padding: 40px 8% 100px;
+    background: var(--light);
+    overflow: hidden;
+}
+.md-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+/* -------------------------
+   CONTENT
+------------------------- */
+
+.md-content {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 10%;
+    align-items: start;
+}
+
+
+/* -------------------------
+   IMAGE
+------------------------- */
+
+.md-image {
+    position: sticky;
+    top: 140px;
+    width: 100%;
+    height: 620px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.md-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* -------------------------
+   COPY
+------------------------- */
+
+.md-copy,
+.md-intro {
+    max-width: 650px;
+}
+
+.md-copy p{
+    font-size: 18px;
+    line-height: 1.65;
+    color: #444;
+    margin-bottom: 30px;
+}
+.md-intro {
+    font-size: 25px;
+    line-height: 1.35;
+    color: #111;
+    margin: 45px;
+}
+
+.md-intro strong {
+    color: #111;
+    font-weight: 500;
+}
+
+
+/* -------------------------
+   SIGNATURE
+------------------------- */
+
+.md-signature {
+    margin-top: 80px;
+}
+
+.signature-line {
+    width: 80px;
+    height: 2px;
+    background: #F84507;
+    margin-bottom: 20px;
+}
+
+.md-signature h3 {
+    font-family: "helvetica-neue-lt-pro", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.md-signature p {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+
+/* ==========================================================
+   MD MESSAGE RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .md-message {
+        padding: 100px 6%;
+    }
+
+    .md-heading {
+        width: 100%;
+        margin-bottom: 70px;
+    }
+
+    .md-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .md-image {
+        position: relative;
+        top: auto;
+        height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .md-message {
+        padding: 80px 5%;
+    }
+
+    .md-heading h2 {
+        font-size: 48px;
+        letter-spacing: -1px;
+    }
+
+    .md-copy .md-intro {
+        font-size: 21px;
+    }
+
+    .md-copy p {
+        font-size: 16px;
+    }
+
+    .md-image {
+        height: 400px;
+    }
+}
+/* ==========================================================
    MANAGEMENT PROFILES — company page
 ========================================================== */
 
@@ -3578,6 +3732,55 @@ MISSION
 
     transform:scaleY(var(--bar, 0));   /* driven by JS */
     transform-origin:top;              /* grows downward */
+}
+
+/* ==========================================================
+AWARDS
+========================================================== */
+
+.awards{
+    background:var(--light);
+    padding:20px 8% 80px;
+}
+.award-intro p{
+    font-family:"balto", sans-serif;
+    font-weight:400;
+    font-size: 20px;
+    line-height:1.35;
+    color:var(--ink);
+    margin: 45px;
+}
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 40px 5%;
+}
+
+.award {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.award img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    display: block;
+}
+
+.award:hover img {
+    transform: scale(1.05);
+}
+
+.award p {
+    margin-top: 14px;
+    margin-left: 2px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: grey;
+    text-align: left;
 }
 
 /* .cta{ background:var(--light); padding:40px 24px 90px; } */
