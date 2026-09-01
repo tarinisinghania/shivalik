@@ -5341,12 +5341,12 @@ body.nav-locked{ overflow:hidden; }
     border-radius:16px;
     overflow:hidden;
     aspect-ratio:4 / 3;
-    background:#EDEAE4;
+    background:white;
     margin-bottom:20px;
 }
 
 .tech-item-media img{
-    width:100%; height:100%; object-fit:cover;
+    width:100%; height:100%; object-fit:contain;
     transition:transform .7s var(--ease);
 }
 
