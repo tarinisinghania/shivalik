@@ -418,41 +418,6 @@ window.addEventListener("load", () => ScrollTrigger.refresh());
         }
     });
 })();
-/* ---------- Form submit ---------- */
-
-const form = document.getElementById("contactForm");
-const status = document.getElementById("formStatus");
-
-form?.addEventListener("submit", e => {
-    e.preventDefault();
-
-    /* native validation first */
-    if (!form.checkValidity()){
-        status.textContent = "Please fill in the required fields.";
-        status.classList.add("error");
-        form.reportValidity();
-        return;
-    }
-
-    status.classList.remove("error");
-
-    const btn = form.querySelector(".cf-submit");
-    btn.disabled = true;
-    status.textContent = "Sending…";
-
-    /* ---- NO BACKEND WIRED YET ----
-       Replace this block with a real fetch() to your endpoint /
-       form service (Formspree, Web3Forms, your own API, etc.).
-       For now it simulates success so the flow is complete.       */
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log("Enquiry submitted:", data);
-
-    setTimeout(() => {
-        status.textContent = "Thanks — we'll reply within two working days.";
-        form.reset();
-        btn.disabled = false;
-    }, 700);
-});
 
 /* ---------- Gradient illuminate sweep on text ---------- */
 
