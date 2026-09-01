@@ -3285,7 +3285,7 @@ h2.illuminate{
 ========================================== */
 
 .certification {
-    padding: 140px 6%;
+    padding: 80px 6%;
 }
 
 /* GRID */
@@ -3293,7 +3293,7 @@ h2.illuminate{
 .certifications-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 60px 30px;
+    gap: 30px 30px;
 }
 
 /* CERTIFICATE */
