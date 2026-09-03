@@ -4160,7 +4160,7 @@ AWARDS
 .prod-item h4{
     font-family:"balto", sans-serif;
     font-weight:500;
-    font-size:1.2rem;
+    font-size:1.1rem;
     color:var(--ink);
     margin-bottom:6px;
 }
@@ -4178,28 +4178,91 @@ AWARDS
     background:rgba(248,69,7,.08);
 }
 /* ==========================================================
-   PRODUCT CARD — name, blurb, expandable detail
+   PRODUCT CARD — boxed, matching .mgmt-card / .why-item
 ========================================================== */
 
-/* Product shots are on white and get cropped by object-fit:cover.
-   This modifier shows the whole casting instead. */
-.prod-item-media--object{
+.prod-item{
+    display:flex;
+    flex-direction:column;
     background:#fff;
-    border:1px solid rgba(0,0,0,.06);
-}
-.prod-item-media--object img{
-    object-fit:contain;
-    padding:22px;
-}
-.prod-item:hover .prod-item-media--object img{
-    transform:scale(1.04);
+    border:1px solid rgba(0,0,0,.07);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 
-.prod-item-blurb{
-    font-size:.95rem;
-    line-height:1.5;
-    color:#6b6b6b;
-    margin-bottom:12px;
+.prod-item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
+}
+
+/* media now sits flush at the top of the card */
+.prod-item .prod-item-media{
+    border-radius:0;
+    border:none;
+    margin-bottom:0;
+    background:#fff;
+    flex:0 0 auto;
+}
+
+/* product shots on white — show the whole casting, don't crop it */
+.prod-item-media--object img{
+    object-fit:contain;
+    padding:26px;
+}
+
+/* thin brand rule separating image from copy */
+.prod-item .prod-item-media::after{
+    content:"";
+    display:block;
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:2px;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+    opacity:0;
+    transition:opacity .4s var(--ease);
+}
+.prod-item .prod-item-media{ position:relative; }
+.prod-item:hover .prod-item-media::after{ opacity:1; }
+
+/* ---------- text area padding ---------- */
+
+.prod-item > h4{
+    padding:24px 24px 0;
+    margin-bottom:0;
+}
+
+.prod-item > .prod-item-blurb{
+    padding:8px 24px 0;
+    margin-bottom:0;
+}
+
+/* when a card ends on the name or blurb, close the box off */
+.prod-item > h4:last-child,
+.prod-item > .prod-item-blurb:last-child{
+    padding-bottom:26px;
+}
+
+.prod-item > .prod-detail{
+    margin:20px 24px 24px;
+    margin-top:auto;              /* pins the toggle to the card bottom */
+    padding-top:14px;
+    border-top:1px solid rgba(0,0,0,.1);
+}
+
+/* image-only cards (waterworks) still need a floor */
+.prod-item > .prod-item-media:last-child{
+    margin-bottom:0;
+}
+
+@media (max-width:768px){
+    .prod-item > h4{ padding:18px 18px 0; }
+    .prod-item > .prod-item-blurb{ padding:6px 18px 0; }
+    .prod-item > h4:last-child,
+    .prod-item > .prod-item-blurb:last-child{ padding-bottom:20px; }
+    .prod-item > .prod-detail{ margin:16px 18px 18px; }
+    .prod-item-media--object img{ padding:18px; }
 }
 
 /* ---------- expandable detail (no JS needed) ---------- */
