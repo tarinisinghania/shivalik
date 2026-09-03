@@ -5843,121 +5843,331 @@ body.nav-locked{ overflow:hidden; }
    Reuses .cf-field / .cf-submit / .cf-status from the contact form.
 ========================================================== */
 
-.careers-main{
+/* ==========================================================
+   CAREERS — gallery marquee
+========================================================== */
+
+.cr-gallery{
+    position:relative;
     background:var(--light);
-    padding:150px 8% 130px;
+    padding:90px 0 20px;
+    overflow:hidden;
 }
 
-.cr-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    align-items:start;
+.cr-gallery-track{
+    display:flex;
+    width:max-content;
+    animation:crMarquee 30s linear infinite;
+    will-change:transform;
+}
+
+/* pause on hover so people can actually look at a photo */
+.cr-gallery:hover .cr-gallery-track{
+    animation-play-state:paused;
+}
+
+.cr-gallery-set{
+    display:flex;
+    gap:20px;
+    padding-right:20px;        /* keeps the seam gap even */
+    flex:0 0 auto;
+}
+
+/* one set travels exactly its own width, so the loop is invisible */
+@keyframes crMarquee{
+    from{ transform:translateX(0); }
+    to  { transform:translateX(-50%); }
+}
+
+.cr-shot{
+    flex:0 0 clamp(240px, 26vw, 380px);
+    margin:0;
+    border-radius:18px;
+    overflow:hidden;
+    background:#EDEAE4;
+    aspect-ratio:4 / 3;
+}
+
+.cr-shot--tall{ aspect-ratio:3 / 4; align-self:flex-end; }
+
+.cr-shot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
+}
+.cr-shot:hover img{ transform:scale(1.05); }
+
+/* edge fades so images enter and leave rather than getting chopped */
+.cr-gallery::before,
+.cr-gallery::after{
+    content:"";
+    position:absolute;
+    top:0; bottom:0;
+    width:9%;
+    z-index:2;
+    pointer-events:none;
+}
+.cr-gallery::before{
+    left:0;
+    background:linear-gradient(to right, var(--light), rgba(249,246,241,0));
+}
+.cr-gallery::after{
+    right:0;
+    background:linear-gradient(to left, var(--light), rgba(249,246,241,0));
+}
+
+@media (max-width:640px){
+    .cr-gallery{ padding:60px 0 10px; }
+    .cr-gallery-set{ gap:14px; padding-right:14px; }
+    .cr-shot{ flex-basis:74vw; }
+    .cr-shot--tall{ align-self:auto; aspect-ratio:4 / 3; }
+    .cr-gallery-track{ animation-duration:30s; }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .cr-gallery-track{ animation:none; }
+    .cr-gallery{ overflow-x:auto; }
 }
 
 /* ==========================================================
-   LEFT — framing copy
+   CAREERS — intro
 ========================================================== */
 
-.cr-left .label p{ margin-bottom:24px; }
+.cr-intro{
+    background:var(--light);
+    padding:80px 8% 20px;
+}
 
-.cr-headline{
+.cr-intro-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:start;
+    margin-top:20px;
+}
+
+.cr-intro .cr-headline{
     font-family:"balto", sans-serif;
     font-weight:500;
     font-size:2.9rem;
     line-height:1.15;
     letter-spacing:-0.01em;
     color:var(--ink);
-    max-width:14ch;
+    max-width:100%;
+    margin:0;
 }
 
-.cr-blurb{
-    font-size:1.05rem;
+.cr-intro .cr-blurb{
+    font-size:1.15rem;
+    line-height:1.65;
+    color:#5a534e;
+    max-width:48ch;
+    margin:0;
+}
+
+/* ==========================================================
+   CAREERS — why people stay
+========================================================== */
+
+.cr-stay{
+    background:var(--light);
+    padding:70px 8% 40px;
+}
+
+.cr-stay-inner{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:24px;
+}
+
+.cr-stay-card{
+    display:flex;
+    flex-direction:column;
+    padding:32px 28px 34px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.07);
+    border-left:5px solid var(--middle);
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+
+.cr-stay-card:nth-child(1){ border-left-color:var(--red); }
+.cr-stay-card:nth-child(2){ border-left-color:var(--orange); }
+.cr-stay-card:nth-child(3){ border-left-color:var(--red); }
+.cr-stay-card:nth-child(4){ border-left-color:var(--orange); }
+
+.cr-stay-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
+}
+
+.cr-stay-fig{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.9rem;
+    line-height:1;
+    color:var(--middle);
+    margin-bottom:16px;
+}
+
+.cr-stay-card h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color:var(--ink);
+    margin-bottom:10px;
+}
+
+.cr-stay-card p{
+    font-size:.98rem;
     line-height:1.6;
-    color:#6b6b6b;
-    max-width:46ch;
-    margin-top:26px;
+    color:#5a534e;
 }
 
-/* why-join points */
-.cr-points{
+/* ==========================================================
+   CAREERS — programme rows
+========================================================== */
+
+.cr-prog{
+    background:var(--light);
+    padding:60px 8% 40px;
+}
+
+.cr-prog-row{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+    align-items:center;
+    margin-bottom:90px;
+}
+
+.cr-prog-row--flip .cr-prog-visual{ order:-1; }
+
+.cr-prog-copy h2{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin:16px 0 20px;
+    max-width:18ch;
+}
+
+.cr-prog-copy > p{
+    font-size:1.1rem;
+    line-height:1.65;
+    color:#5a534e;
+    max-width:46ch;
+}
+
+.cr-prog-list{
     list-style:none;
     display:flex;
     flex-direction:column;
-    gap:26px;
-    margin:44px 0 0;
+    gap:22px;
+    margin:34px 0 0;
+    padding:0;
 }
 
-.cr-points li{
+.cr-prog-list li{
     display:flex;
     flex-direction:column;
-    gap:6px;
+    gap:5px;
     padding-left:22px;
     position:relative;
 }
 
-.cr-points li::before{
+.cr-prog-list li::before{
     content:"";
     position:absolute;
-    left:0; top:7px;
+    left:0; top:8px;
     width:9px; height:9px;
     border-radius:50%;
     background:linear-gradient(120deg, var(--orange), var(--red));
 }
 
-.cr-point-key{
+.cr-prog-key{
     font-family:"balto", sans-serif;
     font-weight:600;
     font-size:1.05rem;
     color:var(--ink);
 }
 
-.cr-point-val{
+.cr-prog-val{
     font-size:1rem;
     line-height:1.55;
     color:#6b6b6b;
 }
 
-.cr-hr-contact{
-    margin-top:40px;
-    padding-top:26px;
-    border-top:1px solid rgba(0,0,0,.1);
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+.cr-prog-visual{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio:4 / 3;
+    background:#EDEAE4;
 }
 
-.cr-hr-mail{
-    font-size:1.1rem;
-    color:var(--middle);
-    transition:color .3s var(--ease);
+.cr-prog-visual img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
 }
-.cr-hr-mail:hover{ color:var(--red); }
+.cr-prog-row:hover .cr-prog-visual img{ transform:scale(1.04); }
 
 /* ==========================================================
-   RIGHT — form card  (grey, like the contact card)
+   CAREERS — form section (now full width, not a 2-col grid)
+========================================================== */
+
+.careers-main{
+    padding:40px 8% 130px;
+}
+
+.cr-form-head{
+    max-width:56ch;
+    margin:0 auto 44px;
+    text-align:center;
+}
+
+.cr-form-head .label p{ margin-bottom:16px; }
+
+.cr-form-head h2{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:2.2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:14px;
+}
+
+.cr-form-head > p{
+    font-size:1.05rem;
+    line-height:1.6;
+    color:#6b6b6b;
+}
+
+.cr-form-head .cr-hr-contact{
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px solid rgba(0,0,0,.1);
+    align-items:center;
+}
+
+.cr-card{
+    max-width:760px;
+    margin:0 auto;
+}
+/* ==========================================================
+   CAREERS — form card
 ========================================================== */
 
 .cr-card{
+    max-width:760px;
+    margin:0 auto;
     background:#EDEAE4;
     border-radius:22px;
     padding:48px 44px;
-}
-
-.cr-card h2{
-    font-family:"balto", sans-serif;
-    font-weight:500;
-    font-size:1.9rem;
-    color:var(--ink);
-    margin-bottom:10px;
-}
-
-.cr-card-lead{
-    font-size:.98rem;
-    line-height:1.55;
-    color:#6b6b6b;
-    max-width:40ch;
-    margin-bottom:34px;
 }
 
 .cr-form{
@@ -5970,7 +6180,7 @@ body.nav-locked{ overflow:hidden; }
 .cf-row{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:26px;
+    gap:32px;
 }
 
 /* ---------- CV upload ---------- */
@@ -6016,33 +6226,59 @@ body.nav-locked{ overflow:hidden; }
     background:rgba(248,69,7,.05);
 }
 
-@media (prefers-reduced-motion:reduce){
-    .cr-upload{ transition:none; }
-}
-
-/* ==========================================================
-   Responsive
-========================================================== */
-
-@media (max-width:1024px){
-    .careers-main{ padding:120px 6% 90px; }
-    .cr-grid{ gap:56px; }
-    .cr-headline{ font-size:2.4rem; }
-}
+/* ---------- responsive ---------- */
 
 @media (max-width:768px){
-    .cr-grid{ grid-template-columns:1fr; gap:44px; }
-    .careers-main{ padding:110px 6% 70px; }
-    .cr-headline{ font-size:2rem; max-width:100%; }
-    .cr-blurb{ max-width:100%; }
     .cr-card{ padding:36px 26px; }
     .cf-row{ grid-template-columns:1fr; gap:26px; }
 }
 
 @media (max-width:480px){
-    .careers-main{ padding:100px 20px 60px; }
     .cr-card{ padding:30px 20px; }
     .cr-upload{ flex-direction:column; text-align:center; gap:12px; padding:24px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .cr-upload{ transition:none; }
+}
+
+/* ==========================================================
+   CAREERS — responsive
+========================================================== */
+
+@media (max-width:1100px){
+    .cr-stay-inner{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:900px){
+    .cr-intro-grid{ grid-template-columns:1fr; gap:28px; }
+    .cr-intro .cr-headline{ font-size:2.2rem; }
+    .cr-intro .cr-headline br{ display:none; }
+    .cr-intro .cr-blurb{ max-width:100%; }
+
+    .cr-prog-row,
+    .cr-prog-row--flip{ grid-template-columns:1fr; gap:32px; margin-bottom:64px; }
+    .cr-prog-row--flip .cr-prog-visual{ order:-1; }
+    .cr-prog-visual{ order:-1; }
+    .cr-prog-copy h2{ max-width:100%; font-size:1.6rem; }
+    .cr-prog-copy > p{ max-width:100%; }
+}
+
+@media (max-width:640px){
+    .cr-gallery{ padding:50px 0 10px; }
+    .cr-gallery-track{ padding:0 6%; gap:14px; }
+    .cr-shot{ flex-basis:74vw; }
+    .cr-shot--tall{ align-self:auto; aspect-ratio:4 / 3; }
+
+    .cr-stay-inner{ grid-template-columns:1fr; }
+    .cr-stay-card{ padding:26px 22px 28px; }
+    .cr-stay-fig{ font-size:1.6rem; }
+
+    .cr-intro,
+    .cr-stay,
+    .cr-prog{ padding-left:6%; padding-right:6%; }
+    .careers-main{ padding:30px 6% 80px; }
+    .cr-form-head h2{ font-size:1.7rem; }
 }
 /* ==========================================================
    CONTACT MODAL

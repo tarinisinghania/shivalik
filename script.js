@@ -1253,7 +1253,7 @@ downloadBtn?.addEventListener("click", () => {
 ========================================================== */
 
 (() => {
-    const subnav = document.getElementById("companySubnav");
+    const subnav = document.querySelector(".page-subnav, #companySubnav");
     if (!subnav) return;
 
     const buttons = Array.from(subnav.querySelectorAll(".prod-tab-label"));
@@ -1383,3 +1383,4 @@ gsap.from(".md-copy > p", {
     }
 
 });
+

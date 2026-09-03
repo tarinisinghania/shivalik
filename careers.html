@@ -55,6 +55,13 @@ Navigation
 <!-- ===========================
 Hero
 =========================== -->
+<div class="prod-tab-labels" id="companySubnav">
+  <button class="prod-tab-label" data-target="life">Life at Shivalik</button>
+  <button class="prod-tab-label" data-target="why">Why People Stay</button>
+  <button class="prod-tab-label" data-target="trainee">Trainee Programme</button>
+  <button class="prod-tab-label" data-target="welfare">Welfare</button>
+  <button class="prod-tab-label" data-target="apply">Apply</button>
+</div>
 <section class="hero hero--inner" id="home">
   <img class="hero-img" src="career.jpg" alt="">
   <div class="hero-fade"></div>
@@ -65,137 +72,269 @@ Hero
 </section>
 
 <!-- ===========================
-Careers — intro + form
+Intro
 =========================== -->
-<section class="careers-main">
-  <div class="cr-grid">
+<section class="cr-intro" id="life">
+  <div class="label"><p>Join Shivalik</p></div>
+  <div class="cr-intro-grid">
+    <h1 class="cr-headline">A workplace<br>our people stay for.</h1>
+    <p class="cr-blurb">
+      From the foundry floor to the design office, our fifteen hundred people share
+      one habit: getting it right the first time. What keeps them here is harder to
+      put in a job description — steady growth, work that gets noticed, and the kind
+      of place where people know each other's families.
+    </p>
+  </div>
+</section>
 
-    <!-- LEFT: framing copy + why-join points -->
-    <div class="cr-left">
-      <div class="label"><p>Join Shivalik</p></div>
+<!-- ===========================
+Gallery strip
+=========================== -->
+<section class="cr-gallery" aria-label="Life at Shivalik">
+  <div class="cr-gallery-track">
 
-      <h1 class="cr-headline">A workplace our people vouch for.</h1>
-
-      <p class="cr-blurb">
-        From the foundry floor to the design office, our fifteen hundred people
-        share one habit: getting it right the first time. If that sounds like
-        you, we'd like to hear from you — send us your details and CV, and our
-        HR team will be in touch.
-      </p>
-
-      <ul class="cr-points">
-        <li>
-          <span class="cr-point-key">Grow with us</span>
-          <span class="cr-point-val">Training, mentorship and clear paths that grow with the company.</span>
-        </li>
-        <li>
-          <span class="cr-point-key">Safety first</span>
-          <span class="cr-point-val">ISO 45001-certified operations with a genuine safety-first culture.</span>
-        </li>
-        <li>
-          <span class="cr-point-key">Real impact</span>
-          <span class="cr-point-val">Your work ships in vehicles and machinery relied on across the world.</span>
-        </li>
-      </ul>
-
-      <div class="cr-hr-contact">
-        <span class="cr-point-key">HR Enquiries</span>
-        <a href="mailto:careers@shivalikengineering.com" class="cr-hr-mail">careers@shivalikengineering.com</a>
-      </div>
+    <div class="cr-gallery-set">
+      <figure class="cr-shot"><img src="career/01.jpg" alt="Shivalik office reception"></figure>
+      <figure class="cr-shot cr-shot--tall"><img src="career/03.jpg" alt="Operator working on the foundry floor"></figure>
+      <figure class="cr-shot"><img src="career/02.jpg" alt="Team meeting in the Shivalik boardroom"></figure>
+      <figure class="cr-shot cr-shot--tall"><img src="career/05.jpg" alt="Engineer at work in the quality lab"></figure>
+      <figure class="cr-shot"><img src="career/06.jpg" alt="Machine shop operators on the line"></figure>
+      <figure class="cr-shot"><img src="career/04.jpg" alt="Shivalik plant entrance"></figure>
     </div>
 
-    <!-- RIGHT: application form card -->
-    <div class="cr-card">
-      <h2>Apply now</h2>
-      <p class="cr-card-lead">
-        Tell us about yourself and attach your CV. Fields marked * are required.
-      </p>
-
-      <form class="cr-form" id="careersForm" novalidate>
-
-        <div class="cf-field">
-          <label for="cr-name">Full name *</label>
-          <input type="text" id="cr-name" name="name" autocomplete="name" required>
-        </div>
-
-        <div class="cf-row">
-          <div class="cf-field">
-            <label for="cr-email">Email *</label>
-            <input type="email" id="cr-email" name="email" autocomplete="email" required>
-          </div>
-          <div class="cf-field">
-            <label for="cr-phone">Phone</label>
-            <input type="tel" id="cr-phone" name="phone" autocomplete="tel">
-          </div>
-        </div>
-
-        <div class="cf-field">
-          <label for="cr-role">Area of interest</label>
-          <select id="cr-role" name="role">
-            <option value="">Select a department</option>
-            <option>Foundry &amp; Production</option>
-            <option>Machining</option>
-            <option>Quality &amp; Metallurgy</option>
-            <option>Design &amp; Engineering</option>
-            <option>Maintenance</option>
-            <option>Supply Chain &amp; Logistics</option>
-            <option>Sales &amp; Marketing</option>
-            <option>Human Resources &amp; Admin</option>
-            <option>Finance &amp; Accounts</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="cf-field">
-          <label for="cr-exp">Years of experience</label>
-          <select id="cr-exp" name="experience">
-            <option value="">Select</option>
-            <option>Fresher / 0–1 years</option>
-            <option>1–3 years</option>
-            <option>3–5 years</option>
-            <option>5–10 years</option>
-            <option>10+ years</option>
-          </select>
-        </div>
-
-        <div class="cf-field">
-          <label for="cr-message">Message</label>
-          <textarea id="cr-message" name="message" rows="4" placeholder="A short note about what you're looking for (optional)"></textarea>
-        </div>
-
-        <!-- CV upload -->
-        <div class="cf-field">
-          <label>Attach CV *</label>
-          <label class="cr-upload" for="cr-cv" id="crUploadLabel">
-            <span class="cr-upload-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M12 16V4M7 9l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <span class="cr-upload-text" id="crUploadText">
-              <strong>Click to upload</strong> or drag &amp; drop<br>
-              <small>PDF, DOC or DOCX — max 5&nbsp;MB</small>
-            </span>
-          </label>
-          <input type="file" id="cr-cv" name="cv" accept=".pdf,.doc,.docx" required hidden>
-        </div>
-
-        <button type="submit" class="cf-submit">
-          Submit application
-          <svg class="brand-arrow-triple" viewBox="0 0 120 48" fill="currentColor" aria-hidden="true">
-            <g class="ch-1"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
-            <g class="ch-2" transform="translate(38,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
-            <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
-          </svg>
-        </button>
-
-        <p class="cf-status" id="crStatus" role="status" aria-live="polite"></p>
-
-      </form>
+    <div class="cr-gallery-set" aria-hidden="true">
+      <figure class="cr-shot"><img src="career/01.jpg" alt=""></figure>
+      <figure class="cr-shot cr-shot--tall"><img src="career/03.jpg" alt=""></figure>
+      <figure class="cr-shot"><img src="career/02.jpg" alt=""></figure>
+      <figure class="cr-shot cr-shot--tall"><img src="career/05.jpg" alt=""></figure>
+      <figure class="cr-shot"><img src="career/06.jpg" alt=""></figure>
+      <figure class="cr-shot"><img src="career/04.jpg" alt=""></figure>
     </div>
 
   </div>
+</section>
+
+<!-- ===========================
+Why people stay
+=========================== -->
+<section class="cr-stay" id="why">
+  <div class="cr-stay-inner">
+
+    <article class="cr-stay-card">
+      <span class="cr-stay-fig">XX years</span>
+      <h3>People stay</h3>
+      <p>
+        Average tenure across our units. Many of the people who joined us in the
+        early Bhilai days are still here — now running the lines they once trained on.
+      </p>
+    </article>
+
+    <article class="cr-stay-card">
+      <span class="cr-stay-fig">4 → 7 units</span>
+      <h3>Growing fast</h3>
+      <p>
+        Three new units come online through 2026. Growth like that creates room —
+        new lines need new supervisors, and we look inside first.
+      </p>
+    </article>
+
+    <article class="cr-stay-card">
+      <span class="cr-stay-fig">Recognised</span>
+      <h3>Hard work counts</h3>
+      <p>
+        Progression here follows contribution, not calendar time. If you take
+        something on and do it well, that gets seen and it gets rewarded.
+      </p>
+    </article>
+
+    <article class="cr-stay-card">
+      <span class="cr-stay-fig">1,500 people</span>
+      <h3>A real community</h3>
+      <p>
+        Festivals marked together, families welcomed on site, and colleagues who
+        notice when you're having a hard week. The warmth here is genuine.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===========================
+Trainee programme
+=========================== -->
+<section class="cr-prog" id="trainee">
+
+  <div class="cr-prog-row">
+    <div class="cr-prog-copy">
+      <div class="label"><p>Trainee Programme</p></div>
+      <h2>Start here with everything you need in place.</h2>
+      <p>
+        Our trainee programme takes people at the beginning of their careers and
+        gives them the ground to stand on — not just the training, but the practical
+        support that makes relocating for a first job possible.
+      </p>
+
+      <ul class="cr-prog-list">
+        <li>
+          <span class="cr-prog-key">Hostel accommodation</span>
+          <span class="cr-prog-val">Company-provided residential facilities close to the plant.</span>
+        </li>
+        <li>
+          <span class="cr-prog-key">Daily transport</span>
+          <span class="cr-prog-val">Dedicated transport between accommodation and the units.</span>
+        </li>
+        <li>
+          <span class="cr-prog-key">Structured training</span>
+          <span class="cr-prog-val">Hands-on rotation across foundry, machining and quality.</span>
+        </li>
+        <li>
+          <span class="cr-prog-key">Mentorship</span>
+          <span class="cr-prog-val">Paired with senior engineers who have come up the same route.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cr-prog-visual">
+      <img src="career/trainee.jpg" alt="Trainees at the Shivalik plant">
+    </div>
+  </div>
+
+  <div class="cr-prog-row cr-prog-row--flip">
+    <div class="cr-prog-copy" id="welfare">
+      <div class="label"><p>Employee Welfare</p></div>
+      <h2>A fund that's there when it's needed.</h2>
+      <p>
+        Shivalik maintains a standing welfare corpus for employees facing emergencies.
+        It exists so that a medical crisis or a family emergency doesn't become a
+        financial one — support is available quickly, without a lengthy process.
+      </p>
+
+      <ul class="cr-prog-list">
+        <li>
+          <span class="cr-prog-key">Emergency corpus</span>
+          <span class="cr-prog-val">A maintained fund available to employees in urgent need.</span>
+        </li>
+        <li>
+          <span class="cr-prog-key">Medical support</span>
+          <span class="cr-prog-val">Assistance for employees and their immediate families.</span>
+        </li>
+        <li>
+          <span class="cr-prog-key">Safety first</span>
+          <span class="cr-prog-val">ISO 45001-certified operations across every unit.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cr-prog-visual">
+      <img src="career/welfare.jpg" alt="Shivalik employees at the Bhilai plant">
+    </div>
+  </div>
+
+</section>
+
+<!-- ===========================
+Application form
+=========================== -->
+<section class="careers-main" id="apply">
+
+  <div class="cr-form-head">
+    <div class="label"><p>Apply</p></div>
+    <h2>Send us your details.</h2>
+    <p>
+      Tell us about yourself and attach your CV. Our HR team will be in touch.
+      Fields marked * are required.
+    </p>
+    <div class="cr-hr-contact">
+      <span class="cr-point-key">HR Enquiries</span>
+      <a href="mailto:careers@shivalikengineering.com" class="cr-hr-mail">careers@shivalikengineering.com</a>
+    </div>
+  </div>
+
+  <div class="cr-card">
+    <form class="cr-form" id="careersForm" novalidate>
+
+      <div class="cf-field">
+        <label for="cr-name">Full name *</label>
+        <input type="text" id="cr-name" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cr-email">Email *</label>
+          <input type="email" id="cr-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="cf-field">
+          <label for="cr-phone">Phone</label>
+          <input type="tel" id="cr-phone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="cf-field">
+        <label for="cr-role">Area of interest</label>
+        <select id="cr-role" name="role">
+          <option value="">Select a department</option>
+          <option>Foundry &amp; Production</option>
+          <option>Machining</option>
+          <option>Quality &amp; Metallurgy</option>
+          <option>Design &amp; Engineering</option>
+          <option>Maintenance</option>
+          <option>Supply Chain &amp; Logistics</option>
+          <option>Sales &amp; Marketing</option>
+          <option>Human Resources &amp; Admin</option>
+          <option>Finance &amp; Accounts</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="cf-field">
+        <label for="cr-exp">Years of experience</label>
+        <select id="cr-exp" name="experience">
+          <option value="">Select</option>
+          <option>Fresher / 0–1 years</option>
+          <option>1–3 years</option>
+          <option>3–5 years</option>
+          <option>5–10 years</option>
+          <option>10+ years</option>
+        </select>
+      </div>
+
+      <div class="cf-field">
+        <label for="cr-message">Message</label>
+        <textarea id="cr-message" name="message" rows="4" placeholder="A short note about what you're looking for (optional)"></textarea>
+      </div>
+
+      <!-- CV upload -->
+      <div class="cf-field">
+        <label>Attach CV *</label>
+        <label class="cr-upload" for="cr-cv" id="crUploadLabel">
+          <span class="cr-upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M12 16V4M7 9l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="cr-upload-text" id="crUploadText">
+            <strong>Click to upload</strong> or drag &amp; drop<br>
+            <small>PDF, DOC or DOCX — max 5&nbsp;MB</small>
+          </span>
+        </label>
+        <input type="file" id="cr-cv" name="cv" accept=".pdf,.doc,.docx" required hidden>
+      </div>
+
+      <button type="submit" class="cf-submit">
+        Submit application
+        <svg class="brand-arrow-triple" viewBox="0 0 120 48" fill="currentColor" aria-hidden="true">
+          <g class="ch-1"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+          <g class="ch-2" transform="translate(38,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+          <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+        </svg>
+      </button>
+
+      <p class="cf-status" id="crStatus" role="status" aria-live="polite"></p>
+
+    </form>
+  </div>
+
 </section>
 
 <!-- ===========================
