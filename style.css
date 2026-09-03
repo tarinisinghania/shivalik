@@ -2856,9 +2856,14 @@ h2.illuminate{
     height:100%;
     object-fit:cover;
     opacity:0;
-    transform:scale(1.04);
-    transition:opacity 1.1s var(--ease), transform 1.6s var(--ease);
+    transform:none;              /* was scale(1.04) + 1.6s transition */
+    transition:none;             /* GSAP owns this now */
+    will-change:opacity;
+    backface-visibility:hidden;
 }
+
+/* the first image is the floor — always visible underneath */
+.road-bg-img:first-of-type{ opacity:1; }
 
 .road-bg-img.is-active{
     opacity:1;
@@ -3839,37 +3844,62 @@ AWARDS
     color:var(--ink);
     margin: 45px;
 }
-.awards-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 40px 5%;
+.awards-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:24px;
+    padding:40px 0;
 }
 
-.award {
-    width: 100%;
-    overflow: hidden;
-    border-radius: 10px;
+.award{
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.07);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 
-.award img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: contain;
-    display: block;
+.award:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
 }
 
-.award:hover img {
-    transform: scale(1.05);
+/* square media box — this is what makes every card identical */
+.award img{
+    width:100%;
+    aspect-ratio:1 / 1;
+    object-fit:cover;
+    padding:0;
+    background:#fff;
+    display:block;
+    transition:transform .6s var(--ease);
 }
 
-.award p {
-    margin-top: 14px;
-    margin-left: 2px;
-    font-size: 12px;
-    line-height: 1.3;
-    color: grey;
-    text-align: left;
+.award:hover img{ transform:scale(1.04); }
+
+.award p{
+    margin:auto 0 0;              /* pins caption to the card bottom */
+    padding:16px 20px 22px;
+    border-top:1px solid rgba(0,0,0,.07);
+    font-size:13px;
+    line-height:1.4;
+    color:#5a534e;
+    text-align:left;
+}
+
+@media (max-width:1200px){
+    .awards-grid{ grid-template-columns:repeat(4, 1fr); }
+}
+@media (max-width:900px){
+    .awards-grid{ grid-template-columns:repeat(3, 1fr); gap:18px; }
+    .award img{ padding:18px; }
+}
+@media (max-width:600px){
+    .awards-grid{ grid-template-columns:repeat(2, 1fr); }
+    .award p{ padding:12px 14px 16px; font-size:12px; }
 }
 
 /* .cta{ background:var(--light); padding:40px 24px 90px; } */

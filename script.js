@@ -511,10 +511,21 @@ if (window.gsap){
 
     /* background image crossfade */
     const bgImgs = Array.from(document.querySelectorAll(".road-bg-img"));
-    function setActiveBg(i){
-        bgImgs.forEach(img => img.classList.toggle("is-active", Number(img.dataset.idx) === i));
+
+    /* stacked crossfade: image i fades in over image i-1.
+    never leaves a gap, so the plate is never see-through. */
+    function paintBg(p){
+        if (bgImgs.length < 2) return;
+        const pos = p * (bgImgs.length - 1);
+        for (let i = 1; i < bgImgs.length; i++){
+            const o = Math.min(Math.max(pos - (i - 1), 0), 1);
+            bgImgs[i].style.opacity = o;
+        }
     }
-    setActiveBg(0);
+    paintBg(0);
+
+    /* decode up front so the first fade isn't a stutter */
+    bgImgs.forEach(img => img.decode?.().catch(() => {}));
 
     if (track && viewport && roadmap){
 
@@ -555,8 +566,6 @@ if (window.gsap){
                 index = Math.max(0, Math.min(i, cards.length - 1));
                 const y = st.start + cardProgress(index) * (st.end - st.start);
                 window.scrollTo({ top:y, behavior:"smooth" });
-                syncButtons();
-                setActiveBg(index);
             };
 
             gsap.to(track, {
@@ -574,11 +583,11 @@ if (window.gsap){
                     onUpdate: self => {
                         st = self;
                         if (progress) progress.style.width = (self.progress * 100) + "%";
+                        paintBg(self.progress);                    // ← continuous, every frame
                         const i = nearestIndex(self.progress);
                         if (i !== index){
                             index = i;
-                            syncButtons();
-                            setActiveBg(index);
+                            syncButtons();                          // buttons still step, that's fine
                         }
                     }
                 }
