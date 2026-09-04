@@ -6432,7 +6432,7 @@ body.modal-open{ overflow:hidden; }
 }
 
 /* Tablet */
-@media (max-width:1100px){
+@media (max-width:1400px){
   .trust-strip{
     bottom:36px;
     justify-content:center;
