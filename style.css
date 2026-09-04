@@ -5874,27 +5874,27 @@ body.nav-locked{ overflow:hidden; }
 
 .cr-gallery-track{
     display:flex;
+    gap:20px;                       /* the seam gap lives here now */
     width:max-content;
-    animation:crMarquee 30s linear infinite;
+    animation:crMarquee 45s linear infinite;
     will-change:transform;
-}
-
-/* pause on hover so people can actually look at a photo */
-.cr-gallery:hover .cr-gallery-track{
-    animation-play-state:paused;
 }
 
 .cr-gallery-set{
     display:flex;
     gap:20px;
-    padding-right:20px;        /* keeps the seam gap even */
+    padding-right:0;                /* was 20px — this was breaking the loop */
     flex:0 0 auto;
 }
 
-/* one set travels exactly its own width, so the loop is invisible */
 @keyframes crMarquee{
     from{ transform:translateX(0); }
-    to  { transform:translateX(-50%); }
+    to  { transform:translateX(calc(-50% - 10px)); }   /* half the track + half the gap */
+}
+
+/* pause on hover so people can actually look at a photo */
+.cr-gallery:hover .cr-gallery-track{
+    animation-play-state:paused;
 }
 
 .cr-shot{
@@ -6299,6 +6299,16 @@ body.nav-locked{ overflow:hidden; }
     .cr-prog{ padding-left:6%; padding-right:6%; }
     .careers-main{ padding:30px 6% 80px; }
     .cr-form-head h2{ font-size:1.7rem; }
+}
+@media (max-width:640px){
+    .cr-gallery-track{ gap:14px; animation-duration:30s; }
+    .cr-gallery-set{ gap:14px; }
+}
+@media (max-width:640px){
+    @keyframes crMarquee{
+        from{ transform:translateX(0); }
+        to  { transform:translateX(calc(-50% - 7px)); }
+    }
 }
 /* ==========================================================
    CONTACT MODAL
