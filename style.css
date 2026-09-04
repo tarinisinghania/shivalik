@@ -1636,7 +1636,7 @@ PRODUCTS
 
 .products-card .pc-products li{
     font-family:"balto", sans-serif;
-    font: size 14.5px;
+    font-size: 14.5px;
     letter-spacing:.02em;
     color:var(--grey);
     padding:5px 12px;
@@ -3750,7 +3750,7 @@ CORE VALUES  (roadmap-style plate)
 @media (max-width:1024px){
     .mgmt-grid{ gap:22px; }
     .mgmt-copy{ padding:24px 22px 28px; }
-    .mgmt-copy h3{ font-size:1rem; font-weight: 600; }
+    .mgmt-copy h3{ font: size 1.1rem; font-weight: 600; }
     .mgmt-copy p{ font-size:.94rem; }
     .mgmt-role {font-size: 9.5px;}
 }
@@ -4091,7 +4091,6 @@ AWARDS
 }
 
 /* no longer needed — the glass background replaces the old opaque backing */
-.prod-tab-labels::before{ display:none; }
 
 .prod-tab-label:hover{ color:var(--ink); }
 
@@ -4403,7 +4402,6 @@ AWARDS
 }
 @media (max-width:1400px){
     .prod{ padding:110px 120px 130px; }
-    .prod-tabs::before{ left:-120px; right:-120px; }
 }
 
 @media (max-width:1100px){
@@ -4474,11 +4472,6 @@ AWARDS
 /* ---------- iPad / tablet (≤1024px) ---------- */
 @media (max-width:1024px){
 
-    /* navbar tightens in */
-    .navbar{ left:20px; right:20px; padding:14px 26px; }
-    nav ul{ gap:20px; }
-    nav a{ font-size:11px; letter-spacing:.06em; }
-
     /* hero text scales down */
     .hero h1{ font-size:44px; }
     .hero--inner h1{ font-size:2.6rem; }
@@ -4506,7 +4499,6 @@ AWARDS
     .prod{ padding:90px 40px 90px; }
     .prod-panel{ padding:60px 0; }              /* was 80px 80px */
     .prod-grid{ grid-template-columns:repeat(3, 1fr); }
-    .prod-tab-labels::before{ left:-40px; right:-40px; }
 
     /* manufacturing / company plates */
     .values{ padding:40px 40px 20px; }
@@ -4522,8 +4514,6 @@ AWARDS
 
     /* navbar: hide the text nav, keep logo + button
        (you'd normally add a burger menu; this prevents overflow) */
-    nav ul{ display:none; }
-    .navbar{ padding:12px 20px; }
 
     .hero{ padding:100px 6%; }
     .hero h1{ font-size:34px; }
@@ -4545,8 +4535,6 @@ AWARDS
     /* PRODUCTS page */
     .prod{ padding:80px 20px 70px; }
     .prod-tab-images{ gap:12px; }
-    .prod-tab-labels{ gap:8px; top:90px; padding:12px 0; overflow-x:auto; }
-    .prod-tab-label{ font-size:13px; flex:0 0 auto; padding:0 6px 14px; white-space:nowrap; }
     .prod-grid{ grid-template-columns:repeat(2, 1fr); gap:20px; }
     .prod-panel-head h3{ font-size:1.5rem; }
 
@@ -4822,7 +4810,6 @@ AWARDS
     .prod{ padding:90px 40px 90px; }
     .prod-panel{ padding:60px 0; }
     .prod-grid{ grid-template-columns:repeat(3, 1fr); gap:24px; }
-    .prod-tab-labels::before{ left:-40px; right:-40px; }
     .prod-tab-images{ gap:16px; }
     .hero--inner h1{ font-size:2.4rem; }
 }
@@ -4893,7 +4880,6 @@ AWARDS
 
         overflow:visible;
     }
-    .prod-tab-labels::before{ display:none; }
 
     .prod-tab-label{
         display:flex;
@@ -4932,7 +4918,6 @@ AWARDS
     /* single-column product grid */
     .prod-grid{ grid-template-columns:1fr; gap:24px; }
 
-    .prod-tab-labels{ top:96px; }
 }
 
 /* ==========================================================
@@ -5060,11 +5045,7 @@ AWARDS
 .nav-burger.open span:nth-child(2){ opacity:0; }
 .nav-burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-@media (max-width:768px){
-    .navbar nav,
-    .navbar .button{ display:none; }
-    .nav-burger{ display:flex; }
-}
+
 
 /* the overlay */
 .nav-overlay{
@@ -5936,14 +5917,6 @@ body.nav-locked{ overflow:hidden; }
     background:linear-gradient(to left, var(--light), rgba(249,246,241,0));
 }
 
-@media (max-width:640px){
-    .cr-gallery{ padding:60px 0 10px; }
-    .cr-gallery-set{ gap:14px; padding-right:14px; }
-    .cr-shot{ flex-basis:74vw; }
-    .cr-shot--tall{ align-self:auto; aspect-ratio:4 / 3; }
-    .cr-gallery-track{ animation-duration:30s; }
-}
-
 @media (prefers-reduced-motion:reduce){
     .cr-gallery-track{ animation:none; }
     .cr-gallery{ overflow-x:auto; }
@@ -6286,7 +6259,7 @@ body.nav-locked{ overflow:hidden; }
 @media (max-width:640px){
     .cr-gallery{ padding:50px 0 10px; }
     .cr-shot{ flex-basis:74vw; }
-    .cr-shot--tall{ align-self:auto; aspect-ratio:4 / 3; }
+    .cr-shot--tall{ align-self:auto; height:clamp(180px, 20vw, 285px); }
 
     .cr-stay-inner{ grid-template-columns:1fr; }
     .cr-stay-card{ padding:26px 22px 28px; }
@@ -6299,15 +6272,9 @@ body.nav-locked{ overflow:hidden; }
     .cr-form-head h2{ font-size:1.7rem; }
 }
 @media (max-width:640px){
-    .cr-gallery-track{ gap:14px; animation-duration:30s; }
-    .cr-gallery-set{ gap:14px; }
+    .cr-gallery-track{ animation-duration:30s; }
 }
-@media (max-width:640px){
-    @keyframes crMarquee{
-        from{ transform:translateX(0); }
-        to  { transform:translateX(calc(-50% - 7px)); }
-    }
-}
+
 /* ==========================================================
    CONTACT MODAL
 ========================================================== */
@@ -6521,19 +6488,6 @@ body.modal-open{ overflow:hidden; }
    iPad range currently falls back to the desktop left/right values,
    which don't match the section's shrunk side padding at 1024px ---------- */
 
-@media (max-width:1070px){
-    .prod-tab-labels{
-        left:40px;
-        right:40px;
-        top:110px;
-    }
-    .trans-tabs{
-        left:40px;
-        right:40px;
-        top:110px;
-        max-width:none;             /* let it fill the available width like prod-tab-labels */
-    }
-}
 
 /* ---------- Manufacturing CTA card: 40vw is far too narrow once
    the viewport itself shrinks ---------- */
