@@ -411,28 +411,26 @@ ABOUT
     width:850px;                 /* the text keeps its exact current width */
     flex:0 0 auto;               /* never shrink or grow */
 }
-
 .about-visual{
     flex:1;
     display:flex;
-    flex-direction:column;   /* stack the two images */
+    flex-direction:column;
+    align-items:center;          /* centre both images as a pair */
+    justify-content:center;
     gap:24px;
     background:transparent;
+    min-width:0;                 /* lets it shrink inside the flex row */
 }
 
 .about-visual img{
     width:100%;
-    height:auto;             /* let each image keep its aspect ratio */
+    max-width:520px;             /* the lockup never gets bigger than this */
+    height:auto;
     object-fit:contain;
     display:block;
+    margin:0;
 }
 
-/* stack when there isn't room for 850px text + image */
-@media (max-width:1250px){
-    .about{ flex-direction:column; align-items:stretch; }
-    .about-inner{ width:100%; }
-    .about-visual{ aspect-ratio:16 / 9; }
-}
 .label p{
     font-family: "General", sans-serif;
     font-weight: 700;
@@ -6602,33 +6600,33 @@ body.modal-open{ overflow:hidden; }
         overflow-x:hidden;
     }
 }
-@media (max-width:1024px){
-    .about-visual img{
-        max-width:500px;
-        margin:0 auto;
-    }
-}
+/* ==========================================================
+   ABOUT VISUAL — truck + logo/tagline lockup
+========================================================== */
 
-@media (max-width:768px){
-    .about-visual img{
-        max-width:300px;
-    }
-}
-@media (max-width:1024px){
-    .about-visual{
-        aspect-ratio:auto;    
-        width:100%;
-        max-width:100vw;
-        overflow:visible;          /* clips anything still trying to bleed out */
+/* stacked layout — text above, lockup below */
+@media (max-width:1250px){
+    .about{
+        flex-direction:column;
         align-items:center;
+        gap:48px;
     }
+    .about-inner{ width:100%; }
 
-    .about-visual img{
+    .about-visual{
         width:100%;
-        max-width:100%;
-        margin:0 auto;
-        display:block;
+        aspect-ratio:auto;       /* the images set their own height */
     }
+}
+
+@media (max-width:900px){
+    .about-visual img{ max-width:440px; }
+    .about-visual{ gap:18px; }
+}
+
+@media (max-width:600px){
+    .about-visual img{ max-width:300px; }
+    .about-visual{ gap:14px; }
 }
 @media (max-width:640px){
     .trust-strip{
