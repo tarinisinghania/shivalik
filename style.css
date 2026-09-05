@@ -5853,24 +5853,22 @@ body.nav-locked{ overflow:hidden; }
 
 .cr-gallery-track{
     display:flex;
-    gap:20px;                       /* the seam gap lives here now */
-    width:max-content;
+    width:fit-content;              /* more reliable than max-content here */
     animation:crMarquee 45s linear infinite;
     will-change:transform;
 }
 
 .cr-gallery-set{
     display:flex;
-    gap:20px;
-    padding-right:0;                /* was 20px — this was breaking the loop */
     flex:0 0 auto;
+    gap:20px;
+    padding-right:20px;             /* the seam gap — same on both sets */
 }
 
 @keyframes crMarquee{
     from{ transform:translateX(0); }
-    to  { transform:translateX(calc(-50% - 10px)); }   /* half the track + half the gap */
+    to  { transform:translateX(-50%); }
 }
-
 /* pause on hover so people can actually look at a photo */
 .cr-gallery:hover .cr-gallery-track{
     animation-play-state:paused;
