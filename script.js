@@ -490,13 +490,11 @@ if (window.gsap){
             );
         }
 
-        gsap.utils.toArray(".unit-row").forEach(row => {
-            gsap.fromTo(row,
-                { opacity: 0, x: 20 },
-                {
-                    opacity: 1, x: 0, ease: "power3.out", duration: .7,
-                    scrollTrigger: { trigger: row, start: "top 85%", toggleActions: "play none none reverse" }
-                }
+        gsap.utils.toArray(".unit-timeline").forEach(tl => {
+            gsap.fromTo(tl,
+                { "--spine": 0 },
+                { "--spine": 1, ease:"none",
+                scrollTrigger:{ trigger:tl, start:"top 78%", end:"bottom 70%", scrub:true } }
             );
         });
     }
@@ -702,6 +700,8 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
             p.classList.toggle("active", on);
             p.hidden = !on;
         });
+
+        document.querySelectorAll(".prod-overlay").forEach(o => o.hidden = true);
 
         if (window.ScrollTrigger) ScrollTrigger.refresh();
 
@@ -1384,3 +1384,54 @@ gsap.from(".md-copy > p", {
 
 });
 
+/* ==========================================================
+   PRODUCT "See more" overlay
+========================================================== */
+
+(() => {
+    const wraps = document.querySelectorAll(".prod-grid-wrap");
+    if (!wraps.length) return;
+
+    const closeAll = () => {
+        document.querySelectorAll(".prod-overlay").forEach(o => o.hidden = true);
+        document.querySelectorAll(".prod-grid-wrap").forEach(w => w.classList.remove("is-open"));
+    };
+
+    wraps.forEach(wrap => {
+        const overlay = wrap.querySelector(".prod-overlay");
+        if (!overlay) return;
+
+        const title = overlay.querySelector(".prod-overlay-title");
+        const body  = overlay.querySelector(".prod-overlay-body");
+
+        wrap.querySelectorAll(".prod-more").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const card = btn.closest(".prod-item");
+                const tpl  = card.querySelector(".prod-more-data");
+                if (!tpl) return;
+
+                title.textContent = card.querySelector("h4")?.textContent || "";
+                body.replaceChildren(tpl.content.cloneNode(true));
+
+                closeAll();
+                overlay.hidden = false;
+                wrap.classList.add("is-open");
+                window.scrollTo({
+                    top: wrap.getBoundingClientRect().top + window.pageYOffset - 200,
+                    behavior: "smooth"
+                });
+                overlay.scrollTop = 0;
+            });
+        });
+
+                overlay.querySelector(".prod-overlay-close")
+               ?.addEventListener("click", () => {
+                   overlay.hidden = true;
+                   wrap.classList.remove("is-open");
+               });
+    });
+
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeAll();
+    });
+})();
