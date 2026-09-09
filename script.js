@@ -457,8 +457,8 @@ if (window.gsap){
         name: "--reveal", syntax: "<percentage>", initialValue: "0%", inherits: false
     });
 
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches
-             || matchMedia("(max-width: 768px)").matches;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const noPin  = reduce || matchMedia("(max-width: 768px)").matches;
 
     /* ---- intro paragraph illuminates as one sweep ---- */
     if (!reduce){
@@ -479,16 +479,6 @@ if (window.gsap){
             name: "--spine", syntax: "<number>", initialValue: "1", inherits: false
         });
 
-        const timeline = document.querySelector(".unit-timeline");
-        if (timeline){
-            gsap.fromTo(timeline,
-                { "--spine": 0 },
-                {
-                    "--spine": 1, ease: "none",
-                    scrollTrigger: { trigger: timeline, start: "top 78%", end: "bottom 70%", scrub: true }
-                }
-            );
-        }
 
         gsap.utils.toArray(".unit-timeline").forEach(tl => {
             gsap.fromTo(tl,
@@ -527,7 +517,7 @@ if (window.gsap){
 
     if (track && viewport && roadmap){
 
-        if (reduce){
+        if (noPin){
             roadmap.classList.add("no-pin");
             document.querySelector(".road-nav")?.remove();
         } else {
