@@ -719,65 +719,50 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 
 
 /* ==========================================================
-   TRANSFORMATION PAGE — pillar tab switching
+   TRANSFORMATION PAGE — subnav scroll-to-section + scroll-spy
 ========================================================== */
 
 (() => {
     const tabs = Array.from(document.querySelectorAll(".trans-tab"));
-    const panels = Array.from(document.querySelectorAll(".trans-panel"));
     if (!tabs.length) return;
 
-    const activate = (name) => {
-        tabs.forEach(t => {
-            const on = t.dataset.panel === name;
-            t.classList.toggle("active", on);
-            t.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        panels.forEach(p => {
-            const on = p.id === "panel-" + name;
-            p.classList.toggle("active", on);
-            p.hidden = !on;
-        });
+    const sections = tabs
+        .map(t => document.getElementById(t.dataset.target))
+        .filter(Boolean);
+    if (!sections.length) return;
 
-        /* reveal the new panel's content immediately (triggers won't re-fire) */
-        const active = document.getElementById("panel-" + name);
-        if (active && window.gsap){
-            const items = active.querySelectorAll(
-                ".human-card .hc-media, .human-card .hc-copy, .tech-erp, .tech-item, .tech-safety, .sus-feature, .sus-point, .reveal-card"
-            );
-            gsap.set(items, { opacity:1, x:0, y:0 });
-        }
-
-        if (window.ScrollTrigger) ScrollTrigger.refresh();
-
-        /* scroll after layout has updated to the new panel height */
-        requestAnimationFrame(() => {
-            const anchor = document.querySelector(".trans-head") || document.querySelector(".trans");
-            if (!anchor) return;
-            const y = anchor.getBoundingClientRect().top + window.pageYOffset - 120;
-            window.scrollTo({ top:y, behavior:"smooth" });
-        });
+    const setActive = (id) => {
+        tabs.forEach(t => t.classList.toggle("active", t.dataset.target === id));
     };
 
-    
     tabs.forEach(tab => {
-        tab.addEventListener("click", () => activate(tab.dataset.panel));
-
-        /* keyboard arrows move between tabs */
-        tab.addEventListener("keydown", e => {
-            const i = tabs.indexOf(tab);
-            if (e.key === "ArrowRight" && i < tabs.length - 1){
-                tabs[i + 1].focus(); activate(tabs[i + 1].dataset.panel);
-            } else if (e.key === "ArrowLeft" && i > 0){
-                tabs[i - 1].focus(); activate(tabs[i - 1].dataset.panel);
-            }
+        tab.addEventListener("click", () => {
+            const target = document.getElementById(tab.dataset.target);
+            if (!target) return;
+            const y = target.getBoundingClientRect().top + window.pageYOffset - 180;
+            window.scrollTo({ top:y, behavior:"smooth" });
+            setActive(tab.dataset.target);
         });
     });
 
-    /* open a pillar from the URL hash, e.g. transformation.html#human */
+    /* highlight whichever pillar is in view */
+    const spy = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin:"-180px 0px -60% 0px", threshold:0 });
+
+    sections.forEach(s => spy.observe(s));
+
+    /* deep link: transformation.html#human */
     const hash = location.hash.replace("#", "");
-    if (hash && document.getElementById("panel-" + hash)){
-        activate(hash);
+    if (hash && document.getElementById(hash)){
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                const y = document.getElementById(hash).getBoundingClientRect().top
+                        + window.pageYOffset - 180;
+                window.scrollTo({ top:y, behavior:"smooth" });
+                setActive(hash);
+            }, 120);
+        });
     }
 })();
 
@@ -1021,11 +1006,7 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     /* on the transformation page the hash is a pillar name (#technology,
        #human, #sustainability) → scroll to that panel. Elsewhere the hash
        is a section id (#units, #products, #intro). */
-    const isTransformation = /transformation/i.test(location.pathname);
-
-    const target = isTransformation
-        ? document.getElementById("panel-" + hash.replace("#", ""))
-        : document.querySelector(hash);
+        const target = document.querySelector(hash);
 
     if (!target) return;
 

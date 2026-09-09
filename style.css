@@ -89,7 +89,7 @@ NAVBAR
     justify-content:space-between;
     align-items:center;
 
-    padding:15px 50px;
+    padding:11px 50px;
 
     border-radius:50px;
     color: #111;
@@ -1291,7 +1291,7 @@ FOOTER
     z-index:5;
     background:#1e1714;
     color:#EDE7E1;
-    padding:0 0 24px;
+    padding:0 0 18px;
     border-top:3px solid transparent;
     background-image:
         linear-gradient(#17110E, #17110E),
@@ -1309,33 +1309,34 @@ FOOTER
 .footer-top{
     display:grid;
     grid-template-columns:1.7fr 1fr 1.15fr 1.25fr;
-    gap: 48px;;
-    padding:64px 0 52px;
+    gap:40px;                      /* was 48px */
+    padding:44px 0 36px;           /* was 64px 0 52px */
+    align-items:start;
 }
 
 /* ---------- Brand ---------- */
 
 .f-logo{
-    width:170px;                   /* was 210px */
-    margin-bottom:20px;            /* was 34px */
+    width:160px;                   /* was 170px */
+    margin-bottom:16px;            /* was 20px */
 }
 
 .f-desc{
-    max-width:400px;
-    font-size:15px;                /* was 17px */
-    line-height:1.6;               /* was 1.75 */
+    max-width:380px;
+    font-size:14.5px;
+    line-height:1.55;              /* was 1.6 */
     color:#CFC6BE;
 }
 
 .f-social{
     display:flex;
-    gap:12px;                      /* was 16px */
-    margin-top:22px;               /* was 34px */
+    gap:10px;                      /* was 12px */
+    margin-top:18px;               /* was 22px */
 }
 
 .f-social a{
-    width:38px;
-    height:38px;
+    width:34px;
+    height:34px;
     border-radius:50%;
     border:1px solid rgba(255,255,255,.18);
     display:flex;
@@ -1346,8 +1347,8 @@ FOOTER
 }
 
 .f-social svg{
-    width:16px;
-    height:16px;
+    width:15px;
+    height:15px;
 }
 
 .f-social a:hover{
@@ -1366,17 +1367,18 @@ FOOTER
     text-transform:uppercase;
     color:#fff;
     margin-bottom:20px;
+    padding-top:3px;    
 }
 
 .f-col ul{
     list-style:none;
     display:flex;
     flex-direction:column;
-    gap:11px;
+    gap:9px;
 }
 
 .f-col a{
-    font-size:15px;
+    font-size:14.5px;
     color:#CFC6BE;
     display:inline-block;
     transition:.3s var(--ease);
@@ -1389,15 +1391,15 @@ FOOTER
 
 .f-contact address{
     font-style:normal;
-    font-size:15px;
-    line-height:1.65;
+    font-size:14.5px;
+    line-height:1.55;              /* was 1.65 */
+    margin-bottom:13px;            /* was 16px */
     color:#CFC6BE;
-    margin-bottom:16px;
 }
 
 .f-contact a{
     display:block;
-    margin-bottom:7px;
+    margin-bottom:6px;
 }
 
 /* ---------- Bottom bar ---------- */
@@ -1406,14 +1408,14 @@ FOOTER
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
-    padding-top:22px;
+    padding-top:16px;              /* was 22px */
+    gap:16px;
     border-top:1px solid var(--middle);
 }
 .footer-bottom{
     border-top:none;               /* the .footer-rule element replaces it */
 }
-
+.footer-rule{ margin-top:4px; }
 .footer-rule{
     display:flex;
     align-items:center;
@@ -1488,22 +1490,23 @@ FOOTER
 @media (max-width:1100px){
     .footer-top{
         grid-template-columns:1fr 1fr;
-        gap:40px 32px;
-        padding:52px 0 40px;
+        gap:34px 28px;
+        padding:38px 0 30px;
     }
     .f-brand{ grid-column:1 / -1; }
+    .f-col h4{ padding-top:0; }    /* alignment only matters in the 4-col row */
 }
 
 @media (max-width:640px){
     .footer-top{
         grid-template-columns:1fr;
-        gap:32px;
-        padding:44px 0 32px;
+        gap:28px;
+        padding:32px 0 26px;
     }
     .footer-bottom{
         flex-direction:column;
         align-items:flex-start;
-        gap:10px;
+        gap:9px;
     }
 }
 
@@ -4139,7 +4142,7 @@ AWARDS
     font-weight:400;
     font-size:1.1em;
     color:#8a8580;
-    padding:15px 16px;
+    padding:11px 16px;
     border-radius:60px;
     white-space:nowrap;
     transition:.35s var(--ease);
@@ -4148,7 +4151,7 @@ AWARDS
 /* label row — fixed below the navbar, glass style matching it */
 .prod-tab-labels{
     position:fixed;                /* was sticky */
-    top:115px;                     /* clears the fixed navbar */
+    top:105px;                     /* clears the fixed navbar */
     left:120px;                    /* matches .prod's default side padding */
     right:120px;
     z-index:900;
@@ -5276,7 +5279,7 @@ body.nav-locked{ overflow:hidden; }
 
 .trans-tabs{
     position:fixed;
-    top:115px;
+    top:105px;
     left:120px;
     right:120px;            /* was 60px — now symmetric */
     z-index:900;
@@ -5297,7 +5300,7 @@ body.nav-locked{ overflow:hidden; }
 .trans-tab{
     flex:1 1 0;             /* was flex:1 — equal columns */
     text-align:center;
-    padding:15px 16px;      /* was 12px 20px */
+    padding:11px 16px;      /* was 12px 20px */
     border:none;
     border-radius:60px;
     background:none;
@@ -5340,8 +5343,12 @@ body.nav-locked{ overflow:hidden; }
 ========================================================== */
 
 .trans-panel{
-    animation:transIn .5s var(--ease);
+    animation:none;              /* they're all visible now */
+    padding-top:80px;
+    scroll-margin-top:180px;     /* stops the fixed navbar + tabs covering the heading */
 }
+
+.trans-panel:first-of-type{ padding-top:0; }
 
 .trans-panel[hidden]{ display:none; }
 
@@ -6941,4 +6948,119 @@ body.modal-open{ overflow:hidden; }
     .units{ padding-top:210px; }        /* manufacturing */
     .prod-panel{ padding-top:210px; }   /* products */
     .trans-head{ padding-top:210px; }   /* transformation */
+}
+/* ==========================================================
+   NAV + SUBNAV — compressed across breakpoints
+   append at end of style.css
+========================================================== */
+
+/* ---------- iPad (769–1366px) ---------- */
+@media (min-width:769px) and (max-width:1366px){
+    .navbar{
+        top:18px;
+        left:20px;
+        right:20px;
+        padding:10px 24px;
+    }
+    .logo{ width:135px; }
+    nav ul{ gap:20px; }
+    nav a{ font-size:11.5px; letter-spacing:.07em; }
+    .button{ padding:7px 22px; font-size:13px; }
+
+    .prod-tab-labels,
+    .trans-tabs{
+        top:84px;
+        left:30px;
+        right:30px;
+        padding:5px;
+        max-width:none;
+    }
+    .prod-tab-label,
+    .trans-tab{
+        padding:10px 12px;
+        font-size:.95rem;
+    }
+}
+
+/* ---------- Tablet / large phone (≤900px) ---------- */
+@media (max-width:900px){
+    .navbar{
+        top:16px;
+        left:16px;
+        right:16px;
+        padding:9px 20px;
+    }
+    .logo{ width:125px; }
+
+    .nav-burger{
+        top:28px;
+        right:28px;
+        width:38px;
+        height:38px;
+    }
+    .nav-burger span{ width:22px; }
+}
+
+/* ---------- Mobile (≤768px) ---------- */
+@media (max-width:768px){
+    .navbar{
+        top:14px;
+        left:14px;
+        right:14px;
+        padding:8px 18px;
+    }
+    .logo{ width:115px; }
+
+    .nav-burger{ top:24px; right:24px; }
+
+    .prod-tab-labels{
+        top:82px;               /* was 132px */
+        left:14px;
+        right:14px;
+        gap:5px;
+        padding:6px;
+        border-radius:20px;
+    }
+    .prod-tab-label{
+        font-size:.74rem;
+        padding:8px 5px;
+        min-height:36px;
+        border-radius:14px;
+        line-height:1.2;
+    }
+
+    .trans-tabs{
+        top:82px;               /* was 132px */
+        left:14px;
+        right:14px;
+        gap:5px;
+        padding:6px;
+        border-radius:40px;
+    }
+    .trans-tab{
+        font-size:.8rem;
+        padding:8px 10px;
+    }
+
+    /* content clearance — recalculated for the shorter bars */
+    .units{ padding-top:160px; }
+    .prod-panel{ padding-top:160px; }
+    .trans-head{ padding-top:160px; }
+}
+
+/* ---------- Small phone (≤480px) ---------- */
+@media (max-width:480px){
+    .navbar{ padding:7px 16px; }
+    .logo{ width:105px; }
+    .nav-burger{ top:22px; right:20px; width:34px; height:34px; }
+    .nav-burger span{ width:20px; }
+
+    .prod-tab-labels,
+    .trans-tabs{ top:76px; left:12px; right:12px; }
+    .prod-tab-label{ font-size:.7rem; padding:7px 4px; min-height:34px; }
+    .trans-tab{ font-size:.75rem; padding:7px 8px; }
+
+    .units,
+    .prod-panel,
+    .trans-head{ padding-top:150px; }
 }
