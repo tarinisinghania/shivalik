@@ -6995,7 +6995,7 @@ body.modal-open{ overflow:hidden; }
 .trust-band{
     position:relative;
     background:var(--light);
-    padding:0 8% 10px;          /* was 56px 8% 44px */
+    padding:0 8% 10px;
 }
 
 .trust-band-curve{
@@ -7003,7 +7003,7 @@ body.modal-open{ overflow:hidden; }
     top:0;
     left:0;
     width:100%;
-    height:36px;                /* was 60px */
+    height:36px;
     display:block;
     pointer-events:none;
 }
@@ -7013,14 +7013,14 @@ body.modal-open{ overflow:hidden; }
     display:flex;
     align-items:center;
     gap:80px;
-    padding-top:20px;           /* clears the curve, was 28px on top of 56px */
+    padding-top:20px;
     min-height:0;
 }
 
 .trust-band-logo{
     flex:0 0 auto;
     width:auto;
-    height: 100px;
+    height:100px;
 }
 
 .trust-band-logo img{
@@ -7037,6 +7037,7 @@ body.modal-open{ overflow:hidden; }
     align-items:center;
     justify-content:space-between;
     gap:24px;
+    white-space:nowrap;
 }
 
 .trust-band .trust-item{
@@ -7051,25 +7052,37 @@ body.modal-open{ overflow:hidden; }
     border-radius:0;
 }
 
-.trust-band .trust-item:first-child{ border-left:none; padding-left:0; }
-
-.trust-band .trust-item svg{
-    width:56px;
-    height:56px;
-    flex:0 0 auto;
-    fill:var(--middle);
-    stroke-linecap:round;
-    stroke-linejoin:round;
+.trust-band .trust-item:first-child{
+    border-left:none;
+    padding-left:0;
 }
 
-.trust-band .trust-item span{
+/* the fixed box — this is what keeps every label aligned */
+.trust-band .trust-icon{
+    flex:0 0 56px;
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.trust-band .trust-icon svg{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    fill:var(--middle);
+    display:block;
+}
+
+.trust-band .trust-label{
     font-family:"balto", sans-serif;
     font-size:18px;
     font-weight:500;
     line-height:1.25;
     color:var(--ink);
-    max-width:none;
-    white-space: nowrap;
+    white-space:nowrap;
 }
 
 /* ---------- Responsive ---------- */
@@ -7077,88 +7090,73 @@ body.modal-open{ overflow:hidden; }
 @media (max-width:1024px){
     .trust-band{ padding:10px 6% 10px; }
     .trust-band-inner{ gap:32px; }
+    .trust-band-logo{ height:82px; }
     .trust-band .trust-item{ padding-left:24px; gap:12px; }
-    .trust-band .trust-item svg{ width:50px; height:50px; }
-    .trust-band .trust-item span{ font-size:17.5px; }
+    .trust-band .trust-icon{ flex:0 0 46px; width:46px; height:46px; }
+    .trust-band .trust-label{ font-size:16px; }
 }
 
-@media (max-width:768px){
-    .trust-band{ padding:0 5% 16px; }
+/* tablet portrait + phones — logo left, items stacked right */
+@media (max-width:900px){
+    .trust-band{ padding:0 6% 18px; }
 
     .trust-band-inner{
         flex-direction:row;
-        align-items:flex-start;
-        gap:24px;
-        padding-top:18px;
+        align-items:center;
+        gap:40px;
+        padding-top:20px;
     }
 
     .trust-band-logo{
         height:auto;
-        width:110px;
+        width:170px;
         flex:0 0 auto;
     }
-
-    .trust-band-logo img{
-        width:100%;
-        height:auto;
-        object-position:left center;
-    }
+    .trust-band-logo img{ width:100%; height:auto; }
 
     .trust-band-items{
-        flex-direction:column;      /* the three stack */
+        flex:1;
+        flex-direction:column;
         align-items:flex-start;
-        gap:12px;
+        justify-content:center;
+        gap:14px;
         min-width:0;
     }
+
     .trust-band .trust-item{
         flex:none;
         flex-direction:row;
         align-items:center;
-        text-align:left;
         gap:16px;
         padding:0;
         border:none;
         width:100%;
     }
 
-    .trust-band .trust-item svg{
-        width:34px;
-        height:34px;
-        flex:0 0 34px;
-        display:block;
-    }
+    .trust-band .trust-icon{ flex:0 0 40px; width:40px; height:40px; }
+    .trust-band .trust-label{ font-size:16px; }
+}
 
-    .trust-band .trust-item span{
-        font-size:13px;
-        line-height:1.25;
-        white-space:nowrap;
-        max-width:none;
-    }
+@media (max-width:640px){
+    .trust-band{ padding:0 5% 16px; }
+    .trust-band-inner{ gap:24px; padding-top:18px; }
+    .trust-band-logo{ width:110px; }
+    .trust-band-items{ gap:12px; }
+    .trust-band .trust-item{ gap:14px; }
+    .trust-band .trust-icon{ flex:0 0 34px; width:34px; height:34px; }
+    .trust-band .trust-label{ font-size:13px; }
 }
 
 @media (max-width:480px){
     .trust-band{ padding:0 6% 14px; }
     .trust-band-inner{ gap:18px; padding-top:16px; }
-
     .trust-band-logo{ width:88px; }
-
     .trust-band-items{ gap:10px; }
-
-    .trust-band .trust-item{
-        gap:0;
-        padding:0;
-        margin-left:0;
-        align-items:center;
-    }
-
-    .trust-band .trust-item svg{
-        width:24px;
-        height:24px;
-        flex:0 0 38px;
-        margin-right:12px;
-    }
-    .trust-band .trust-item span{ font-size:12px; white-space:nowrap;}
+    .trust-band .trust-item{ gap:12px; }
+    .trust-band .trust-icon{ flex:0 0 28px; width:28px; height:28px; }
+    .trust-band .trust-label{ font-size:12px; }
 }
+
 /* ==========================================================
    D&B BADGE — hero
 ========================================================== */
