@@ -1542,7 +1542,15 @@ FOOTER
     opacity:.55;
     transition:filter .4s var(--ease), opacity .4s var(--ease);
 }
+.client-logo--wide{
+    padding:6px;
+}
 
+.client-logo--wide img{
+    max-height:none;
+    width:100%;
+    max-width:100%;
+}
 .why-item.active .client-logo img{
     filter:grayscale(0);
     opacity:1;
@@ -3843,7 +3851,129 @@ CORE VALUES  (roadmap-style plate)
 @media (max-width:480px){
     .mgmt{ padding:30px 6% 70px; }
 }
+/* ==========================================================
+   TEAM — management & operations (company page)
+========================================================== */
 
+.team{
+    background:var(--light);
+    padding:20px 8% 80px;
+}
+
+.team--ops{ padding-top:0; }
+
+.team-head{
+    max-width:760px;
+    margin-bottom:44px;
+}
+
+.team-head h2{
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-top:14px;
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:26px;
+    align-items:stretch;
+}
+
+.team-card{
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.07);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+
+.team-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
+}
+
+.team-photo{
+    aspect-ratio:1 / 1;
+    background:#EDEAE4;
+    flex:0 0 auto;
+    overflow:hidden;
+}
+
+.team-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+    transition:transform .8s var(--ease);
+}
+
+.team-card:hover .team-photo img{ transform:scale(1.04); }
+
+.team-copy{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:24px 22px 26px;
+    border-top:3px solid transparent;
+    background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(90deg, var(--orange), var(--red));
+    background-origin:border-box;
+    background-clip:padding-box, border-box;
+}
+
+.team-copy h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.1rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:8px;
+}
+
+.team-role{
+    display:inline-block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:40px;
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    margin-bottom:14px;
+}
+
+.team-copy p{
+    font-size:.92rem;
+    line-height:1.6;
+    color:#5a534e;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:1100px){
+    .team-grid{ grid-template-columns:repeat(3, 1fr); gap:22px; }
+}
+
+@media (max-width:860px){
+    .team-grid{ grid-template-columns:repeat(2, 1fr); }
+    .team-head h2{ font-size:1.7rem; }
+}
+
+@media (max-width:520px){
+    .team{ padding:20px 6% 60px; }
+    .team-grid{ grid-template-columns:1fr; gap:20px; max-width:420px; }
+}
 /* ==========================================================
 MISSION
 ========================================================== */
@@ -4468,7 +4598,7 @@ AWARDS
 
 .prod-gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
     gap:16px;
     margin-top:32px;
 }
@@ -4477,11 +4607,12 @@ AWARDS
     width:100%;
     aspect-ratio:1 / 1;
     object-fit:contain;
-    padding:14px;
+    padding:0px;
     background:#fff;
     border:1px solid rgba(0,0,0,.07);
     border-radius:12px;
     display:block;
+
 }
 
 /* ---------- responsive ---------- */
@@ -4561,13 +4692,16 @@ AWARDS
 }
 
 .oem-title{
-    display:block;
+    display:inline-block;
     font-family:"General", sans-serif;
     font-weight:700;
-    font-size:12px;
+    font-size:11px;
     letter-spacing:.14em;
     text-transform:uppercase;
-    color:var(--middle);
+    color:#fff;
+    padding:6px 16px;
+    border-radius:40px;
+    background:linear-gradient(100deg, var(--orange), var(--red));
     margin-bottom:26px;
 }
 
@@ -4579,10 +4713,13 @@ AWARDS
 }
 
 .oem-logo{
-    height:52px;
+    height:60px;
     display:flex;
     align-items:center;
     justify-content:center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .oem-logo img{
@@ -4595,6 +4732,64 @@ AWARDS
     .oem-panel{ padding:28px 24px; }
     .oem-logos{ gap:26px; }
     .oem-logo{ height:42px; }
+}
+/* ---------- OEM panel split into two groups ---------- */
+
+.oem-panel--split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+    align-items:start;
+}
+
+.oem-panel--split .oem-group{
+    margin-top:0;
+}
+
+.oem-panel--split .oem-cat{
+    display:inline-block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#fff;
+    padding:6px 16px;
+    border-radius:40px;
+    background:linear-gradient(100deg, var(--orange), var(--red));
+    margin-bottom:22px;
+}
+
+.oem-panel--split .oem-logos{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:26px 30px;
+}
+
+.oem-panel--split .oem-logo{
+    height:60px;
+}
+
+/* a divider between the two columns */
+.oem-panel--split .oem-group:first-child{
+    padding-right:44px;
+    border-right:1px solid rgba(0,0,0,.1);
+}
+
+@media (max-width:900px){
+    .oem-panel--split{ grid-template-columns:1fr; gap:34px; }
+    .oem-panel--split .oem-group:first-child{
+        padding-right:0;
+        padding-bottom:30px;
+        border-right:none;
+        border-bottom:1px solid rgba(0,0,0,.1);
+    }
+}
+
+@media (max-width:560px){
+    .oem-panel--split .oem-logos{ gap:20px 24px; }
+    .oem-panel--split .oem-logo{ height:34px; }
 }
 
 /* ==========================================================
@@ -6149,7 +6344,7 @@ body.nav-locked{ overflow:hidden; }
     display:grid;
     grid-template-columns:1.05fr .95fr;
     gap:70px;
-    align-items:center;
+    align-items:flex-start;
     margin-bottom:90px;
 }
 
@@ -6216,6 +6411,7 @@ body.nav-locked{ overflow:hidden; }
     overflow:hidden;
     aspect-ratio:4 / 3;
     background:#EDEAE4;
+    margin-top: 150px;
 }
 
 .cr-prog-visual img{
@@ -7129,4 +7325,159 @@ body.modal-open{ overflow:hidden; }
         width:13px;
         height:13px;
     }
+}
+/* ==========================================================
+   CAREERS — recruitment tracker by department
+========================================================== */
+
+.cr-roles{
+    background:var(--light);
+    padding:70px 8% 60px;
+}
+
+.cr-roles-head{
+    max-width:720px;
+    margin-bottom:48px;
+}
+
+.cr-roles-head h2{
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:2.2rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-top:16px;
+}
+
+.cr-roles-lead{
+    margin-top:16px;
+    font-size:1.05rem;
+    line-height:1.6;
+    color:#6b6b6b;
+}
+
+.cr-roles-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px;
+    align-items:start;
+}
+
+.cr-dept{ min-width:0; }
+
+.cr-dept-tag{
+    display:inline-block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#fff;
+    padding:7px 18px;
+    border-radius:40px;
+    margin-bottom:22px;
+    background:linear-gradient(100deg, var(--orange), var(--red));
+}
+
+/* ---------- the scrolling column ---------- */
+
+/* ---------- the column ---------- */
+
+.cr-dept-scroll{
+    position:relative;
+    padding-left:30px;
+}
+
+.cr-dept-scroll::before{
+    content:"";
+    position:absolute;
+    top:6px;
+    bottom:6px;                        /* was 0 — meets the last node */
+    left:7px;
+    width:2px;
+    background:linear-gradient(180deg, var(--orange), var(--red));
+    transform:scaleY(var(--spine, 0));
+    transform-origin:top;
+}
+
+/* ---------- a role ---------- */
+
+.cr-role{
+    position:relative;
+    padding:0 0 30px;
+}
+
+.cr-role:last-child{ padding-bottom:6px; }
+
+.cr-role-node{
+    position:absolute;
+    left:-30px;
+    top:6px;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--orange), var(--red));
+    box-shadow:0 0 0 5px var(--light);
+    z-index:1;
+}
+
+.cr-role h3{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.1rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:4px;
+}
+
+.cr-role-title{
+    display:block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--middle);
+    margin-bottom:12px;
+}
+
+.cr-role-meta{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin:0;
+    padding:0;
+}
+
+.cr-role-meta li{
+    font-size:.9rem;
+    line-height:1.5;
+    color:#373737;
+}
+
+.cr-role-meta strong{
+    display:block;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#9a938c;
+    margin-bottom:1px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:1100px){
+    .cr-roles-grid{ grid-template-columns:1fr 1fr; gap:36px 28px; }
+}
+
+@media (max-width:640px){
+    .cr-roles{ padding:50px 6% 40px; }
+    .cr-roles-head h2{ font-size:1.7rem; }
+    .cr-roles-grid{ grid-template-columns:1fr; gap:34px; }
+    .cr-dept-scroll{ padding-left:26px; }
+    .cr-role-node{ left:-26px; }
+    .cr-role h3{ font-size:1rem; }
 }

@@ -1406,3 +1406,30 @@ gsap.from(".md-copy > p", {
         if (e.key === "Escape") closeAll();
     });
 })();
+/* ==========================================================
+   CAREERS — department spines draw on page scroll
+========================================================== */
+
+if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.registerProperty?.({
+        name:"--spine", syntax:"<number>", initialValue:"1", inherits:false
+    });
+
+    gsap.utils.toArray(".cr-dept-scroll").forEach(col => {
+        gsap.fromTo(col,
+            { "--spine": 0 },
+            {
+                "--spine": 1,
+                ease:"none",
+                scrollTrigger:{
+                    trigger: col,
+                    start: "top 78%",
+                    end: "bottom 70%",
+                    scrub: true
+                }
+            }
+        );
+    });
+}
