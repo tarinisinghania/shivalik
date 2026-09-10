@@ -3998,10 +3998,22 @@ CORE VALUES  (roadmap-style plate)
     .team-grid{ grid-template-columns:repeat(2, 1fr); }
     .team-head h2{ font-size:1.7rem; }
 }
-
 @media (max-width:520px){
     .team{ padding:20px 6% 60px; }
-    .team-grid{ grid-template-columns:1fr; gap:20px; max-width:420px; }
+    .team-grid{ grid-template-columns:repeat(2, 1fr); gap:14px; }
+
+    .team-copy{ padding:16px 14px 18px; }
+    .team-copy h3{ font-size:.92rem; margin-bottom:6px; }
+    .team-role{ font-size:8.5px; padding:4px 9px; margin-bottom:10px; }
+    .team-copy p{ font-size:.8rem; line-height:1.5; }
+}
+@media (max-width:520px){
+    .team-copy p{
+        display:-webkit-box;
+        -webkit-line-clamp:6;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+    }
 }
 /* ==========================================================
 MISSION
