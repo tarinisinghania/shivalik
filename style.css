@@ -7059,19 +7059,18 @@ body.modal-open{ overflow:hidden; }
 
 /* the fixed box — this is what keeps every label aligned */
 .trust-band .trust-icon{
-    flex:0 0 56px;
-    width:56px;
-    height:56px;
+    flex:0 0 44px;
+    width:44px;
+    height:44px;
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;   /* was center — left-align inside the box */
 }
 
 .trust-band .trust-icon svg{
-    max-width:100%;
+    width:100%;                   /* fill the box width */
+    height:auto;                  /* let height follow */
     max-height:100%;
-    width:auto;
-    height:auto;
     fill:var(--middle);
     display:block;
 }
@@ -7133,7 +7132,12 @@ body.modal-open{ overflow:hidden; }
         width:100%;
     }
 
-    .trust-band .trust-icon{ flex:0 0 40px; width:40px; height:40px; }
+    .trust-band .trust-icon{
+        flex:0 0 40px;
+        width:40px;
+        height:40px;
+        justify-content:flex-start;
+    }
     .trust-band .trust-label{ font-size:16px; }
 }
 
