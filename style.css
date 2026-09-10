@@ -1945,7 +1945,7 @@ INTRO
 .intro-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:70px;
+    gap:150px;
     align-items:start;
 }
 .intro-copy h1{
@@ -2146,7 +2146,36 @@ p.illuminate{
     }
     .story-meta p{ max-width:100%; }
 }
+/* ==========================================================
+   INTRO VIDEO — poster + click to load
+========================================================== */
 
+.intro-video{ margin-top:10px; }
+
+.intro-video-el{
+    width:90%;
+    aspect-ratio:16 / 9;
+    border-radius:16px;
+    display:block;
+    background:#2a2320;
+    object-fit:cover;
+    box-shadow:0 14px 40px rgba(0,0,0,.10);
+}
+
+.intro-video-cap{
+    display:block;
+    margin-top:16px;
+    font-family:"General", sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--middle);
+}
+
+@media (max-width:900px){
+    .intro-video{ margin-top:0; }
+}
 /* ==========================================================
    CONTACT PAGE
    uses site tokens from style.css (--light, --dark, --ink,
