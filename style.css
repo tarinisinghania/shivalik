@@ -10284,22 +10284,53 @@ a.inv-val:hover{ color:var(--middle); }
 
 
 /* ==========================================================
-   TRANSFORMATION — chevrons sit above the line
+   TRANSFORMATION — chevrons terminate the line
 ========================================================== */
 
 .panel-rule{
-    overflow:visible;            /* was hidden — would clip the raised chevrons */
+    overflow:hidden;
 }
 
 .panel-rule-arrow{
-    top:23.3%;                   /* the line's flat run */
-    transform:translateY(calc(-100% - 10px));
+    top:23.3%;                          /* the line's flat run */
+    right:0;
+    transform:translateY(-50%);         /* centred on the line again */
+    z-index:2;
+
+    /* page-coloured block that masks the line from the chevrons
+       to the right edge, so the line visibly ends at them */
+    box-sizing:content-box;
+    padding:6px 5% 6px 14px;
+    background:var(--light);
 }
 
 @media (max-width:900px){
-    .panel-rule-arrow{ transform:translateY(calc(-100% - 7px)); }
+    .panel-rule-arrow{ padding:5px 6% 5px 10px; }
 }
 
 @media (max-width:640px){
-    .panel-rule-arrow{ transform:translateY(calc(-100% - 5px)); }
+    .panel-rule-arrow{ padding:4px 6% 4px 8px; }
+}
+/* ==========================================================
+   TRANSFORMATION LINE — iPad
+========================================================== */
+
+@media (min-width:769px) and (max-width:1366px){
+
+    .trans .panel-rule{
+        height:52px;
+        margin-top:80px;
+        overflow:hidden;
+    }
+
+    .trans .panel-rule-arrow{
+        top:23.3%;
+        right:0;
+        width:44px;
+        transform:translateY(-50%);
+        z-index:2;
+        box-sizing:content-box;
+        padding:5px 5% 5px 12px;
+        background:var(--light);
+    }
 }
