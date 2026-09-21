@@ -497,23 +497,68 @@ if (window.gsap){
     const prevBtn = document.getElementById("roadPrev");
     const nextBtn = document.getElementById("roadNext");
 
-    /* background image crossfade */
-    const bgImgs = Array.from(document.querySelectorAll(".road-bg-img"));
+    /* ==========================================================
+   ROADMAP BACKGROUND — timed slideshow (independent of scroll)
+========================================================== */
 
-    /* stacked crossfade: image i fades in over image i-1.
-    never leaves a gap, so the plate is never see-through. */
-    function paintBg(p){
-        if (bgImgs.length < 2) return;
-        const pos = p * (bgImgs.length - 1);
-        for (let i = 1; i < bgImgs.length; i++){
-            const o = Math.min(Math.max(pos - (i - 1), 0), 1);
-            bgImgs[i].style.opacity = o;
-        }
-    }
-    paintBg(0);
+(() => {
+  const plate = document.querySelector(".roadmap-plate");
+  const imgs  = Array.from(document.querySelectorAll(".road-bg-img"));
+  if (!plate || imgs.length < 2) return;
 
-    /* decode up front so the first fade isn't a stutter */
-    bgImgs.forEach(img => img.decode?.().catch(() => {}));
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches){
+    imgs[0].classList.add("is-active");
+    return;
+  }
+
+  const HOLD = 3000;
+  let i = 0, timer = null, visible = false;
+
+  const advance = () => {
+    const next = (i + 1) % imgs.length;
+    const cur  = imgs[i];
+
+    cur.classList.add("is-leaving");
+    cur.classList.remove("is-active");
+    imgs[next].classList.add("is-active");
+
+    setTimeout(() => cur.classList.remove("is-leaving"), 1300);
+    i = next;
+  };
+
+  const start = () => { if (!timer) timer = setInterval(advance, HOLD); };
+  const stop  = () => { clearInterval(timer); timer = null; };
+
+  imgs[0].classList.add("is-active");
+  imgs.forEach(img => img.decode?.().catch(() => {}));
+
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+    visible ? start() : stop();
+  }, { threshold: 0.1 }).observe(plate);
+
+  document.addEventListener("visibilitychange", () => {
+    document.hidden ? stop() : (visible && start());
+  });
+})();
+
+    // /* background image crossfade */
+    // const bgImgs = Array.from(document.querySelectorAll(".road-bg-img"));
+
+    // /* stacked crossfade: image i fades in over image i-1.
+    // never leaves a gap, so the plate is never see-through. */
+    // function paintBg(p){
+    //     if (bgImgs.length < 2) return;
+    //     const pos = p * (bgImgs.length - 1);
+    //     for (let i = 1; i < bgImgs.length; i++){
+    //         const o = Math.min(Math.max(pos - (i - 1), 0), 1);
+    //         bgImgs[i].style.opacity = o;
+    //     }
+    // }
+    // paintBg(0);
+
+    // /* decode up front so the first fade isn't a stutter */
+    // bgImgs.forEach(img => img.decode?.().catch(() => {}));
 
     if (track && viewport && roadmap){
 
@@ -571,7 +616,7 @@ if (window.gsap){
                     onUpdate: self => {
                         st = self;
                         if (progress) progress.style.width = (self.progress * 100) + "%";
-                        paintBg(self.progress);                    // ← continuous, every frame
+                        // paintBg(self.progress);                    // ← continuous, every frame
                         const i = nearestIndex(self.progress);
                         if (i !== index){
                             index = i;

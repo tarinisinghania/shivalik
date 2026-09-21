@@ -6918,7 +6918,7 @@ body.modal-open{ overflow:hidden; }
     .roadmap-plate{
         background-image:
             linear-gradient(135deg, rgba(16,12,9,.55) 0%, rgba(16,12,9,.35) 100%),
-            url("roadmap/bg-02.jpg");
+            url("roadmap/bg-07.jpg");
         background-size:cover;
         background-position:center;
     }
@@ -8844,4 +8844,50 @@ body.modal-open{ overflow:hidden; }
 @media (prefers-reduced-motion:reduce){
     .cr-gallery{ overflow-x:auto; }
     .cr-gallery-track{ opacity:1; }
+}
+/* ==========================================================
+   ROADMAP — background as a timed slideshow
+========================================================== */
+
+.road-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    contain:strict;
+}
+
+.road-bg-img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transform:none;
+    transition:opacity 1.2s linear;
+    will-change:auto;
+}
+
+.road-bg-img.is-active{
+    opacity:1;
+    will-change:opacity;
+}
+
+.road-bg-img.is-leaving{
+    will-change:opacity;
+}
+
+/* solid cards — no backdrop-filter over a changing background */
+.road-card{
+    background:#141414;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+}
+
+.roadmap-plate{
+    contain:layout paint;
+}
+
+@media (prefers-reduced-motion:reduce){
+    .road-bg-img{ transition:none; }
 }
