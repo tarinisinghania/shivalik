@@ -1730,17 +1730,6 @@ PRODUCTS
                transform .8s var(--ease);
 }
 
-/* .pc-media .pc-img{ opacity:1; }
-.pc-media .pc-alt{ opacity:0; }
-
-.product-card:hover .pc-img{ opacity:0; }
-.product-card:hover .pc-alt{ opacity:1; } */
-
-/* both scale together so the swap feels like one move */
-/* .product-card:hover .pc-media img{
-    transform:scale(1.07);
-} */
-
 /* ---------- Body ---------- */
 
 .pc-body{
@@ -2009,25 +1998,6 @@ p.illuminate{
     -webkit-text-fill-color:transparent;   /* stronger than `color` */
     color:transparent;
     background-size:100% 100%;
-}
-
-/* starting state — dim, flat, slightly down */
-.product-card{
-    --lit: 0;    /* 0 = dormant, 1 = fully lit */
-}
-
-.product-card .pc-media img{
-    filter:saturate(calc(0.15 + 0.85 * var(--lit)))
-           brightness(calc(0.7 + 0.3 * var(--lit)));
-}
-
-.product-card .pc-body h3,
-.product-card .pc-body p{
-    color:color-mix(in srgb, #111 calc(var(--lit) * 100%), rgba(17,17,17,0.15));
-}
-
-.product-card .pc-body p{
-    color:color-mix(in srgb, #6b6b6b calc(var(--lit) * 100%), rgba(107,107,107,0.2));
 }
 /* ==========================================================
    OUR STORY — vertical timeline (company page)
@@ -5562,7 +5532,7 @@ body.nav-locked{ overflow:hidden; }
 
 .trans-panel{
     animation:none;              /* they're all visible now */
-    padding-top:80px;
+    padding-top:30px;
     scroll-margin-top:180px;     /* stops the fixed navbar + tabs covering the heading */
 }
 
@@ -7523,4 +7493,1355 @@ body.modal-open{ overflow:hidden; }
     .cr-dept-scroll{ padding-left:26px; }
     .cr-role-node{ left:-26px; }
     .cr-role h3{ font-size:1rem; }
+}
+/* ==========================================================
+   WHY — two-column sticky layout (overrides earlier rules)
+   Left rail stays narrow; everything it saves goes to the cards.
+========================================================== */
+
+.why{
+    padding:60px 0 40px;
+}
+
+/* the grid: narrow rail + everything else */
+.why-grid{
+    display:grid;
+    grid-template-columns:clamp(210px, 21vw, 290px) 1fr;
+    gap:0 52px;
+    align-items:start;
+}
+
+/* ---------- left rail ---------- */
+
+.why-sticky{
+    position:sticky;
+    top:120px;                  /* clears the fixed navbar */
+    z-index:20;
+
+    /* undo the full-width horizontal version */
+    display:block;
+    width:auto;
+    background:none;
+    padding:0;
+    align-self:start;
+}
+
+.why-sticky .label{
+    margin-bottom:18px;
+}
+
+.why h2{
+    font-size:clamp(1.55rem, 2vw, 1.95rem);
+    line-height:1.18;
+    letter-spacing:-0.01em;
+    max-width:none;
+    margin:0;
+    padding:0;                  /* kills the old 20px */
+}
+
+.why-lead{
+    max-width:none;
+    margin:18px 0 0;
+    padding:0;                  /* kills the old 20px bottom */
+    font-size:1rem;
+    line-height:1.55;
+    color:var(--grey);
+}
+
+.why-progress{
+    margin-top:44px;
+    padding-bottom:0;           /* kills the old 20px */
+    gap:12px;
+}
+
+.why-progress .count{
+    font-size:46px;
+}
+
+.why-progress-bar{
+    margin-top:12px;
+    width:100%;
+    max-width:none;             /* fills the rail instead of stopping at 280px */
+}
+
+/* ---------- right column: cards ---------- */
+
+.why-list{
+    width:100%;
+    min-width:0;                /* lets inner grids shrink instead of overflowing */
+    gap:20px;
+}
+
+.why-item{
+    padding:26px 32px;          /* was 28px 55px — 46px back to the content */
+    gap:18px;
+    min-width:0;
+}
+
+.why-item .why-body{
+    flex:1;
+    min-width:0;
+}
+
+/* ---------- inner blocks: take the reclaimed width ---------- */
+
+.cert-grid{
+    grid-template-columns:repeat(3, 1fr);
+    max-width:none;             /* was capped at 560px */
+    gap:22px 26px;
+}
+
+.feature-list{
+    max-width:none;             /* was capped at 480px */
+}
+
+.sustain-list{
+    gap:26px;
+}
+
+.client-logos{
+    grid-template-columns:repeat(7, 1fr);
+    gap:14px;
+}
+
+.tech-trio-mini{
+    gap:16px;
+}
+
+/* ---------- narrower desktop: shrink the rail first ---------- */
+
+@media (max-width:1280px){
+    .why-grid{
+        grid-template-columns:clamp(190px, 19vw, 240px) 1fr;
+        gap:0 40px;
+    }
+    .cert-grid{ grid-template-columns:repeat(2, 1fr); }
+    .client-logos{ grid-template-columns:repeat(5, 1fr); }
+}
+
+@media (max-width:1100px){
+    .why-item{ padding:24px 26px; }
+    .tech-trio-mini{ grid-template-columns:1fr 1fr; }
+}
+
+/* ---------- tablet & below: stack, rail stops sticking ---------- */
+
+@media (max-width:980px){
+    .why{ padding:50px 0 30px; }
+
+    .why-grid{
+        grid-template-columns:1fr;
+        gap:34px;
+    }
+
+    .why-sticky{
+        position:static;
+        top:auto;
+    }
+
+    .why h2{ font-size:1.6rem; }
+    .why-lead{ max-width:60ch; }
+
+    .why-progress{ margin-top:28px; }
+    .why-progress-bar{ max-width:280px; }
+
+    .why-item{ padding:24px 24px; }
+    .client-logos{ grid-template-columns:repeat(4, 1fr); }
+}
+
+@media (max-width:768px){
+    .why-item{ padding:22px 20px; }
+    .cert-grid{ grid-template-columns:1fr; }
+    .client-logos{ grid-template-columns:repeat(3, 1fr); }
+    .tech-trio-mini{ grid-template-columns:1fr; }
+    .sustain-list{ grid-template-columns:1fr; gap:22px; }
+}
+/* ==========================================================
+   WHY — tighter rail, wider cards (overrides the block above)
+========================================================== */
+
+.why-grid{
+    grid-template-columns:clamp(180px, 16vw, 230px) 1fr;
+    gap:0 36px;                 /* was 52px */
+}
+
+.why-sticky .label{
+    margin-bottom:14px;
+}
+
+.why h2{
+    font-size:clamp(1.4rem, 1.7vw, 1.7rem);
+    line-height:1.2;
+}
+
+.why-lead{
+    margin-top:14px;
+    font-size:.95rem;
+    line-height:1.5;
+}
+
+.why-progress{
+    margin-top:32px;
+    gap:10px;
+}
+
+.why-progress .count{
+    font-size:38px;
+}
+
+.why-progress-bar{
+    margin-top:10px;
+}
+
+/* ---------- cards ---------- */
+
+.why-list{
+    gap:16px;                   /* was 20px */
+}
+
+.why-item{
+    padding:24px 26px;          /* was 26px 32px */
+    gap:16px;
+}
+
+/* ---------- inner blocks: tighter gutters, more columns ---------- */
+
+.cert-grid{
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px 20px;
+}
+
+.sustain-list{
+    gap:22px;
+    margin-top:24px;
+}
+
+.sustain-icon{
+    margin-bottom:12px;         /* was 20px */
+}
+
+.client-logos{
+    grid-template-columns:repeat(8, 1fr);
+    gap:10px;
+}
+
+.client-logo{
+    padding:12px 12px;
+    min-height:78px;
+}
+
+.tech-trio-mini{
+    gap:12px;
+    margin-top:22px;
+}
+
+.tech-mini{
+    padding:18px 16px;
+    gap:12px;
+}
+
+.feature-list{
+    gap:22px;
+    margin-top:22px;
+}
+
+.oem-group + .oem-group{
+    margin-top:28px;            /* was 36px */
+}
+
+/* ---------- step-downs ---------- */
+
+@media (max-width:1280px){
+    .why-grid{
+        grid-template-columns:clamp(165px, 15vw, 200px) 1fr;
+        gap:0 26px;
+    }
+    .cert-grid{ grid-template-columns:repeat(3, 1fr); }
+    .client-logos{ grid-template-columns:repeat(6, 1fr); }
+}
+
+@media (max-width:1100px){
+    .why-item{ padding:22px 22px; }
+    .cert-grid{ grid-template-columns:repeat(2, 1fr); }
+    .client-logos{ grid-template-columns:repeat(5, 1fr); }
+    .tech-trio-mini{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:980px){
+    .why-grid{ grid-template-columns:1fr; gap:26px; }
+    .why h2{ font-size:1.5rem; }
+    .why-progress .count{ font-size:42px; }
+}
+/* ==========================================================
+   ABOUT — keep text + lockup side by side on iPad
+   (overrides the 1250px / 1024px stacking rules)
+========================================================== */
+
+@media (min-width:861px){
+
+    .about{
+        flex-direction:row;
+        align-items:center;
+        gap:clamp(28px, 4vw, 60px);
+        width:100%;
+    }
+
+    /* the text column becomes fluid instead of a hard 850px */
+    .about-inner{
+        width:auto;
+        flex:1 1 62%;
+        min-width:0;              /* lets it shrink inside the flex row */
+    }
+
+    .about-visual{
+        flex:0 1 38%;
+        min-width:0;
+        align-items:center;
+        gap:clamp(12px, 1.6vw, 20px);
+    }
+
+    .about-visual img{
+        max-width:100%;           /* was a hard 520px / 440px cap */
+    }
+}
+
+/* ---------- iPad landscape ---------- */
+
+@media (min-width:861px) and (max-width:1250px){
+
+    .about{
+        padding-bottom:70px;
+    }
+
+    .about-copy h1{
+        font-size:clamp(1.35rem, 2.1vw, 1.75rem);
+        line-height:1.28;
+        padding:16px 0 0;         /* kills the old 20px all-round */
+    }
+
+    .about-copy p{
+        font-size:clamp(.95rem, 1.25vw, 1.08rem);
+        line-height:1.55;
+    }
+
+    .about-inner{ flex:1 1 60%; }
+    .about-visual{ flex:0 1 40%; }
+}
+
+/* ---------- iPad portrait ---------- */
+
+@media (min-width:861px) and (max-width:1024px){
+
+    .about{ gap:26px; }
+
+    .about-inner{ flex:1 1 58%; }
+    .about-visual{ flex:0 1 42%; }
+
+    .about-copy h1{ font-size:1.3rem; }
+    .about-copy p{ font-size:.94rem; }
+}
+
+/* ---------- below 861px: now it stacks ---------- */
+
+@media (max-width:860px){
+    .about{
+        flex-direction:column;
+        align-items:center;
+        gap:36px;
+    }
+    .about-inner{ width:100%; }
+    .about-visual{ width:100%; }
+    .about-visual img{ max-width:380px; }
+}
+/* ==========================================================
+   PANEL RULE — full-bleed section divider
+========================================================== */
+
+.panel-rule{
+    position:relative;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    margin-top:100px;
+    margin-bottom:0px;
+    height:60px;
+    pointer-events:none;
+    overflow:hidden;              /* nothing escapes the left edge */
+}
+
+.panel-rule-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.panel-rule-path{
+    stroke-dasharray:1;
+    stroke-dashoffset:1;
+    transition:stroke-dashoffset 1.2s var(--ease);
+}
+
+.panel-rule.is-in .panel-rule-path{
+    stroke-dashoffset:0;
+}
+
+/* chevron pinned to the line's height, not floating in a flex row.
+   the path's flat run sits at y=14 of a 60-unit box → 23.3% down. */
+.panel-rule-arrow{
+    position:absolute;
+    right:1%;
+    top:23.3%;
+    transform:translateY(-50%);
+    width:52px;
+    height:auto;
+    display:block;
+
+    opacity:0;
+    transition:opacity .5s var(--ease) .6s;
+}
+
+.panel-rule.is-in .panel-rule-arrow{
+    opacity:1;
+}
+
+.panel-rule-arrow .ch-1{ fill:#1e1714; }
+.panel-rule-arrow .ch-2{ fill:var(--orange); }
+.panel-rule-arrow .ch-3{ fill:var(--red); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1100px){
+    .panel-rule{ margin-top:80px; height:52px; }
+    .panel-rule-arrow{ width:44px; }
+}
+
+@media (max-width:900px){
+    .panel-rule{ margin-top:64px; margin-bottom:18px; height:44px; }
+    .panel-rule-arrow{ width:38px; right:6%; }
+}
+
+@media (max-width:640px){
+    .panel-rule{ margin-top:52px; height:36px; }
+    .panel-rule-arrow{ width:30px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .panel-rule-path{ stroke-dashoffset:0; transition:none; }
+    .panel-rule-arrow{ opacity:1; transition:none; }
+}
+/* ==========================================================
+   NAVBAR — links distributed across the space between
+   the logo and the CTA (iPad + desktop)
+========================================================== */
+
+@media (min-width:901px){
+
+    .navbar nav{
+        flex:1 1 auto;
+        min-width:0;
+        display:flex;
+        justify-content:space-evenly;   /* equal space around each link */
+        margin:0 clamp(18px, 2.4vw, 46px);
+    }
+
+    .navbar nav ul{
+        flex:1 1 auto;
+        display:flex;
+        justify-content:space-evenly;
+        align-items:center;
+        gap:0;                          /* the distribution replaces the gap */
+        width:100%;
+    }
+
+    .navbar nav li{
+        flex:0 1 auto;
+        text-align:center;
+    }
+
+    .navbar .logo,
+    .navbar .button{
+        flex:0 0 auto;
+    }
+}
+
+/* ---------- iPad: tighten type so every link fits the row ---------- */
+
+@media (min-width:901px) and (max-width:1366px){
+
+    .navbar nav{
+        margin:0 clamp(14px, 1.8vw, 28px);
+    }
+
+    nav a{
+        font-size:clamp(10.5px, .92vw, 12.5px);
+        letter-spacing:.06em;
+        white-space:nowrap;
+    }
+}
+
+@media (min-width:901px) and (max-width:1150px){
+
+    .logo{ width:118px; }
+
+    nav a{
+        font-size:10.5px;
+        letter-spacing:.045em;
+    }
+
+    .button{
+        padding:7px 18px;
+        font-size:12.5px;
+        white-space:nowrap;
+    }
+}
+/* ==========================================================
+   CERT GRID — six certifications + two commitments
+========================================================== */
+
+.cert-grid{
+    grid-template-columns:repeat(3, 1fr);
+}
+
+/* six items, three across = two full rows */
+.cert-item:nth-child(3n){ border-right:none; }
+.cert-item:nth-last-child(-n+3){ border-bottom:none; }
+
+/* ---------- in-process state ---------- */
+
+.cert-item--pending .cert-status{
+    color:var(--grey);
+    font-weight:500;
+}
+
+.cert-item--pending img{
+    opacity:.35;
+}
+
+.why-item.active .cert-item--pending img{
+    opacity:.85;
+}
+
+/* ---------- commitments row ---------- */
+
+.cert-commit{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0;
+    margin-top:0;
+    padding-top:6px;
+    border-top:1px solid rgba(0,0,0,.09);
+    max-width:none;
+}
+
+/* centred under the grid above, matching the reference */
+.cert-commit .cert-item{
+    border-bottom:none;
+    padding-left:26px;
+}
+
+.cert-commit .cert-item:first-child{
+    justify-content:flex-end;
+    padding-right:40px;
+}
+
+.cert-commit .cert-item:last-child{
+    border-right:none;
+    padding-left:40px;
+}
+
+/* ---------- drawn badge (no image file needed) ---------- */
+
+.cert-badge{
+    flex:0 0 auto;
+    width:82px;
+    height:82px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:5px solid var(--red);
+    background:#fff;
+    color:var(--red);
+    transition:filter .45s var(--ease), opacity .45s var(--ease);
+    filter:grayscale(1);
+    opacity:.45;
+}
+
+.why-item.active .cert-badge{
+    filter:grayscale(0);
+    opacity:1;
+}
+
+.cert-badge svg{
+    width:46px;
+    height:46px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1280px){
+    .cert-badge{ width:72px; height:72px; border-width:4px; }
+    .cert-badge svg{ width:40px; height:40px; }
+    .cert-commit .cert-item:first-child{ padding-right:28px; }
+    .cert-commit .cert-item:last-child{ padding-left:28px; }
+}
+
+@media (max-width:1100px){
+    .cert-grid{ grid-template-columns:repeat(2, 1fr); }
+
+    .cert-item:nth-child(3n){ border-right:1px solid rgba(0,0,0,.09); }
+    .cert-item:nth-child(2n){ border-right:none; }
+    .cert-item:nth-child(3n+1){ padding-left:26px; }
+    .cert-item:nth-child(2n+1){ padding-left:0; }
+
+    .cert-item:nth-last-child(-n+3){ border-bottom:1px solid rgba(0,0,0,.09); }
+    .cert-item:nth-last-child(-n+2){ border-bottom:none; }
+}
+
+@media (max-width:768px){
+    .cert-grid,
+    .cert-commit{ grid-template-columns:1fr; }
+
+    .cert-item{
+        padding:20px 0;
+        border-right:none;
+        border-bottom:1px solid rgba(0,0,0,.09);
+    }
+    .cert-item:nth-child(3n+1),
+    .cert-item:nth-child(2n+1){ padding-left:0; }
+    .cert-item:nth-last-child(-n+3),
+    .cert-item:nth-last-child(-n+2){ border-bottom:1px solid rgba(0,0,0,.09); }
+
+    .cert-commit{ padding-top:0; }
+    .cert-commit .cert-item{ padding:20px 0; }
+    .cert-commit .cert-item:first-child{ justify-content:flex-start; padding-right:0; }
+    .cert-commit .cert-item:last-child{ padding-left:0; border-bottom:none; }
+
+    .cert-badge{ width:64px; height:64px; border-width:4px; }
+    .cert-badge svg{ width:34px; height:34px; }
+}
+/* ==========================================================
+   CERT GRID — corrected (scoped to beat earlier rules)
+========================================================== */
+
+.why-item .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+    margin-top:26px;
+    max-width:none;
+}
+
+.why-item .cert-item{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    padding:22px 24px;
+    min-width:0;
+    border-right:1px solid rgba(0,0,0,.09);
+    border-bottom:1px solid rgba(0,0,0,.09);
+}
+
+.why-item .cert-item:nth-child(3n){ border-right:none; }
+.why-item .cert-item:nth-last-child(-n+3){ border-bottom:none; }
+.why-item .cert-item:nth-child(3n+1){ padding-left:0; }
+
+/* ---------- badges: one size for every kind ---------- */
+
+.why-item .cert-item img,
+.why-item .cert-badge{
+    flex:0 0 76px;
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    object-fit:contain;
+    background:#fff;
+    filter:grayscale(1);
+    opacity:.45;
+    transition:filter .45s var(--ease), opacity .45s var(--ease);
+}
+
+.why-item.active .cert-item img,
+.why-item.active .cert-badge{
+    filter:grayscale(0);
+    opacity:1;
+}
+
+.why-item .cert-badge{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:4px solid var(--red);
+    color:var(--red);
+    box-sizing:border-box;
+}
+
+.why-item .cert-badge svg{
+    width:40px;
+    height:40px;
+}
+
+/* ---------- text block ---------- */
+
+.why-item .cert-text{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    min-width:0;
+    padding-top:2px;
+}
+
+.why-item .cert-code{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    line-height:1.2;
+    color:var(--red);
+    margin:0;
+}
+
+.why-item .cert-status{
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    line-height:1.25;
+    color:var(--ink);
+    margin:1px 0 0;
+}
+
+.why-item .cert-rule{
+    display:block;
+    flex:0 0 auto;
+    width:38px;
+    height:2px;
+    margin:11px 0;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .5s var(--ease) .15s;
+}
+
+.why-item.active .cert-rule{ transform:scaleX(1); }
+
+.why-item .cert-sub{
+    font-size:.94rem;
+    line-height:1.45;
+    color:var(--grey);
+    margin:0;
+}
+
+.why-item .cert-item--pending .cert-status{
+    color:var(--grey);
+    font-weight:500;
+}
+
+/* ---------- commitments row ---------- */
+
+.why-item .cert-commit{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0;
+    margin-top:0;
+    padding-top:0;
+    border-top:1px solid rgba(0,0,0,.09);
+}
+
+.why-item .cert-commit .cert-item{
+    border-bottom:none;
+    padding-left:24px;
+}
+
+.why-item .cert-commit .cert-item:first-child{ padding-left:0; }
+.why-item .cert-commit .cert-item:last-child{ border-right:none; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1280px){
+    .why-item .cert-item{ padding:20px 18px; gap:15px; }
+    .why-item .cert-item img,
+    .why-item .cert-badge{ flex-basis:66px; width:66px; height:66px; }
+    .why-item .cert-badge svg{ width:34px; height:34px; }
+    .why-item .cert-code,
+    .why-item .cert-status{ font-size:.98rem; }
+    .why-item .cert-sub{ font-size:.88rem; }
+}
+
+@media (max-width:1100px){
+    .why-item .cert-grid{ grid-template-columns:repeat(2, 1fr); }
+    .why-item .cert-item:nth-child(3n){ border-right:1px solid rgba(0,0,0,.09); }
+    .why-item .cert-item:nth-child(2n){ border-right:none; }
+    .why-item .cert-item:nth-child(3n+1){ padding-left:24px; }
+    .why-item .cert-item:nth-child(2n+1){ padding-left:0; }
+    .why-item .cert-item:nth-last-child(-n+3){ border-bottom:1px solid rgba(0,0,0,.09); }
+    .why-item .cert-item:nth-last-child(-n+2){ border-bottom:none; }
+}
+
+@media (max-width:768px){
+    .why-item .cert-grid,
+    .why-item .cert-commit{ grid-template-columns:1fr; }
+    .why-item .cert-item{
+        padding:18px 0;
+        border-right:none;
+        border-bottom:1px solid rgba(0,0,0,.09);
+    }
+    .why-item .cert-item:nth-child(3n+1),
+    .why-item .cert-item:nth-child(2n+1){ padding-left:0; }
+    .why-item .cert-commit .cert-item{ padding-left:0; }
+    .why-item .cert-item:last-child{ border-bottom:none; }
+    .why-item .cert-item img,
+    .why-item .cert-badge{ flex-basis:60px; width:60px; height:60px; }
+    .why-item .cert-badge svg{ width:32px; height:32px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .why-item .cert-rule{ transform:scaleX(1); transition:none; }
+}
+/* ---------- commitment badges: bare icon, no ring ---------- */
+
+.why-item .cert-badge{
+    border:none;
+    background:none;
+    border-radius:0;
+}
+
+.why-item .cert-badge svg{
+    width:60px;
+    height:60px;
+}
+
+@media (max-width:1280px){
+    .why-item .cert-badge svg{ width:52px; height:52px; }
+}
+
+@media (max-width:768px){
+    .why-item .cert-badge svg{ width:46px; height:46px; }
+}
+
+/* ==========================================================
+   SECTOR CARD — hero and body merged into one card
+========================================================== */
+
+.product-grid{
+    align-items:stretch;
+}
+
+.sector-col{
+    display:flex;
+    height:100%;
+    gap:0;
+}
+
+.sector-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    aspect-ratio:auto;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.07);
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+
+.sector-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 44px rgba(0,0,0,.12);
+}
+
+/* ---------- hero image + title ---------- */
+
+.sc-hero{
+    position:relative;
+    display:block;
+    aspect-ratio:4 / 3;
+    overflow:hidden;
+    flex:0 0 auto;
+}
+
+.sc-hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .8s var(--ease);
+}
+
+.sector-card:hover .sc-hero img{ transform:scale(1.06); }
+
+.sc-hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(16,12,9,.78) 0%, rgba(16,12,9,.12) 52%, rgba(16,12,9,0) 100%);
+}
+
+.sc-title{
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:16px;
+    z-index:1;
+    font-family:"balto", sans-serif;
+    font-weight:600;
+    font-size:1.2rem;
+    line-height:1.2;
+    color:#fff;
+}
+
+/* the brand rule that joins the two halves */
+.sc-hero::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:3px;
+    z-index:2;
+    background:linear-gradient(90deg, var(--orange), var(--red));
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .5s var(--ease);
+}
+
+.sector-card:hover .sc-hero::before{ transform:scaleX(1); }
+
+/* ---------- body ---------- */
+
+.sc-body{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    padding:0 0 18px;
+}
+
+.sc-part{
+    width:100%;
+    aspect-ratio:16 / 10;
+    object-fit:contain;
+    padding:14px;
+    display:block;
+    flex:0 0 auto;
+}
+
+/* ---------- dot bullets ---------- */
+
+.sector-card .pc-products{
+    flex:1;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    align-content:flex-start;
+    margin:0;
+    padding:0 20px;
+}
+
+.sector-card .pc-products li{
+    position:relative;
+    padding:5px 0 5px 18px;
+    font-family:"balto", sans-serif;
+    font-size:14.5px;
+    letter-spacing:.02em;
+    line-height:1.35;
+    color:var(--grey);
+    background:none;
+    border-radius:0;
+}
+
+.sector-card .pc-products li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:11px;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:linear-gradient(120deg, var(--orange), var(--red));
+    margin:0;
+}
+
+/* ---------- arrow, pinned to the bottom ---------- */
+
+.sc-arrow{
+    align-self:flex-start;
+    margin:18px 20px 0;
+    width:40px;
+    height:40px;
+    flex:0 0 auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(0,0,0,.14);
+    color:var(--middle);
+    background:#fff;
+    transition:.4s var(--ease);
+}
+
+.sc-arrow svg{ width:17px; height:17px; }
+
+.sector-card:hover .sc-arrow{
+    background:linear-gradient(120deg, var(--orange), var(--red));
+    border-color:transparent;
+    color:#fff;
+    transform:translateX(4px);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1280px){
+    .product-grid{ grid-template-columns:repeat(3, 1fr); }
+    .sc-title{ font-size:1.1rem; }
+}
+
+@media (max-width:860px){
+    .product-grid{ grid-template-columns:repeat(2, 1fr); }
+    .sc-part{ padding:12px; }
+    .sector-card .pc-products{ padding:0 16px; }
+    .sc-arrow{ margin:14px 16px 0; width:36px; height:36px; }
+}
+
+@media (max-width:560px){
+    .product-grid{ grid-template-columns:1fr; }
+    .sc-hero{ aspect-ratio:16 / 9; }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .sc-hero::before{ transform:scaleX(1); transition:none; }
+}
+/* ==========================================================
+   SECTOR CARD — corrections (must sit last in the file)
+========================================================== */
+
+/* kill the old full-card scrim — the hero has its own now */
+.sector-card::after{ display:none; }
+
+/* the old absolute title/arrow rules no longer apply here */
+.sector-card .sector-title,
+.sector-card .pc-arrow{ display:none; }
+
+/* ---------- lock the part image down ---------- */
+
+.sector-card .sc-part{
+    width:100%;
+    height:170px;               /* explicit height beats aspect-ratio fights */
+    max-height:170px;
+    object-fit:contain;
+    padding:16px;
+    margin:0;
+    display:block;
+    flex:0 0 auto;
+    background:#fff;
+}
+
+/* ---------- hero ---------- */
+
+.sector-card .sc-hero{
+    position:relative;
+    display:block;
+    width:100%;
+    height:190px;
+    flex:0 0 auto;
+    aspect-ratio:auto;
+    overflow:hidden;
+}
+
+.sector-card .sc-hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    margin:0;
+}
+
+.sector-card .sc-title{
+    display:block;
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:14px;
+    z-index:2;
+    font-size:1.12rem;
+    line-height:1.2;
+    color:#fff;
+}
+
+/* ---------- body fills the rest ---------- */
+
+.sector-card .sc-body{
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+    min-height:0;
+    padding:0 0 16px;
+}
+
+.sector-card .pc-products{
+    flex:1 1 auto;
+    min-height:0;
+    padding:4px 18px 0;
+}
+
+.sector-card .sc-arrow{
+    margin:14px 18px 0;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1280px){
+    .sector-card .sc-hero{ height:170px; }
+    .sector-card .sc-part{ height:150px; max-height:150px; }
+}
+
+@media (max-width:860px){
+    .sector-card .sc-hero{ height:180px; }
+    .sector-card .sc-part{ height:160px; max-height:160px; }
+}
+
+@media (max-width:560px){
+    .sector-card .sc-hero{ height:200px; }
+    .sector-card .sc-part{ height:180px; max-height:180px; }
+}
+/* ==========================================================
+   VISION — statement block, paired with Mission below it
+========================================================== */
+
+.vision{
+    background:var(--light);
+    padding:60px 8% 20px;
+}
+
+.vision-head{
+    margin-bottom:32px;
+}
+
+.vision-body{
+    display:grid;
+    grid-template-columns:1.35fr 1fr;
+    gap:60px;
+    align-items:start;
+    position:relative;
+    padding-left:26px;
+}
+
+/* the gradient bar, matching .mission-point */
+.vision-body::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:6px;
+    bottom:6px;
+    width:2px;
+    border-radius:5px;
+    background:linear-gradient(180deg, var(--orange), var(--red));
+
+    transform:scaleY(var(--bar, 0));
+    transform-origin:top;
+}
+
+.vision-statement{
+    font-family:"balto", sans-serif;
+    font-weight:500;
+    font-size:clamp(1.5rem, 2.3vw, 2.05rem);
+    line-height:1.28;
+    letter-spacing:-0.005em;
+    color:var(--ink);
+    margin:0;
+}
+
+.vision-statement strong{
+    color:var(--middle);
+    font-weight:600;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width:980px){
+    .vision{ padding:50px 8% 10px; }
+    .vision-body{ grid-template-columns:1fr; gap:26px; }
+    .vision-sub{ max-width:60ch; padding-top:0; }
+}
+
+@media (max-width:640px){
+    .vision{ padding:40px 6% 10px; }
+    .vision-body{ padding-left:20px; }
+    .vision-statement{ font-size:1.45rem; }
+    .vision-sub{ font-size:1rem; }
+}
+/* ==========================================================
+   WHY — sustainability list on mobile (single column)
+========================================================== */
+
+@media (max-width:768px){
+
+    .why-item .sustain-list{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:22px;
+        margin-top:22px;
+        max-width:100%;
+    }
+
+    /* icon beside the text, not stacked above it */
+    .why-item .sustain-item{
+        display:flex;
+        flex-direction:row;
+        align-items:flex-start;
+        gap:16px;
+        min-width:0;
+    }
+
+    .why-item .sustain-icon{
+        flex:0 0 46px;
+        width:46px;
+        height:46px;
+        margin-bottom:0;
+    }
+
+    .why-item .sustain-icon svg{
+        width:22px;
+        height:22px;
+    }
+
+    .why-item .sustain-item p{
+        min-width:0;
+        font-size:.98rem;
+        line-height:1.5;
+        margin:0;
+    }
+
+    /* the figure stays on one line */
+    .why-item .sustain-item strong{
+        display:block;
+        font-size:1.5rem;
+        line-height:1.15;
+        margin-bottom:4px;
+        white-space:nowrap;
+    }
+}
+
+@media (max-width:480px){
+    .why-item .sustain-icon{
+        flex:0 0 40px;
+        width:40px;
+        height:40px;
+    }
+    .why-item .sustain-icon svg{ width:20px; height:20px; }
+    .why-item .sustain-item strong{ font-size:1.35rem; }
+    .why-item .sustain-item p{ font-size:.94rem; }
+}
+/* ==========================================================
+   ROADMAP — collapsed detail must actually collapse on mobile
+========================================================== */
+
+@media (max-width:768px){
+
+    .road-card .road-detail{
+        position:static;
+        inset:auto;
+        opacity:1;
+        visibility:hidden;          /* the real fix: nothing paints when closed */
+        pointer-events:none;
+        transform:none;
+        background:none;
+        padding:0;
+        margin:0;
+
+        max-height:0;
+        overflow:hidden;
+        display:block;
+
+        transition:max-height .4s var(--ease),
+                   visibility 0s linear .4s,
+                   margin-top 0s linear .4s;
+    }
+
+    .road-card.is-open .road-detail{
+        visibility:visible;
+        pointer-events:auto;
+        max-height:1200px;
+        margin-top:22px;
+        transition:max-height .4s var(--ease),
+                   visibility 0s linear 0s,
+                   margin-top 0s linear 0s;
+    }
+
+    /* the panel's own children can't outrun the clip */
+    .road-card .road-detail > *{
+        margin-top:0;
+    }
+
+    .road-card .road-detail ul,
+    .road-card .road-detail p,
+    .road-card .road-detail table,
+    .road-card .road-detail .road-detail-table-wrap{
+        margin-top:0;
+    }
+
+    .road-card.is-open .road-detail ul{
+        margin:0 0 14px;
+    }
+
+    .road-card .road-detail-close{ display:none; }
+}
+/* ==========================================================
+   CAREERS GALLERY — uniform tiles, no jank on load
+========================================================== */
+
+.cr-gallery{
+    contain:layout paint;         /* isolates the marquee from page layout */
+}
+
+.cr-gallery-track{
+    animation:none;               /* CSS animation replaced by rAF below */
+    will-change:transform;
+    transform:translate3d(0,0,0);
+    backface-visibility:hidden;
+}
+
+/* every tile identical — kills the --tall variant */
+.cr-shot,
+.cr-shot--tall{
+    flex:0 0 clamp(240px, 26vw, 360px);
+    width:clamp(240px, 26vw, 360px);
+    height:clamp(190px, 19vw, 260px);
+    align-self:auto;
+    margin:0;
+    border-radius:18px;
+    overflow:hidden;
+    background:#EDEAE4;
+    contain:paint;
+}
+
+.cr-shot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .8s var(--ease);
+}
+
+/* hover scale on a moving track is expensive — drop it */
+.cr-shot:hover img{ transform:none; }
+
+/* fade the whole strip in once images are ready */
+.cr-gallery-track{
+    opacity:0;
+    transition:opacity .5s var(--ease);
+}
+.cr-gallery.is-ready .cr-gallery-track{ opacity:1; }
+
+@media (max-width:640px){
+    .cr-shot,
+    .cr-shot--tall{
+        flex-basis:70vw;
+        width:70vw;
+        height:46vw;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .cr-gallery{ overflow-x:auto; }
+    .cr-gallery-track{ opacity:1; }
 }

@@ -612,7 +612,7 @@ if (window.gsap){
         name: "--bar", syntax: "<number>", initialValue: "0", inherits: false
     });
 
-    gsap.utils.toArray(".mission-point").forEach((point, i) => {
+    gsap.utils.toArray(".mission-point, .vision-point").forEach((point, i) => {
         gsap.fromTo(point,
             { "--bar": 0 },
             {
@@ -755,6 +755,16 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         });
     }
 })();
+const ruleObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('is-in');
+      ruleObs.unobserve(e.target);
+    }
+  });
+}, {threshold:0.4});
+
+document.querySelectorAll('.panel-rule').forEach(r => ruleObs.observe(r));
 
 /* ==========================================================
    HUMAN CARDS — scroll reveal (image + text slide in)
@@ -1433,3 +1443,64 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         );
     });
 }
+(function(){
+  const gallery = document.querySelector('.cr-gallery');
+  const track   = document.querySelector('.cr-gallery-track');
+  if(!gallery || !track) return;
+
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    gallery.classList.add('is-ready');
+    return;
+  }
+
+  const SPEED = 0.045;           // px per ms — raise to go faster
+  let offset = 0, half = 0, last = 0, running = false, rafId = null;
+
+  const measure = () => { half = track.scrollWidth / 2; };
+
+  const tick = (now) => {
+    if(!last) last = now;
+    const dt = Math.min(now - last, 50);   // clamp after a tab switch
+    last = now;
+
+    if(running && half){
+      offset -= SPEED * dt;
+      if(offset <= -half) offset += half;
+      track.style.transform = `translate3d(${offset}px,0,0)`;
+    }
+    rafId = requestAnimationFrame(tick);
+  };
+
+  // start only once the images have actually loaded
+  const imgs = [...track.querySelectorAll('img')];
+  const ready = imgs.map(img => img.complete
+    ? Promise.resolve()
+    : new Promise(res => { img.onload = img.onerror = res; }));
+
+  Promise.all(ready).then(() => {
+    measure();
+    gallery.classList.add('is-ready');
+    running = true;
+    last = 0;
+    rafId = requestAnimationFrame(tick);
+  });
+
+  // pause when off-screen — no work while the section isn't visible
+  new IntersectionObserver(([e]) => {
+    running = e.isIntersecting && !gallery.matches(':hover');
+    if(running) last = 0;
+  }, {threshold:0}).observe(gallery);
+
+  gallery.addEventListener('mouseenter', () => { running = false; });
+  gallery.addEventListener('mouseleave', () => { running = true; last = 0; });
+
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(measure, 150);
+  }, {passive:true});
+
+  document.addEventListener('visibilitychange', () => {
+    if(!document.hidden) last = 0;
+  });
+})();
