@@ -1549,3 +1549,271 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     if(!document.hidden) last = 0;
   });
 })();
+
+/* ==========================================================
+   NEWS — year + month filtering
+========================================================== */
+
+(() => {
+    const grid = document.getElementById("newsGrid");
+    if (!grid) return;
+
+    const yearSel  = document.getElementById("newsYear");
+    const monthSel = document.getElementById("newsMonth");
+    const reset    = document.getElementById("newsReset");
+    const countEl  = document.getElementById("newsCount");
+    const emptyEl  = document.getElementById("newsEmpty");
+
+    const MONTHS = ["January","February","March","April","May","June",
+                    "July","August","September","October","November","December"];
+
+    const items = Array.from(grid.querySelectorAll(".news-item")).map(el => {
+        const [y, m] = (el.dataset.date || "").split("-");
+        return { el, year: y, month: m };
+    }).filter(it => it.year && it.month);
+
+    if (!items.length) return;
+
+    /* newest first, regardless of markup order */
+    items.sort((a, b) =>
+        (b.el.dataset.date).localeCompare(a.el.dataset.date)
+    );
+    items.forEach(it => grid.appendChild(it.el));
+
+    /* build the year list from the data */
+    [...new Set(items.map(it => it.year))]
+        .sort((a, b) => b.localeCompare(a))
+        .forEach(y => {
+            const o = document.createElement("option");
+            o.value = y;
+            o.textContent = y;
+            yearSel.appendChild(o);
+        });
+
+    /* month options — rebuilt whenever the year changes, so you can
+       never land on a month/year pair that has nothing in it */
+    const buildMonths = () => {
+        const year = yearSel.value;
+        const keep = monthSel.value;
+
+        const available = [...new Set(
+            items.filter(it => year === "all" || it.year === year)
+                 .map(it => it.month)
+        )].sort();
+
+        monthSel.replaceChildren();
+
+        const all = document.createElement("option");
+        all.value = "all";
+        all.textContent = "All months";
+        monthSel.appendChild(all);
+
+        available.forEach(m => {
+            const o = document.createElement("option");
+            o.value = m;
+            o.textContent = MONTHS[Number(m) - 1];
+            monthSel.appendChild(o);
+        });
+
+        monthSel.value = available.includes(keep) ? keep : "all";
+    };
+
+    const apply = () => {
+        const year  = yearSel.value;
+        const month = monthSel.value;
+        let shown = 0;
+
+        items.forEach(it => {
+            const ok = (year === "all"  || it.year === year) &&
+                       (month === "all" || it.month === month);
+            it.el.hidden = !ok;
+            if (ok) shown++;
+        });
+
+        const filtered = year !== "all" || month !== "all";
+        reset.hidden = !filtered;
+        emptyEl.hidden = shown > 0;
+
+        countEl.textContent = filtered
+            ? `${shown} ${shown === 1 ? "update" : "updates"}`
+            : `${items.length} ${items.length === 1 ? "update" : "updates"}`;
+
+        window.ScrollTrigger?.refresh();
+    };
+
+    yearSel.addEventListener("change", () => { buildMonths(); apply(); });
+    monthSel.addEventListener("change", apply);
+
+    reset.addEventListener("click", () => {
+        yearSel.value = "all";
+        buildMonths();
+        monthSel.value = "all";
+        apply();
+    });
+
+    buildMonths();
+    apply();
+})();
+
+/* ==========================================================
+   GALLERY — space filter + lightbox
+========================================================== */
+
+(() => {
+    const grid = document.getElementById("galGrid");
+    if (!grid) return;
+
+    const sel     = document.getElementById("galSpace");
+    const countEl = document.getElementById("galCount");
+    const emptyEl = document.getElementById("galEmpty");
+
+    const box    = document.getElementById("galBox");
+    const boxImg = document.getElementById("galBoxImg");
+    const boxCap = document.getElementById("galBoxCap");
+
+    const items = Array.from(grid.querySelectorAll(".gal-item"));
+    if (!items.length) return;
+
+    /* build the dropdown from the tags already in the markup */
+    const spaces = new Map();
+    items.forEach(el => {
+        const slug  = el.dataset.space;
+        const label = el.querySelector(".gal-tag")?.textContent.trim() || slug;
+        if (slug && !spaces.has(slug)) spaces.set(slug, label);
+    });
+
+    [...spaces.entries()]
+        .sort((a, b) => a[1].localeCompare(b[1]))
+        .forEach(([slug, label]) => {
+            const o = document.createElement("option");
+            o.value = slug;
+            o.textContent = label;
+            sel.appendChild(o);
+        });
+
+    /* what's currently on screen — drives lightbox next/prev */
+    let visible = [];
+
+    const apply = () => {
+        const want = sel.value;
+        visible = [];
+
+        items.forEach(el => {
+            const ok = want === "all" || el.dataset.space === want;
+            el.hidden = !ok;
+            if (ok) visible.push(el);
+        });
+
+        emptyEl.hidden = visible.length > 0;
+        countEl.textContent =
+            `${visible.length} ${visible.length === 1 ? "photo" : "photos"}`;
+
+        window.ScrollTrigger?.refresh();
+    };
+
+    sel.addEventListener("change", apply);
+    apply();
+
+    /* ---------- lightbox ---------- */
+
+    let idx = 0;
+
+    const show = (i) => {
+        if (!visible.length) return;
+        idx = (i + visible.length) % visible.length;
+        const btn = visible[idx].querySelector(".gal-shot");
+        const img = btn.querySelector("img");
+
+        boxImg.src = btn.dataset.full || img.src;
+        boxImg.alt = img.alt || "";
+        boxCap.textContent = visible[idx].querySelector(".gal-tag")?.textContent || "";
+    };
+
+    const open = (i) => {
+        show(i);
+        box.classList.add("open");
+        box.setAttribute("aria-hidden", "false");
+        document.body.classList.add("gal-locked");
+    };
+
+    const close = () => {
+        box.classList.remove("open");
+        box.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("gal-locked");
+        boxImg.src = "";
+    };
+
+    grid.addEventListener("click", e => {
+        const btn = e.target.closest(".gal-shot");
+        if (!btn) return;
+        open(visible.indexOf(btn.closest(".gal-item")));
+    });
+
+    document.getElementById("galPrev").addEventListener("click", () => show(idx - 1));
+    document.getElementById("galNext").addEventListener("click", () => show(idx + 1));
+
+    box.querySelectorAll("[data-gclose]").forEach(el =>
+        el.addEventListener("click", close)
+    );
+
+    document.addEventListener("keydown", e => {
+        if (!box.classList.contains("open")) return;
+        if (e.key === "Escape")     close();
+        if (e.key === "ArrowLeft")  show(idx - 1);
+        if (e.key === "ArrowRight") show(idx + 1);
+    });
+})();
+
+/* ==========================================================
+   INVESTOR — accordion
+========================================================== */
+
+(() => {
+    const acc = document.getElementById("invAcc");
+    if (!acc) return;
+
+    const rows = Array.from(acc.querySelectorAll(".acc-row:not(.acc-row--link)"));
+    if (!rows.length) return;
+
+    const setHeight = (row) => {
+        const panel = row.querySelector(".acc-panel");
+        const inner = row.querySelector(".acc-inner");
+        panel.style.maxHeight = row.classList.contains("is-open")
+            ? inner.scrollHeight + "px"
+            : "0px";
+    };
+
+    const toggle = (row, open) => {
+        const btn = row.querySelector(".acc-head");
+        row.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        setHeight(row);
+    };
+
+    rows.forEach(row => {
+        row.querySelector(".acc-head").addEventListener("click", () => {
+            const willOpen = !row.classList.contains("is-open");
+
+            /* one at a time — drop these two lines to allow several open */
+            rows.forEach(r => { if (r !== row) toggle(r, false); });
+
+            toggle(row, willOpen);
+
+            if (willOpen){
+                setTimeout(() => {
+                    const y = row.getBoundingClientRect().top + window.pageYOffset - 140;
+                    if (window.pageYOffset > y) window.scrollTo({ top:y, behavior:"smooth" });
+                }, 460);
+            }
+        });
+    });
+
+    /* keep open panels correctly sized on resize */
+    let rt;
+    window.addEventListener("resize", () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => {
+            rows.forEach(r => { if (r.classList.contains("is-open")) setHeight(r); });
+        }, 150);
+    }, { passive:true });
+})();

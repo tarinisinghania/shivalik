@@ -36,6 +36,7 @@ Navigation
         <li><a href="products.html">Products</a></li>
         <li><a href="transformation.html">Transformation</a></li>
         <li><a href="careers.html">Careers</a></li>
+        <li><a href="investor.html">Investor</a></li>
     </ul>
 </nav>
 
@@ -58,6 +59,7 @@ Navigation
         <li><a href="products.html">Products</a></li>
         <li><a href="transformation.html">Transformation</a></li>
         <li><a href="careers.html">Careers</a></li>
+        <li><a href="investor.html">Investor</a></li>
         <li><a href="contact.html">Get in Touch</a></li>
     </ul>
 </div>
@@ -66,14 +68,16 @@ Navigation
 Hero
 =========================== -->
 <div class="prod-tab-labels" id="companySubnav">
-  <button class="prod-tab-label" data-target="story">Our Story</button>
+  <button class="prod-tab-label" data-target="story">Timeline</button>
   <button class="prod-tab-label" data-target="md">MD's Message</button>
   <button class="prod-tab-label" data-target="vision">Vision</button>
     <button class="prod-tab-label" data-target="mission">Mission</button>
-  <button class="prod-tab-label" data-target="management">Board of Directors</button>
-  <button class="prod-tab-label" data-target="team">Management</button>
+  <button class="prod-tab-label" data-target="management">Leadership</button>
+  <button class="prod-tab-label" data-target="team">Corporate</button>
   <button class="prod-tab-label" data-target="operations">Operations</button>
   <button class="prod-tab-label" data-target="awards">Awards</button>
+  <button class="prod-tab-label" data-target="news">News</button>
+  <button class="prod-tab-label" data-target="gallery">Gallery</button>
 </div>
 <section class="hero hero--inner" id="home">
 
@@ -917,6 +921,202 @@ Operations Team
 
     </div>
 </section>
+<!-- ===========================
+News
+=========================== -->
+<section class="news" id="news">
+
+  <div class="news-head">
+    <div class="label"><p>News &amp; Updates</p></div>
+    <h2>What's happening at Shivalik.</h2>
+  </div>
+
+  <div class="news-controls">
+    <div class="news-filters">
+      <div class="news-field">
+        <label for="newsYear">Year</label>
+        <select id="newsYear">
+          <option value="all">All years</option>
+        </select>
+      </div>
+
+      <div class="news-field">
+        <label for="newsMonth">Month</label>
+        <select id="newsMonth">
+          <option value="all">All months</option>
+        </select>
+      </div>
+
+      <button class="news-reset" id="newsReset" type="button" hidden>Clear filters</button>
+    </div>
+
+    <p class="news-count" id="newsCount" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="news-grid" id="newsGrid">
+
+    <article class="news-item" data-date="2026-08-14">
+      <a class="news-card" href="#">
+        <span class="news-media">
+          <img src="news/solar-plant.jpg" alt="" loading="lazy">
+        </span>
+        <span class="news-body">
+          <time class="news-date" datetime="2026-08-14">14 August 2026</time>
+          <h3>70 MW captive solar plant reaches full output</h3>
+          <p>The plant now supplies the majority of group electricity demand across all four units.</p>
+          <span class="news-more">Read more
+            <svg class="brand-arrow-triple" viewBox="0 0 120 48" aria-hidden="true">
+              <g class="ch-1"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-2" transform="translate(38,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+            </svg>
+          </span>
+        </span>
+      </a>
+    </article>
+
+    <article class="news-item" data-date="2026-05-22">
+      <a class="news-card" href="#">
+        <span class="news-media">
+          <img src="news/eicher-award.jpg" alt="" loading="lazy">
+        </span>
+        <span class="news-body">
+          <time class="news-date" datetime="2026-05-22">22 May 2026</time>
+          <h3>Shivalik recognised at the Eicher supplier conference</h3>
+          <p>Awarded for consistency in quality and delivery performance across the year.</p>
+          <span class="news-more">Read more
+            <svg class="brand-arrow-triple" viewBox="0 0 120 48" aria-hidden="true">
+              <g class="ch-1"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-2" transform="translate(38,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+            </svg>
+          </span>
+        </span>
+      </a>
+    </article>
+
+    <article class="news-item" data-date="2025-11-09">
+      <a class="news-card" href="#">
+        <span class="news-media">
+          <img src="news/machining-line.jpg" alt="" loading="lazy">
+        </span>
+        <span class="news-body">
+          <time class="news-date" datetime="2025-11-09">9 November 2025</time>
+          <h3>New robotic fettling line commissioned</h3>
+          <p>Automated finishing improves consistency and removes operators from the dustiest part of the process.</p>
+          <span class="news-more">Read more
+            <svg class="brand-arrow-triple" viewBox="0 0 120 48" aria-hidden="true">
+              <g class="ch-1"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-2" transform="translate(38,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+              <g class="ch-3" transform="translate(76,0)"><path d="M4 2 L28 2 L38 22 L14 22 Z"/><path d="M14 26 L38 26 L28 46 L4 46 Z"/></g>
+            </svg>
+          </span>
+        </span>
+      </a>
+    </article>
+
+  </div>
+
+  <p class="news-empty" id="newsEmpty" hidden>No updates from that period.</p>
+
+</section>
+
+<!-- ===========================
+Gallery
+=========================== -->
+<section class="gal" id="gallery">
+
+  <div class="gal-head">
+    <div class="label"><p>Inside Shivalik</p></div>
+    <h2>Where the work actually happens.</h2>
+  </div>
+
+  <div class="gal-controls">
+    <div class="gal-field">
+      <label for="galSpace">Space</label>
+      <select id="galSpace">
+        <option value="all">All spaces</option>
+      </select>
+    </div>
+    <p class="gal-count" id="galCount" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="gal-grid" id="galGrid">
+
+    <figure class="gal-item" data-space="foundry">
+      <button class="gal-shot" type="button" data-full="gallery/foundry-01.jpg">
+        <img src="gallery/foundry-01.jpg" alt="Molten metal pour on the foundry floor" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Foundry</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="foundry">
+      <button class="gal-shot" type="button" data-full="gallery/foundry-02.jpg">
+        <img src="gallery/foundry-02.jpg" alt="Induction furnace charging" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Foundry</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="machine-shop">
+      <button class="gal-shot" type="button" data-full="gallery/machining-01.jpg">
+        <img src="gallery/machining-01.jpg" alt="CNC machining centre in operation" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Machine Shop</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="machine-shop">
+      <button class="gal-shot" type="button" data-full="gallery/machining-02.jpg">
+        <img src="gallery/machining-02.jpg" alt="Machined wheel hubs on the line" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Machine Shop</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="fettling">
+      <button class="gal-shot" type="button" data-full="gallery/fettling-01.jpg">
+        <img src="gallery/fettling-01.jpg" alt="Robotic fettling cell" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Fettling</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="sand-plant">
+      <button class="gal-shot" type="button" data-full="gallery/sand-01.jpg">
+        <img src="gallery/sand-01.jpg" alt="Automated sand mixing plant" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Sand Plant</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="quality-lab">
+      <button class="gal-shot" type="button" data-full="gallery/lab-01.jpg">
+        <img src="gallery/lab-01.jpg" alt="Spectrometer analysis in the metallurgy lab" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Quality Lab</span>
+      </button>
+    </figure>
+
+    <figure class="gal-item" data-space="solar-plant">
+      <button class="gal-shot" type="button" data-full="gallery/solar-01.jpg">
+        <img src="gallery/solar-01.jpg" alt="Captive solar plant array" loading="lazy" width="600" height="450">
+        <span class="gal-tag">Solar Plant</span>
+      </button>
+    </figure>
+
+  </div>
+
+  <p class="gal-empty" id="galEmpty" hidden>Nothing here yet.</p>
+
+</section>
+
+<!-- lightbox -->
+<div class="gal-box" id="galBox" aria-hidden="true">
+  <div class="gal-box-overlay" data-gclose></div>
+  <div class="gal-box-inner" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="gal-box-close" data-gclose aria-label="Close">&times;</button>
+    <button class="gal-box-nav gal-box-prev" id="galPrev" aria-label="Previous">&lsaquo;</button>
+    <img class="gal-box-img" id="galBoxImg" src="" alt="">
+    <button class="gal-box-nav gal-box-next" id="galNext" aria-label="Next">&rsaquo;</button>
+    <p class="gal-box-cap" id="galBoxCap"></p>
+  </div>
+</div>
+
 <section class="cta">
   <div class="cta-plate">
     <h2>When it has to fit, hold, and last<br>— choose Shivalik.</h2>
@@ -1067,6 +1267,7 @@ Footer
           <li><a href="products.html">Products</a></li>
           <li><a href="transformation.html">Transformation</a></li>
           <li><a href="careers.html">Careers</a></li>
+          <li><a href="investor.html">Investor</a></li>
         </ul>
       </div>
 
