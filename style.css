@@ -4138,8 +4138,8 @@ AWARDS
 
 .man-contact {
     position:relative;
-    margin: 50px;
-    max-width: 40vw;
+    margin: 80px;
+    max-width: 35vw;
     overflow:hidden;
     padding:28px 55px;
     background:#fff;
@@ -5927,7 +5927,7 @@ body.nav-locked{ overflow:hidden; }
     grid-template-columns:1fr 1fr;
     gap:60px;
     align-items:center;
-    margin-top:20px;
+    margin-top:80px;
 }
 
 .safety-copy h3{
@@ -10333,4 +10333,275 @@ a.inv-val:hover{ color:var(--middle); }
         padding:5px 5% 5px 12px;
         background:var(--light);
     }
+}
+/* Our Story: no hanging words */
+.intro-copy h1 {
+  text-wrap: balance;      /* evens out line lengths */
+  max-width: 20ch;
+}
+
+.story-title {
+  text-wrap: balance;
+}
+
+.story-meta p {
+  text-wrap: pretty;       /* avoids a single word on the last line */
+}
+
+/* iPad portrait + landscape */
+@media (min-width: 768px) and (max-width: 1180px) {
+  .intro-copy h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    max-width: 18ch;
+  }
+
+  .story-meta p {
+    max-width: 52ch;
+  }
+}
+
+/* ---------- Downloads under film ---------- */
+.intro-grid {
+  align-items: center;
+}
+
+.intro-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* uses .intro-video-cap styling; just reset spacing */
+.intro-downloads-label {
+  display: inline-block;
+  margin: 0 8px 0 0;
+}
+
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: rgba(248, 69, 7, 0.08);
+  border: 1px solid rgba(248, 69, 7, 0.22);
+  border-radius: 999px;
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 500;
+  color: #2a2522;
+  cursor: pointer;
+  transition: background .25s, color .25s, border-color .25s, transform .25s;
+}
+
+.dl-btn svg {
+  width: 14px;
+  height: 14px;
+  color: #F84507;
+  transition: color .25s, transform .25s;
+}
+
+.dl-btn:hover,
+.dl-btn:focus-visible {
+  background: linear-gradient(90deg, #F5040B, #F84507 55%, #FB8503);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.dl-btn:hover svg,
+.dl-btn:focus-visible svg {
+  color: #fff;
+  transform: translateY(2px);
+}
+
+/* ---------- Download modal ---------- */
+.dl-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .3s, visibility .3s;
+}
+.dl-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.dl-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 14, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.dl-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 40px 36px 32px;
+  background: #F8F5F0;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform .35s;
+}
+.dl-modal.is-open .dl-dialog { transform: none; }
+
+.dl-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dl-kicker {
+  font-size: .75rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #F84507;
+  font-weight: 600;
+}
+.dl-dialog h3 { margin: 6px 0 4px; font-size: 1.6rem; }
+.dl-sub { margin: 0 0 24px; color: #666; }
+
+.dl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dl-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.dl-field label { font-size: .85rem; font-weight: 600; }
+.dl-field input,
+.dl-field textarea {
+  font: inherit;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 10px;
+  background: #fff;
+  resize: vertical;
+}
+.dl-field input:focus,
+.dl-field textarea:focus {
+  outline: none;
+  border-color: #F84507;
+  box-shadow: 0 0 0 3px rgba(248, 69, 7, 0.15);
+}
+.dl-field input.is-invalid { border-color: #F5040B; }
+
+.dl-error { color: #F5040B; font-size: .9rem; margin: 0 0 12px; }
+
+.dl-submit {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #F5040B, #F84507 55%, #FB8503);
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.dl-submit:disabled { opacity: .6; cursor: wait; }
+
+@media (max-width: 600px) {
+  .dl-row { grid-template-columns: 1fr; gap: 0; }
+  .dl-dialog { padding: 36px 22px 24px; }
+}
+
+/* ---------- Leadership photos ---------- */
+.mgmt-grid .mgmt-card .mgmt-photo {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.mgmt-grid .mgmt-card .mgmt-photo img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 50% 50%;
+  scale: 1;
+  transform-origin: 50% 0%;
+}
+
+/* Giriraj: reference photo */
+.mgmt-grid .mgmt-photo img[src="cmd.jpg"] {
+  object-position: 50% 50% !important;
+  scale: 1.05;
+}
+
+/* Raghvendra */
+.mgmt-grid .mgmt-photo img[src="jmd.jpg"] {
+  object-position: 50% 0% !important;
+  scale: 1;
+  transform-origin: 50% 0%;
+}
+
+/* Vinay */
+.mgmt-grid .mgmt-photo img[src="vinay.jpg"] {
+  object-position: 50% 0% !important;
+  scale: 1;
+  transform-origin: 50% 0%;
+}
+
+/* ---------- Roles on one line ---------- */
+.team-role,
+.mgmt-role {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;   /* safety net: never breaks the card */
+}
+
+/* iPad landscape & small laptops: 3 cards per row */
+@media (max-width: 1280px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-role,
+  .mgmt-role {
+    font-size: .66rem;
+    letter-spacing: .08em;
+    padding: 7px 12px;
+  }
+}
+
+/* iPad portrait: 2 cards per row */
+@media (max-width: 900px) {
+  .team-grid,
+  .mgmt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Phones: 1 card per row */
+@media (max-width: 560px) {
+  .team-grid,
+  .mgmt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-role,
+  .mgmt-role {
+    font-size: .7rem;
+  }
 }

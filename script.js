@@ -1817,3 +1817,121 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         }, 150);
     }, { passive:true });
 })();
+
+/* ===========================
+   Gated PDF downloads
+=========================== */
+(() => {
+  const modal = document.getElementById('dlModal');
+  if (!modal) return;
+
+  // Same endpoint your Contact page form sends to (Formspree, PHP mail script, etc.)
+  // Leave empty to skip sending while testing.
+  const FORM_ENDPOINT = '';
+  const STORAGE_KEY = 'shivalik_dl_lead';
+
+  const form    = document.getElementById('dlForm');
+  const title   = document.getElementById('dlTitle');
+  const docIn   = document.getElementById('dlDoc');
+  const errorEl = document.getElementById('dlError');
+  const submit  = form.querySelector('.dl-submit');
+  let pendingFile = null;
+  let lastFocus = null;
+
+  const hasFilledForm = () => {
+    try { return !!localStorage.getItem(STORAGE_KEY); } catch (e) { return false; }
+  };
+
+  const startDownload = (file) => {
+    const a = document.createElement('a');
+    a.href = file;
+    a.download = file.split('/').pop();
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
+  const openModal = (btn) => {
+    pendingFile = btn.dataset.file;
+    title.textContent = btn.dataset.name;
+    docIn.value = btn.dataset.name;
+    errorEl.hidden = true;
+    lastFocus = btn;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined') lenis.stop();
+    setTimeout(() => form.querySelector('input:not([type=hidden])').focus({ preventScroll: true }), 60);
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined') lenis.start();
+    if (lastFocus) lastFocus.focus();
+  };
+
+  document.querySelectorAll('.dl-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (hasFilledForm()) startDownload(btn.dataset.file);
+      else openModal(btn);
+    });
+  });
+
+  modal.querySelectorAll('[data-dlclose]').forEach((el) =>
+    el.addEventListener('click', closeModal)
+  );
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.hidden = true;
+
+    // validation
+    let valid = true;
+    form.querySelectorAll('[required]').forEach((field) => {
+      const ok = field.checkValidity();
+      field.classList.toggle('is-invalid', !ok);
+      if (!ok) valid = false;
+    });
+    if (!valid) {
+      errorEl.textContent = 'Please fill in all required fields with valid details.';
+      errorEl.hidden = false;
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Preparing download…';
+
+    try {
+      if (FORM_ENDPOINT) {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (!res.ok) throw new Error('Submit failed');
+      }
+
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch (err) {}
+
+      startDownload(pendingFile);
+      form.reset();
+      closeModal();
+    } catch (err) {
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.hidden = false;
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Download PDF';
+    }
+  });
+
+  form.querySelectorAll('input, textarea').forEach((field) =>
+    field.addEventListener('input', () => field.classList.remove('is-invalid'))
+  );
+})();
