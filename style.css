@@ -10605,3 +10605,120 @@ a.inv-val:hover{ color:var(--middle); }
     font-size: .7rem;
   }
 }
+
+/* ---------- Industries Served: all 5 in one row on iPad landscape ---------- */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .products .product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding-inline: 24px;
+    margin-inline: auto;
+    align-items: stretch;
+  }
+
+  .products .sector-col {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: none !important;
+    grid-column: auto !important;
+  }
+
+  .products .sector-card {
+    height: 100%;
+  }
+
+  .products .sc-hero {
+    height: 150px !important;
+  }
+
+  .products .sc-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .products .sc-title {
+    font-size: .95rem !important;
+    line-height: 1.2;
+  }
+
+  .products .sc-body {
+    padding: 16px 14px !important;
+  }
+
+  .products .sc-part {
+    max-height: 180px;
+    width: auto;
+    max-width: 100%;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  .products .pc-products li {
+    font-size: .78rem !important;
+  }
+}
+
+/* ---------- Stop sideways scrolling ---------- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* ---------- iPad landscape & small laptops ---------- */
+@media (max-width: 1366px) {
+
+  /* Navbar: fit inside the screen */
+  .navbar {
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px) !important;
+    box-sizing: border-box;
+    padding-inline: 20px !important;
+    gap: 16px;
+  }
+
+  .navbar nav ul {
+    gap: clamp(14px, 2.2vw, 36px) !important;
+  }
+
+  .navbar nav a {
+    font-size: .78rem !important;
+    letter-spacing: .06em !important;
+    white-space: nowrap;
+  }
+
+  .navbar .button {
+    white-space: nowrap;
+    padding-inline: 20px !important;
+  }
+
+  /* Hero: stack text above the buttons */
+  .hero-lower {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+    gap: 14px !important;
+    max-width: 100%;
+  }
+
+  .hero-btn {
+    font-size: .95rem !important;
+    padding: 16px 26px !important;
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
