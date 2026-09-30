@@ -10751,3 +10751,16 @@ body {
     padding-top: 50px !important;
   }
 }
+
+/* ---------- Odometer: hide neighbouring digits peeking through ---------- */
+.odo-digit {
+  clip-path: inset(0.09em 0);   /* trims a hair off the top and bottom of each window */
+}
+
+/* whole-pixel font sizes = no half-pixel offsets */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .stat h2,
+  .stat .counter {
+    font-size: 48px;
+  }
+}
