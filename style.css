@@ -10722,3 +10722,32 @@ body {
     box-sizing: border-box;
   }
 }
+
+/* ==========================================================
+   PRODUCTS — continuous scroll
+========================================================== */
+
+.prod-panel,
+.prod-panel[hidden] {
+  display: block !important;
+  animation: none;
+}
+
+/* thin divider between sectors */
+.prod-panel + .prod-panel {
+  border-top: 1px solid var(--middle);
+}
+
+/* iPad: keep sections evenly spaced */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .prod-panel + .prod-panel {
+    padding-top: 60px;
+  }
+}
+
+/* phones: only the first panel needs the big clearance for the fixed bar */
+@media (max-width: 768px) {
+  .prod-panel + .prod-panel {
+    padding-top: 50px !important;
+  }
+}

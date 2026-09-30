@@ -1935,3 +1935,86 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     field.addEventListener('input', () => field.classList.remove('is-invalid'))
   );
 })();
+
+/* ===========================
+   Products: continuous scroll + scroll-spy subnav
+=========================== */
+(() => {
+  const panels = [...document.querySelectorAll('.prod-panel')];
+  if (!panels.length) return;
+
+  const labels = [...document.querySelectorAll('.prod-tab-label')];
+  const images = [...document.querySelectorAll('.prod-tab-img')];
+  const bar    = document.querySelector('.prod-tab-labels');
+
+  // show every panel
+  panels.forEach(p => p.removeAttribute('hidden'));
+
+  // space taken by the fixed navbar + subnav
+  const offset = () => (bar ? bar.getBoundingClientRect().bottom : 120) + 24;
+
+  const setActive = (key) => {
+    labels.forEach(b => b.classList.toggle('active', b.dataset.panel === key));
+    images.forEach(b => b.classList.toggle('active', b.dataset.panel === key));
+  };
+
+  const scrollToPanel = (key, smooth = true) => {
+    const el = document.getElementById('panel-' + key);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - offset();
+    window.scrollTo({ top: y, behavior: smooth ? 'smooth' : 'auto' });
+  };
+
+  // clicks: scroll instead of switching pages
+  // (capture phase, so the old tab-switching code in products.js never runs)
+  let lock = false;
+  let lockTimer;
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.prod-tab-label, .prod-tab-img');
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const key = btn.dataset.panel;
+    setActive(key);
+
+    lock = true;                        // don't let scroll-spy flicker mid-scroll
+    clearTimeout(lockTimer);
+    lockTimer = setTimeout(() => { lock = false; }, 900);
+
+    scrollToPanel(key);
+    history.replaceState(null, '', '#panel-' + key);
+  }, true);
+
+  // scroll-spy: highlight the section currently on screen
+  let ticking = false;
+
+  const spy = () => {
+    ticking = false;
+    if (lock) return;
+
+    const line = offset() + 40;
+    let current = panels[0];
+    for (const p of panels) {
+      if (p.getBoundingClientRect().top <= line) current = p;
+    }
+    setActive(current.id.replace('panel-', ''));
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(spy);
+    }
+  }, { passive: true });
+
+  // open at a section if the URL has one, e.g. products.html#panel-railways
+  window.addEventListener('load', () => {
+    const key = location.hash.replace('#', '').replace('panel-', '');
+    if (key && document.getElementById('panel-' + key)) scrollToPanel(key, false);
+    spy();
+  });
+})();
+
