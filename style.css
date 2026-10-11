@@ -10764,3 +10764,413 @@ body {
     font-size: 48px;
   }
 }
+/* ---------- Our Story: film full width, top aligned with label ---------- */
+.intro-grid {
+  align-items: start;        /* both columns start at the same top edge */
+}
+
+.intro-video {
+  margin-top: 0;
+}
+
+.intro-video-el {
+  width: 100%;               /* was 90% — now matches the line below */
+}
+/* ---------- Keep the Our Story label styled like every other label ---------- */
+.intro-copy .label p,
+.intro-copy .label p.illuminate {
+  font-family: "General", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: #F84507;
+  -webkit-text-fill-color: #F84507;   /* cancels the illuminate gradient text */
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+/* ==========================================================
+   SPACING SYSTEM — one rhythm for every page
+   Keep this block at the very end of style.css.
+========================================================== */
+
+:root{
+    --gap:        clamp(72px, 8vw, 112px);   /* between sections */
+    --sx:         8%;                        /* side margin */
+    --head-gap:   clamp(28px, 3vw, 44px);    /* heading → content */
+    --block-gap:  clamp(44px, 5vw, 72px);    /* big blocks inside a section */
+    --anchor:     150px;                     /* fixed navbar + subnav height */
+}
+
+@media (max-width:768px){
+    :root{
+        --gap:       60px;
+        --sx:        6%;
+        --head-gap:  26px;
+        --block-gap: 40px;
+        --anchor:    140px;
+    }
+}
+
+/* ---------- every standard content section ---------- */
+
+.intro, .md-message, .values, .vision, .mission, .mgmt, .team, .awards,
+.news, .gal, .units, .certification, .prod, .trans,
+.cr-intro, .cr-stay, .cr-prog, .cr-roles, .careers-main,
+.contact-main, .inv{
+    padding: calc(var(--gap) / 2) var(--sx);
+    margin-top: 0;
+    margin-bottom: 0;
+    scroll-margin-top: var(--anchor);   /* subnav jumps land below the fixed bars */
+}
+
+/* ---------- homepage: sections inside .main ---------- */
+
+.main{
+    min-height: 0;
+    padding: calc(var(--gap) / 2) var(--sx);
+}
+
+.main > .about,
+.main > .stats,
+.main > .why,
+.main > .products,
+.main > .contact-cta{
+    padding: calc(var(--gap) / 2) 0;
+    margin: 0;
+}
+
+.products-head{ margin-bottom: var(--head-gap); }
+.products-cta{ margin-top: var(--head-gap); }
+
+/* ---------- full-bleed bands ---------- */
+
+.cta{ padding: 0; }
+.cta-plate{ padding: var(--gap) var(--sx); }
+
+.roadmap{ padding: calc(var(--gap) / 2) 24px; }
+@media (max-width:768px){ .roadmap{ padding: calc(var(--gap) / 2) 14px; } }
+
+.cr-gallery{ padding: calc(var(--gap) / 2) 0; }
+
+/* ---------- section headings → content: one gap everywhere ---------- */
+
+.mgmt-head, .team-head, .news-head, .gal-head, .mission-head, .vision-head,
+.units-head, .prod-head, .trans-head, .cr-roles-head, .inv-head,
+.roadmap-top, .cr-form-head, .prod-panel-head, .values-head{
+    margin-bottom: var(--head-gap);
+}
+
+/* ---------- company page internals ---------- */
+
+.intro-copy h1{ padding: 16px 0 0; }          /* was 20px all round — lines up with the label */
+.story-timeline{ margin-top: var(--block-gap); }
+.md-intro{ margin: var(--head-gap) 0; }       /* was 45px on every side */
+.md-signature{ margin-top: var(--head-gap); }
+.award-intro p{ margin: var(--head-gap) 0 0; max-width: 70ch; }
+.awards-grid{ padding: 0; margin-top: var(--head-gap); }
+
+/* ---------- products page ---------- */
+
+.prod-panel,
+.prod-panel + .prod-panel{
+    padding: calc(var(--gap) / 2) 0 !important;
+    scroll-margin-top: var(--anchor);
+}
+
+.prod-panel:first-of-type{ padding-top: var(--head-gap) !important; }
+.oem-panel{ margin-top: var(--block-gap); }
+
+/* ---------- transformation page ---------- */
+
+.trans-head{ padding-top: 0; }
+.trans-panel{ padding-top: 0; scroll-margin-top: var(--anchor); }
+
+.panel-rule,
+.trans .panel-rule{
+    margin-top: var(--block-gap);
+    margin-bottom: var(--head-gap);
+}
+
+.human-head,
+.sus-head{
+    margin-top: 0;
+    margin-bottom: var(--head-gap);
+}
+
+.human-cards{ gap: var(--block-gap); }
+
+.tech-erp,
+.tech-block,
+.sus-block,
+.sus-feature{ margin-bottom: var(--block-gap); }
+
+.tech-safety{ margin-top: var(--block-gap); }
+
+.trans-panel > :last-child{ margin-bottom: 0; }
+
+/* ---------- manufacturing ---------- */
+
+.roadmap-tagline{ margin-top: var(--block-gap); }
+
+/* ---------- careers ---------- */
+
+.cr-prog-row{
+    margin-bottom: var(--block-gap);
+    align-items: center;
+}
+.cr-prog-row:last-child{ margin-bottom: 0; }
+.cr-prog-visual{ margin-top: 0; }             /* was a 150px push-down */
+
+/* ---------- contact ---------- */
+
+.cm-card{ margin-top: var(--block-gap); }
+
+/* ---------- MD's Message: italic ---------- */
+.md-intro p,
+.md-copy > p {
+  font-style: italic;
+}
+/* ---------- Core Values: medium, label above ---------- */
+.values-plate {
+  display: block;
+  padding: 26px clamp(28px, 3.5vw, 48px) 30px;
+  border-radius: 22px;
+}
+
+.values-head {
+  margin: 0 0 18px !important;
+}
+
+.values-head .label p {
+  margin: 0;
+}
+
+.values-grid {
+  grid-template-columns: repeat(4, auto);
+  justify-content: space-between;
+  gap: 18px 32px;
+}
+
+.value-card {
+  gap: 12px;
+}
+
+.value-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.value-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* iPad portrait & phones: values 2 × 2 */
+@media (max-width: 900px) {
+  .values-plate {
+    padding: 24px 24px 26px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 20px;
+  }
+
+  .value-card h3 { font-size: 1.15rem; }
+}
+
+@media (max-width: 480px) {
+  .value-card h3 { font-size: 1.05rem; }
+}
+
+/* ---------- Same gap above the trust band on every page ---------- */
+
+/* whatever section comes right before the trust band: no bottom spacing */
+section:has(+ .trust-band) {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+section:has(+ .trust-band) > :last-child,
+section:has(+ .trust-band) > :last-child > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* the trust band sets the gap itself */
+.trust-band {
+  margin-top: calc(var(--gap) / 2);
+}
+/* ---------- Contact page: clear the hero plate ---------- */
+.contact-main {
+  padding-top: calc(var(--gap) / 2 + 120px);
+}
+
+@media (max-width: 768px) {
+  .contact-main {
+    padding-top: calc(var(--gap) / 2);   /* mobile hero doesn't overlap */
+  }
+}
+/* ---------- Products: Export & Domestic labels level ---------- */
+.oem-panel--split .oem-group,
+.oem-panel--split .oem-group + .oem-group {
+  margin-top: 0;
+}
+
+/* when the columns stack on smaller screens, keep a gap between them */
+@media (max-width: 900px) {
+  .oem-panel--split .oem-group + .oem-group {
+    margin-top: 0;      /* the grid gap already spaces them */
+  }
+}
+/* ---------- Products: transformation-style dividers ---------- */
+.prod-panel + .prod-panel { border-top: none; }   /* remove the old plain line */
+
+.prod .panel-rule {
+  margin-top: 0;
+  margin-bottom: 0;      /* the panels' own padding spaces it */
+}
+/* ---------- Transformation: stronger section labels ---------- */
+.trans-eyebrow {
+  display: inline-block;
+  font-family: "General", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 9px 20px;
+  border-radius: 40px;
+  background: linear-gradient(100deg, var(--orange), var(--red));
+  box-shadow: 0 6px 18px rgba(248, 69, 7, .22);
+  margin-bottom: 22px;
+}
+
+@media (max-width: 768px) {
+  .trans-eyebrow {
+    font-size: 11.5px;
+    padding: 8px 16px;
+    margin-bottom: 18px;
+  }
+}
+/* ---------- Careers marquee: pure CSS, always visible ---------- */
+.cr-gallery-track {
+  opacity: 1 !important;
+  animation: crMarquee 45s linear infinite !important;
+  will-change: transform;
+}
+
+.cr-gallery:hover .cr-gallery-track {
+  animation-play-state: paused;
+}
+
+@media (max-width: 640px) {
+  .cr-gallery-track {
+    animation-duration: 30s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-gallery-track {
+    animation: none !important;
+  }
+}
+/* ---------- Contact box (products + manufacturing): fit the spacing system ---------- */
+.man-contact {
+  margin: 0 var(--sx);          /* no extra top gap; left edge lines up with page content */
+}
+
+@media (max-width: 768px) {
+  .man-contact {
+    margin: 0 var(--sx);
+    max-width: none;
+  }
+}
+/* ---------- Contact box: breathing room under the button ---------- */
+section.man-contact {
+  padding-bottom: 40px !important;
+}
+
+@media (max-width: 768px) {
+  section.man-contact {
+    padding-bottom: 28px !important;
+  }
+}
+/* ---------- Careers: images line up with the heading ---------- */
+.cr-prog-row {
+  align-items: start;
+}
+
+.cr-prog-visual {
+  margin-top: 38px;   /* label height + gap = where the heading starts */
+}
+
+/* stacked on smaller screens: image sits above the text, no offset */
+@media (max-width: 900px) {
+  .cr-prog-visual {
+    margin-top: 0;
+  }
+}
+/* ---------- Stats: current / additional breakdown ---------- */
+.stat-split {
+  order: 2;                       /* sits below the orange label */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: -2px;
+  font-family: "balto", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.stat-split span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.stat-split em {
+  font-style: normal;
+  font-family: "General", sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9a938c;
+}
+
+@media (max-width: 768px) {
+  .stat-split { font-size: 14px; }
+}
+/* ---------- Stats: breakdown above the number, everything else level ---------- */
+.stats {
+  align-items: stretch;            /* every stat column is the same height */
+}
+
+.stat {
+  justify-content: flex-end;       /* content sits at the bottom of each column */
+}
+
+.stat-split {
+  order: -1;                       /* above the big number */
+  margin: 0 0 -4px;
+}
+
+.stat h2,
+.stat .counter {
+  order: 0;
+}
+
+.stat p {
+  order: 1;                        /* label at the bottom, as before */
+  margin-top: 0;
+}
+/* ---------- Stats: dividers stay at their original height ---------- */
+.stat:not(:last-child)::after {
+  top: 34px;          /* skips the breakdown line above the numbers */
+  bottom: 0;
+  height: auto;
+}

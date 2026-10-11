@@ -2018,3 +2018,24 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
   });
 })();
 
+/* draw the dividers in when they scroll into view */
+(() => {
+  const rules = document.querySelectorAll('.prod .panel-rule');
+  if (!rules.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    rules.forEach(r => r.classList.add('is-in'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  rules.forEach(r => io.observe(r));
+})();
