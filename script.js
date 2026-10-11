@@ -1,4 +1,35 @@
 /* ==========================================================
+   SEND FORM TO EMAIL (Web3Forms) — used by every form
+========================================================== */
+const WEB3FORMS_KEY = 'PASTE_YOUR_ACCESS_KEY_HERE';
+
+async function sendLead(formEl, subject) {
+  const data = new FormData(formEl);
+
+  // the forms' own "subject" dropdown would clash with the email subject
+  if (data.has('subject')) {
+    data.set('topic', data.get('subject'));
+  }
+
+  // file uploads need a paid Web3Forms plan, so strip them here
+  for (const [key, value] of [...data.entries()]) {
+    if (value instanceof File) data.delete(key);
+  }
+
+  data.set('access_key', WEB3FORMS_KEY);
+  data.set('subject', subject);
+  data.set('from_name', 'Shivalik Website');
+
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: data,
+    headers: { Accept: 'application/json' }
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || 'Submit failed');
+}
+
+/* ==========================================================
    MOBILE NAV — burger toggle
 ========================================================== */
 
@@ -943,7 +974,7 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     });
 
     /* ---- submit ---- */
-    form.addEventListener("submit", e => {
+    form.addEventListener("submit", async e => {
         e.preventDefault();
 
         if (!form.checkValidity()){
@@ -963,25 +994,19 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         btn.disabled = true;
         status.textContent = "Submitting…";
 
-        /* ---- NO BACKEND WIRED YET ----
-           A file upload needs a server endpoint or a form service that
-           accepts attachments (e.g. Formspree, Web3Forms, or your own API).
-           Replace this block with a real fetch() using FormData:
-
-               const data = new FormData(form);
-               const res = await fetch("YOUR_ENDPOINT", { method:"POST", body:data });
-
-           For now it simulates success so the flow is complete.        */
-        console.log("Application:", Object.fromEntries(new FormData(form).entries()));
-
-        setTimeout(() => {
+        try {
+            await sendLead(form, "New job application");
             status.textContent = "Thank you — your application has been received. Our HR team will be in touch.";
             form.reset();
             dropZone.classList.remove("has-file");
             uploadTxt.innerHTML =
                 `<strong>Click to upload</strong> or drag &amp; drop<br><small>PDF, DOC or DOCX — max 5&nbsp;MB</small>`;
+        } catch (err) {
+            status.textContent = "Something went wrong. Please try again.";
+            status.classList.add("error");
+        } finally {
             btn.disabled = false;
-        }, 800);
+        }
     });
 })();
 
@@ -1019,7 +1044,7 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     /* form submit (unchanged fake-success flow) */
     const form   = document.getElementById("contactFormModal");
     const status = document.getElementById("modalStatus");
-    form?.addEventListener("submit", e => {
+    form?.addEventListener("submit", async e => {
         e.preventDefault();
         if (!form.checkValidity()){
             status.textContent = "Please fill in the required fields.";
@@ -1031,13 +1056,18 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
         const btn = form.querySelector(".cf-submit");
         btn.disabled = true;
         status.textContent = "Sending…";
-        console.log("Enquiry:", Object.fromEntries(new FormData(form).entries()));
-        setTimeout(() => {
+
+        try {
+            await sendLead(form, "New enquiry from website");
             status.textContent = "Thanks — we'll reply within two working days.";
             form.reset();
-            btn.disabled = false;
             setTimeout(close, 1500);
-        }, 700);
+        } catch (err) {
+            status.textContent = "Something went wrong. Please try again.";
+            status.classList.add("error");
+        } finally {
+            btn.disabled = false;
+        }
     });
 })();
 /* ==========================================================
@@ -1171,7 +1201,7 @@ function openDetail(card, open){
     const form = document.getElementById("brochureForm");
     const status = document.getElementById("brochureStatus");
 
-    form?.addEventListener("submit", e => {
+    form?.addEventListener("submit", async e => {
         e.preventDefault();
 
         if (!form.checkValidity()){
@@ -1186,94 +1216,108 @@ function openDetail(card, open){
         btn.disabled = true;
         status.textContent = "Preparing your download...";
 
-        /* ---- NO BACKEND WIRED YET ----
-           Replace this with a real fetch() to log/store the lead
-           (Formspree, Web3Forms, your own API, etc.) before triggering
-           the download. For now it simulates the lead capture. */
-        console.log("Brochure request:", Object.fromEntries(new FormData(form).entries()));
+        try {
+            try {
+                await sendLead(form, "Brochure download request");
+            } catch (err) {
+                console.error("Lead email failed:", err);   // still download
+            }
 
-        setTimeout(() => {
-            /* trigger the actual file download */
             const filename = form.dataset.file;
             const a = document.createElement("a");
             a.href = filename;
-            a.download = filename;
+            a.download = filename.split("/").pop();   // saves as Shivalik_Brochure.pdf
             document.body.appendChild(a);
             a.click();
             a.remove();
 
             status.textContent = "Thanks — your download has started.";
             form.reset();
-            btn.disabled = false;
             setTimeout(close, 1500);
-        }, 600);
+        } catch (err) {
+            status.textContent = "Something went wrong. Please try again.";
+            status.classList.add("error");
+        } finally {
+            btn.disabled = false;
+        }
     });
 })();
-const form = document.getElementById("contactForm");
-const status = document.getElementById("formStatus");
-const downloadBtn = document.getElementById("downloadBrochureBtn");
+/* ==========================================================
+   CONTACT PAGE FORM
+========================================================== */
+(() => {
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("formStatus");
+    const downloadBtn = document.getElementById("downloadBrochureBtn");
+    if (!form) return;
 
-function submitEnquiry(){
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log("Enquiry submitted:", data);
-    // Replace with a real fetch() to your endpoint / form service.
-}
+    /* ---- Send a message ---- */
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
 
-/* ---- Send a message (unchanged behaviour) ---- */
-form?.addEventListener("submit", e => {
-    e.preventDefault();
+        if (!form.checkValidity()){
+            status.textContent = "Please fill in the required fields.";
+            status.classList.add("error");
+            form.reportValidity();
+            return;
+        }
 
-    if (!form.checkValidity()){
-        status.textContent = "Please fill in the required fields.";
-        status.classList.add("error");
-        form.reportValidity();
-        return;
-    }
+        status.classList.remove("error");
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        status.textContent = "Sending…";
 
-    status.classList.remove("error");
-    const btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    status.textContent = "Sending…";
+        try {
+            await sendLead(form, "New enquiry from website");
+            status.textContent = "Thanks — we'll reply within two working days.";
+            form.reset();
+        } catch (err) {
+            status.textContent = "Something went wrong. Please try again.";
+            status.classList.add("error");
+        } finally {
+            btn.disabled = false;
+        }
+    });
 
-    submitEnquiry();
+    /* ---- Download Brochure ---- */
+    downloadBtn?.addEventListener("click", async () => {
 
-    setTimeout(() => {
-        status.textContent = "Thanks — we'll reply within two working days.";
-        form.reset();
-        btn.disabled = false;
-    }, 700);
-});
+        if (!form.checkValidity()){
+            status.textContent = "Please fill in the required fields to download the brochure.";
+            status.classList.add("error");
+            form.reportValidity();
+            return;
+        }
 
-/* ---- Download Brochure — gated behind the same validation ---- */
-downloadBtn?.addEventListener("click", () => {
+        status.classList.remove("error");
+        downloadBtn.disabled = true;
+        status.textContent = "Preparing your download…";
 
-    if (!form.checkValidity()){
-        status.textContent = "Please fill in the required fields to download the brochure.";
-        status.classList.add("error");
-        form.reportValidity();
-        return;
-    }
+        try {
+            try {
+                await sendLead(form, "Brochure download request");
+            } catch (err) {
+                console.error("Lead email failed:", err);   // still download
+            }
 
-    status.classList.remove("error");
-    downloadBtn.disabled = true;
-    status.textContent = "Preparing your download…";
+            const filename = form.dataset.file;
+            const a = document.createElement("a");
+            a.href = filename;
+            a.download = filename.split("/").pop();
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
 
-    submitEnquiry();
-
-    setTimeout(() => {
-        const filename = form.dataset.file;
-        const a = document.createElement("a");
-        a.href = filename;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-
-        status.textContent = "Thanks — your download has started.";
-        form.reset();
-        downloadBtn.disabled = false;
-    }, 600);
-});
+            status.textContent = "Thanks — your download has started.";
+            form.reset();
+        } catch (err) {
+            status.textContent = "Something went wrong. Please try again.";
+            status.classList.add("error");
+        } finally {
+            downloadBtn.disabled = false;
+        }
+    });
+})();
 /* ==========================================================
    COMPANY PAGE — subnav scroll-to-section + active tracking
 ========================================================== */
@@ -1874,8 +1918,7 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
 
   document.querySelectorAll('.dl-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      if (hasFilledForm()) startDownload(btn.dataset.file);
-      else openModal(btn);
+      openModal(btn);
     });
   });
 
@@ -1908,13 +1951,10 @@ if (window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
     submit.textContent = 'Preparing download…';
 
     try {
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' }
-        });
-        if (!res.ok) throw new Error('Submit failed');
+      try {
+        await sendLead(form, 'PDF download: ' + docIn.value);
+      } catch (err) {
+        console.error('Lead email failed:', err);   // still download
       }
 
       try { localStorage.setItem(STORAGE_KEY, '1'); } catch (err) {}
